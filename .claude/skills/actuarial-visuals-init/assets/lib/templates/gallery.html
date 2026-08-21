@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visuals &mdash; __PROJECT__</title>
+<link rel="stylesheet" href="../_lib/templates/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="g-head">
+    <h1>Visuals</h1>
+    <p>__PROJECT__ &middot; built __BUILT__</p>
+  </header>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search titles, topics, notes&hellip;" autocomplete="off">
+    <div class="filters" id="f-courses"></div>
+    <div class="filters" id="f-topics"></div>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">No visuals match that filter.</div>
+</div>
+
+<script>
+const MANIFEST = /*__MANIFEST__*/[];
+</script>
+<script src="../_lib/templates/gallery.js"></script>
+</body>
+</html>

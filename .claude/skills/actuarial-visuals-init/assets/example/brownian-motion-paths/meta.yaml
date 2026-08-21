@@ -1,0 +1,21 @@
+id: brownian-motion-paths
+title: "Brownian motion: sample paths and quadratic variation"
+summary: "Paths spread like sqrt(t) while quadratic variation converges to t on every path."
+
+courses: [MathFin]
+topics: [brownian-motion, quadratic-variation, martingale, ito-calculus]
+
+source: "MathFin -- Brownian motion, definition and properties"
+
+seed: 20260901
+
+params:
+  n_paths: 60
+  n_steps: 500
+  T: 1.0
+  highlight: 3
+
+formats: [html, png, mp4]
+fps: 20
+
+created: 2026-08-20

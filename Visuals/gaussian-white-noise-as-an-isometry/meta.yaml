@@ -1,0 +1,36 @@
+# What this visual is, so the gallery and future-you can find it.
+id: gaussian-white-noise-as-an-isometry
+title: "Gaussian white noise as an isometry"
+summary: "W(A) ~ N(0, mu(A)) with Cov(W(A),W(B)) = mu(A cap B): splitting adds variance, overlap is covariance."
+
+# Filters in the gallery. A visual can belong to several courses.
+courses: [MathFin]
+topics: [white-noise, isometry, gaussian-process, stochastic-integration, isonormal-process, ito-isometry]
+
+# Where in the material this comes from -- lecture, chapter, exercise.
+source: "Le Gall, Brownian Motion, Martingales and Stochastic Calculus -- Ch.1, Gaussian white noise / definition of the isonormal Gaussian process"
+
+# Reproducibility. Never use a literal seed in model.py; read ctx.seed.
+seed: 25517
+
+# Model constants. Surfaced next to the figure, so they stay honest.
+params:
+  domain_max: 16.0        # base space E = [0, domain_max]
+  lambda0: 1.0             # intensity density mu(dx) = (lambda0 + lambda1*x) dx
+  lambda1: 0.15
+  split_a: 0.0             # A = A1 u A2 = [split_a, split_b], split point c swept
+  split_b: 6.0
+  split_c_lo: 1.0
+  split_c_hi: 5.0
+  overlap_a_lo: 5.0        # fixed set A = [overlap_a_lo, overlap_a_hi] in the isometry panel
+  overlap_a_hi: 11.0
+  overlap_b_width: 6.0     # sliding set B has the same width, offset s
+  overlap_s_lo: -1.0
+  overlap_s_hi: 11.0
+  n_frames: 21
+
+# html always works. png needs a headless browser, mp4 needs frames + ffmpeg.
+formats: [html, png]
+fps: 12
+
+created: 2026-08-21
