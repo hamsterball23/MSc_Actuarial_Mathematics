@@ -1,0 +1,24 @@
+key,value
+id,gaussian-white-noise-as-an-isometry
+title,Gaussian white noise as an isometry
+summary,"W(A) ~ N(0, mu(A)) with Cov(W(A),W(B)) = mu(A cap B): splitting adds variance, overlap is covariance."
+courses,MathFin
+topics,white-noise|isometry|gaussian-process|stochastic-integration|isonormal-process|ito-isometry
+source,"Le Gall, Brownian Motion, Martingales and Stochastic Calculus -- Ch.1, Gaussian white noise / definition of the isonormal Gaussian process"
+seed,25517
+params.domain_max,16.0
+params.lambda0,1.0
+params.lambda1,0.15
+params.split_a,0.0
+params.split_b,6.0
+params.split_c_lo,1.0
+params.split_c_hi,5.0
+params.overlap_a_lo,5.0
+params.overlap_a_hi,11.0
+params.overlap_b_width,6.0
+params.overlap_s_lo,-1.0
+params.overlap_s_hi,11.0
+params.n_frames,21
+formats,html|png
+fps,12
+created,2026-08-21

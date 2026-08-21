@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<link rel="stylesheet" href="../../_lib/templates/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="crumb"><a href="../../_site/index.html">&larr; All visuals</a></nav>
+
+  <header class="head">
+    <h1>__TITLE__</h1>
+    <p class="sub">__SUBTITLE__</p>
+  </header>
+
+  <section class="figbox">
+    __FIGURE__
+  </section>
+
+  <section id="params" class="params"></section>
+
+  <section id="notes" class="notes"></section>
+
+  <footer class="foot">
+    <span id="downloads"></span>
+  </footer>
+</div>
+
+<script>
+const NOTES = /*__NOTES__*/"";
+const META  = /*__META__*/{};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script src="../../_lib/templates/page.js"></script>
+</body>
+</html>

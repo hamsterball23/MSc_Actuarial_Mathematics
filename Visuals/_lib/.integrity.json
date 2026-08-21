@@ -1,0 +1,19 @@
+{
+  "files": {
+    "VERSION": "44e161e4495cac2c",
+    "api.py": "aec011c651ae80e9",
+    "doctor.py": "43e5cf23dd104196",
+    "gallery.py": "c6e7fe425767f670",
+    "render.py": "3517ae58fdfd62f1",
+    "requirements.txt": "58e6300cc1dadc79",
+    "scaffold.py": "5583082c206839db",
+    "templates/gallery.html": "1f3358c8c5d711d6",
+    "templates/gallery.js": "240ede6f56a072f2",
+    "templates/page.js": "f794f6cce3392651",
+    "templates/style.css": "dd12d4e206b11e09",
+    "templates/visual.html": "a6d3a11778c3cc16",
+    "theme.py": "5e5a04e7b400e39f",
+    "viz.py": "3672ba1da399dcc7"
+  },
+  "version": "1.0.1"
+}
