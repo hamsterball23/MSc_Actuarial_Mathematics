@@ -1,3 +1,34 @@
+## In plain terms
+
+Gaussian white noise $W$ is a machine that hands a random number $W(A)$ to every
+subset $A \subset E$, with two rules:
+
+- $W(A) \sim \mathcal{N}(0, \mu(A))$ — mean zero, variance equal to the "weighted
+  length" of $A$.
+- $\operatorname{Cov}(W(A), W(B)) = \mu(A \cap B)$ — two sets' noise values are
+  correlated exactly in proportion to how much they *overlap*.
+
+That's the whole object. The two panels make each rule visible:
+
+- **Left panel — splitting a set doesn't change its total variance.** Cut a fixed
+  interval $A$ into $A_1$ and $A_2$ at a point $c$ and drag $c$. The variances of
+  $W(A_1)$ and $W(A_2)$ (solid curves) reshuffle — one grows, the other shrinks — but
+  the variance of $W(A)$ (dashed curve) never moves. $A_1, A_2$ are disjoint, hence
+  independent, and variances of independent things add:
+  $\operatorname{Var}(W(A_1)) + \operatorname{Var}(W(A_2)) = \mu(A_1) + \mu(A_2) =
+  \mu(A)$. Slicing a set doesn't create or destroy randomness, it only decides how a
+  fixed pool of variance is split into two independent pieces.
+- **Right panel — overlap = correlation, literally.** Fix $A$ and slide a same-width
+  window $B$ across $E$; the ellipse is the joint law of $(W(A), W(B))$. Far apart
+  (disjoint), the ellipse is round: uncorrelated, independent, $\mu(A \cap B) = 0$. As
+  $B$ slides toward $A$ it tilts and thins, and when $B = A$ exactly it collapses onto
+  the diagonal — perfect correlation, because at that point $W(A)$ and $W(B)$ are
+  literally the same random variable, not just "very correlated."
+
+The word "isometry" in the title is just the dictionary between the two panels: set
+overlap on the left *is* covariance on the right, with no translation needed — a map
+that turns lengths into variances and angles into correlation.
+
 ## What this shows
 
 Let $(E, \mathcal{E}, \mu)$ be a measure space with $\mu$ $\sigma$-finite. **Gaussian
