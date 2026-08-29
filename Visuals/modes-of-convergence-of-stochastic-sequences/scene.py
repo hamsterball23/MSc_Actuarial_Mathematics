@@ -25,7 +25,7 @@ from plotly.subplots import make_subplots
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_lib"))
 from api import Frame, Scene  # noqa: E402
-from theme import C, annotate  # noqa: E402
+from theme import C  # noqa: E402
 
 
 def _normal_pdf(z):
@@ -52,8 +52,8 @@ def build(ctx):
     n_frames = int(ctx.param("n_frames", 32))
 
     fig = make_subplots(
-        rows=4, cols=1, shared_xaxes=False, vertical_spacing=0.07,
-        row_heights=[0.27, 0.16, 0.16, 0.27],
+        rows=4, cols=1, shared_xaxes=False, vertical_spacing=0.10,
+        row_heights=[0.27, 0.15, 0.15, 0.27],
         subplot_titles=(
             "Almost sure convergence -- Xₙ = (1/n)Σ Uᵢ, Uᵢ iid Uniform(0,1)",
             "Convergence in probability, not a.s. (1/2) -- the moving interval Iₙ and ω",
@@ -135,15 +135,19 @@ def build(ctx):
     ), row=4, col=1)
 
     # ---- layout ----------------------------------------------------------
-    fig.update_xaxes(type="log", title_text="n", range=[0, np.log10(n1[-1])],
-                      row=1, col=1)
+    # dtick=1 on a log axis shows only whole-decade ticks (1, 10, 100, ...);
+    # the plotly default also labels every minor tick (1..9, 10..90, ...),
+    # which crowds three stacked log axes into an unreadable comb of digits.
+    fig.update_xaxes(type="log", dtick=1, title_text="n",
+                      range=[0, np.log10(n1[-1])], row=1, col=1)
     fig.update_yaxes(title_text="Xₙ", row=1, col=1)
 
-    fig.update_xaxes(type="log", range=[0, np.log10(n2[-1])], row=2, col=1)
+    fig.update_xaxes(type="log", dtick=1, range=[0, np.log10(n2[-1])],
+                      row=2, col=1)
     fig.update_yaxes(title_text="[0, 1]", range=[-0.03, 1.03], row=2, col=1)
 
-    fig.update_xaxes(type="log", title_text="n", range=[0, np.log10(n2[-1])],
-                      row=3, col=1)
+    fig.update_xaxes(type="log", dtick=1, title_text="n",
+                      range=[0, np.log10(n2[-1])], row=3, col=1)
     fig.update_yaxes(title_text="Yₙ", range=[0, 1.15], tickvals=[0, 1],
                       row=3, col=1)
 
@@ -155,9 +159,13 @@ def build(ctx):
         barmode="overlay",
         legend=dict(orientation="h", y=1.045, x=1, xanchor="right"),
     )
-    annotate(fig, f"SLLN n≤{n1[-1]}   typewriter n≤{n2[-1]}   "
-                   f"CLT n∈{{{', '.join(str(v) for v in n_values)}}}   "
-                   f"seed={ctx.seed}")
+    # theme.annotate()'s corner position is defined in each subplot's own
+    # paper fraction, so on a 4-row figure it lands inside row 4's plot area
+    # rather than below the whole figure -- keep the parameter note in the
+    # caption instead of overlaying it on the histogram.
+    param_note = (f"SLLN n≤{n1[-1]}   typewriter n≤{n2[-1]}   "
+                  f"CLT n∈{{{', '.join(str(v) for v in n_values)}}}   "
+                  f"seed={ctx.seed}")
 
     # ======================================================================
     # frames -- each row advances on its own natural scale
@@ -221,5 +229,6 @@ def build(ctx):
             "Row 4: the histogram of Zₙ locks onto N(0,1) as n grows, "
             "but that says nothing about any single realisation of Zₙ -- "
             "convergence in distribution is a statement about laws, not paths."
+            f"\n\n{param_note}"
         ),
     )
