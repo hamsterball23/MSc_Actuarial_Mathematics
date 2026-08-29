@@ -1,0 +1,45 @@
+# What this visual is, so the gallery and future-you can find it.
+id: modes-of-convergence-of-stochastic-sequences
+title: "Modes of convergence of stochastic sequences"
+summary: "Three classic examples, side by side: a.s. convergence (SLLN), convergence in probability but not a.s. (the typewriter sequence), and convergence in distribution (CLT)."
+
+# Filters in the gallery. A visual can belong to several courses.
+courses: [MathFin]
+topics:
+  - modes of convergence
+  - almost sure convergence
+  - convergence in probability
+  - convergence in distribution
+  - strong law of large numbers
+  - central limit theorem
+  - typewriter sequence
+
+# Where in the material this comes from -- lecture, chapter, exercise.
+source: "MathFin lecture notes, ch. on convergence concepts for stochastic processes"
+
+# Reproducibility. Never use a literal seed in model.py; read ctx.seed.
+seed: 22774
+
+# Model constants. Surfaced next to the figure, so they stay honest.
+params:
+  # panel 1 -- SLLN, running average of iid Uniform(0,1)
+  n_paths: 6            # highlighted sample paths
+  n_steps_as: 500        # length of each SLLN path
+  n_faint_paths: 60      # faint background ensemble
+
+  # panel 2 -- typewriter sequence, moving block on [0,1]
+  n_blocks_k: 8          # blocks k = 0..K-1, n runs 1..2^K - 1
+  u_point: 0.37          # the fixed outcome omega the interval sweeps over
+
+  # panel 3 -- CLT for standardised sums of iid Uniform(0,1)
+  n_values: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+  n_replications: 20000  # Monte Carlo draws per n
+  n_bins: 50
+
+  n_frames: 32
+
+# html always works. png needs a headless browser, mp4 needs frames + ffmpeg.
+formats: [html, png, mp4]
+fps: 10
+
+created: 2026-08-29
