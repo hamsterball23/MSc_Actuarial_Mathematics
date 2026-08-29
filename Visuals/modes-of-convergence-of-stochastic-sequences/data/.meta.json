@@ -1,0 +1,48 @@
+{
+  "id": "modes-of-convergence-of-stochastic-sequences",
+  "title": "Modes of convergence of stochastic sequences",
+  "summary": "Three classic examples, side by side: a.s. convergence (SLLN), convergence in probability but not a.s. (the typewriter sequence), and convergence in distribution (CLT).",
+  "courses": [
+    "MathFin"
+  ],
+  "topics": [
+    "modes of convergence",
+    "almost sure convergence",
+    "convergence in probability",
+    "convergence in distribution",
+    "strong law of large numbers",
+    "central limit theorem",
+    "typewriter sequence"
+  ],
+  "source": "MathFin lecture notes, ch. on convergence concepts for stochastic processes",
+  "seed": 22774,
+  "params": {
+    "n_paths": 6,
+    "n_steps_as": 500,
+    "n_faint_paths": 60,
+    "n_blocks_k": 8,
+    "u_point": 0.37,
+    "n_values": [
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512,
+      1024
+    ],
+    "n_replications": 20000,
+    "n_bins": 50,
+    "n_frames": 32
+  },
+  "formats": [
+    "html",
+    "png",
+    "mp4"
+  ],
+  "fps": 10,
+  "created": "2026-08-29"
+}
