@@ -38,3 +38,6 @@ Thumbs.db
 # Logs / temp
 *.log
 .tmp/
+
+# graphify regenerable AST cache
+graphify-out/cache/

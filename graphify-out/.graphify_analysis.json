@@ -1,0 +1,483 @@
+{
+  "communities": {
+    "0": [
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_scene",
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_scene_build",
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_scene_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_frame",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_31",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_annotate",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_apply",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_build_template",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_c",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_install",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_py_figure",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_py_template",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_rationale_101",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_rationale_23",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_rationale_86",
+      "claude_skills_actuarial_visuals_init_assets_lib_theme_rationale_93",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_scene",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_scene_build",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_scene_rationale_1",
+      "visuals_brownian_motion_paths_scene",
+      "visuals_brownian_motion_paths_scene_build",
+      "visuals_brownian_motion_paths_scene_rationale_1",
+      "visuals_gaussian_white_noise_as_an_isometry_scene",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_build",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_cov_ellipse",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_gaussian_pdf",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_rationale_1",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_rationale_39",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_rationale_52",
+      "visuals_gaussian_white_noise_as_an_isometry_scene_trapezoid",
+      "visuals_lib_api_frame",
+      "visuals_lib_api_rationale_31",
+      "visuals_lib_api_rationale_65",
+      "visuals_lib_api_scene",
+      "visuals_lib_api_scene_animated",
+      "visuals_modes_of_convergence_of_stochastic_sequences_scene",
+      "visuals_modes_of_convergence_of_stochastic_sequences_scene_build",
+      "visuals_modes_of_convergence_of_stochastic_sequences_scene_normal_pdf",
+      "visuals_modes_of_convergence_of_stochastic_sequences_scene_rationale_1"
+    ],
+    "1": [
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_65",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_scene",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_scene_animated",
+      "claude_skills_actuarial_visuals_init_assets_lib_render",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_attach_animation",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_build_scene",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_compress",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_esc",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_human",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_image_hint",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_load_meta",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_model_stamp",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_plotly_js_ref",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_public_meta",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_py_exception",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_py_figure",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_py_scene",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_113",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_192",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_220",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_285",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_293",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_338",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_442",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_rationale_99",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_render_visual",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_renderresult",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_renderresult_post_init",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_renderresult_report",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_run_model",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_write_flat_meta",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_write_html",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_write_mp4",
+      "claude_skills_actuarial_visuals_init_assets_lib_render_write_png"
+    ],
+    "2": [
+      "visuals_lib_render",
+      "visuals_lib_render_attach_animation",
+      "visuals_lib_render_build_scene",
+      "visuals_lib_render_compress",
+      "visuals_lib_render_esc",
+      "visuals_lib_render_human",
+      "visuals_lib_render_image_hint",
+      "visuals_lib_render_load_meta",
+      "visuals_lib_render_model_stamp",
+      "visuals_lib_render_plotly_js_ref",
+      "visuals_lib_render_public_meta",
+      "visuals_lib_render_py_exception",
+      "visuals_lib_render_py_figure",
+      "visuals_lib_render_py_path",
+      "visuals_lib_render_py_scene",
+      "visuals_lib_render_rationale_1",
+      "visuals_lib_render_rationale_113",
+      "visuals_lib_render_rationale_192",
+      "visuals_lib_render_rationale_220",
+      "visuals_lib_render_rationale_285",
+      "visuals_lib_render_rationale_293",
+      "visuals_lib_render_rationale_338",
+      "visuals_lib_render_rationale_442",
+      "visuals_lib_render_rationale_99",
+      "visuals_lib_render_render_visual",
+      "visuals_lib_render_renderresult",
+      "visuals_lib_render_renderresult_post_init",
+      "visuals_lib_render_renderresult_report",
+      "visuals_lib_render_run_model",
+      "visuals_lib_render_write_flat_meta",
+      "visuals_lib_render_write_html",
+      "visuals_lib_render_write_mp4",
+      "visuals_lib_render_write_png"
+    ],
+    "3": [
+      "visuals_brownian_motion_paths_model",
+      "visuals_brownian_motion_paths_model_main",
+      "visuals_brownian_motion_paths_model_rationale_1",
+      "visuals_gaussian_white_noise_as_an_isometry_model",
+      "visuals_gaussian_white_noise_as_an_isometry_model_main",
+      "visuals_gaussian_white_noise_as_an_isometry_model_mu",
+      "visuals_gaussian_white_noise_as_an_isometry_model_rationale_1",
+      "visuals_gaussian_white_noise_as_an_isometry_model_rationale_47",
+      "visuals_lib_api",
+      "visuals_lib_api_context",
+      "visuals_lib_api_context_has",
+      "visuals_lib_api_context_id",
+      "visuals_lib_api_context_init",
+      "visuals_lib_api_context_list_data",
+      "visuals_lib_api_context_load",
+      "visuals_lib_api_context_param",
+      "visuals_lib_api_context_params",
+      "visuals_lib_api_context_seed",
+      "visuals_lib_api_context_title",
+      "visuals_lib_api_py_path",
+      "visuals_lib_api_rationale_1",
+      "visuals_lib_api_rationale_120",
+      "visuals_lib_api_rationale_126",
+      "visuals_lib_api_rationale_137",
+      "visuals_lib_api_rationale_182",
+      "visuals_lib_api_rationale_189",
+      "visuals_lib_api_rationale_97",
+      "visuals_lib_api_rng",
+      "visuals_lib_api_save",
+      "visuals_modes_of_convergence_of_stochastic_sequences_model",
+      "visuals_modes_of_convergence_of_stochastic_sequences_model_main",
+      "visuals_modes_of_convergence_of_stochastic_sequences_model_rationale_1"
+    ],
+    "4": [
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_model",
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_model_main",
+      "claude_skills_actuarial_visuals_init_assets_example_brownian_motion_paths_model_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_api",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_has",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_id",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_init",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_list_data",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_load",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_param",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_params",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_seed",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_context_title",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_120",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_126",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_137",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_182",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_189",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rationale_97",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_rng",
+      "claude_skills_actuarial_visuals_init_assets_lib_api_save",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_model",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_model_main",
+      "claude_skills_actuarial_visuals_references_example_brownian_motion_model_rationale_1"
+    ],
+    "5": [
+      "visuals_lib_theme",
+      "visuals_lib_theme_annotate",
+      "visuals_lib_theme_apply",
+      "visuals_lib_theme_build_template",
+      "visuals_lib_theme_c",
+      "visuals_lib_theme_install",
+      "visuals_lib_theme_py_figure",
+      "visuals_lib_theme_py_template",
+      "visuals_lib_theme_rationale_1",
+      "visuals_lib_theme_rationale_101",
+      "visuals_lib_theme_rationale_23",
+      "visuals_lib_theme_rationale_86",
+      "visuals_lib_theme_rationale_93"
+    ],
+    "6": [
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_check",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_check_import",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_hash",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_iter_lib_files",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_rationale_54",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_rversion",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_seal",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_verify",
+      "claude_skills_actuarial_visuals_init_assets_lib_doctor_version"
+    ],
+    "7": [
+      "claude_skills_actuarial_visuals_init_assets_lib_viz",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_build",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_doctor",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_new",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_render",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_seal",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_site",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_cmd_vendor",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_main",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_rationale_102",
+      "claude_skills_actuarial_visuals_init_assets_lib_viz_resolve"
+    ],
+    "8": [
+      "visuals_lib_doctor",
+      "visuals_lib_doctor_check",
+      "visuals_lib_doctor_check_import",
+      "visuals_lib_doctor_hash",
+      "visuals_lib_doctor_iter_lib_files",
+      "visuals_lib_doctor_py_path",
+      "visuals_lib_doctor_rationale_1",
+      "visuals_lib_doctor_rationale_54",
+      "visuals_lib_doctor_rversion",
+      "visuals_lib_doctor_seal",
+      "visuals_lib_doctor_verify",
+      "visuals_lib_doctor_version"
+    ],
+    "9": [
+      "visuals_lib_viz",
+      "visuals_lib_viz_cmd_build",
+      "visuals_lib_viz_cmd_doctor",
+      "visuals_lib_viz_cmd_new",
+      "visuals_lib_viz_cmd_render",
+      "visuals_lib_viz_cmd_seal",
+      "visuals_lib_viz_cmd_site",
+      "visuals_lib_viz_cmd_vendor",
+      "visuals_lib_viz_main",
+      "visuals_lib_viz_py_path",
+      "visuals_lib_viz_rationale_102",
+      "visuals_lib_viz_resolve"
+    ],
+    "10": [
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_build",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_discover",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_entry",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_esc",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_gallery_rationale_21"
+    ],
+    "11": [
+      "visuals_lib_gallery",
+      "visuals_lib_gallery_build",
+      "visuals_lib_gallery_discover",
+      "visuals_lib_gallery_entry",
+      "visuals_lib_gallery_esc",
+      "visuals_lib_gallery_py_path",
+      "visuals_lib_gallery_rationale_1",
+      "visuals_lib_gallery_rationale_21"
+    ],
+    "12": [
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_buildfilters",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_card",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_esc",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_matches",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_render",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_gallery_uniq"
+    ],
+    "13": [
+      "visuals_lib_templates_gallery",
+      "visuals_lib_templates_gallery_buildfilters",
+      "visuals_lib_templates_gallery_card",
+      "visuals_lib_templates_gallery_esc",
+      "visuals_lib_templates_gallery_matches",
+      "visuals_lib_templates_gallery_render",
+      "visuals_lib_templates_gallery_uniq"
+    ],
+    "14": [
+      "claude_skills_actuarial_visuals_init_assets_lib_scaffold",
+      "claude_skills_actuarial_visuals_init_assets_lib_scaffold_create",
+      "claude_skills_actuarial_visuals_init_assets_lib_scaffold_py_path",
+      "claude_skills_actuarial_visuals_init_assets_lib_scaffold_rationale_1",
+      "claude_skills_actuarial_visuals_init_assets_lib_scaffold_slugify"
+    ],
+    "15": [
+      "visuals_lib_scaffold",
+      "visuals_lib_scaffold_create",
+      "visuals_lib_scaffold_py_path",
+      "visuals_lib_scaffold_rationale_1",
+      "visuals_lib_scaffold_slugify"
+    ],
+    "16": [
+      "visuals_lib_templates_page",
+      "visuals_lib_templates_page_esc",
+      "visuals_lib_templates_page_mathtoken",
+      "visuals_lib_templates_page_stashmath",
+      "visuals_lib_templates_page_stashmath_take"
+    ],
+    "17": [
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_page",
+      "claude_skills_actuarial_visuals_init_assets_lib_templates_page_esc"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06707317073170732,
+    "1": 0.10952380952380952,
+    "2": 0.11553030303030302,
+    "3": 0.07056451612903226,
+    "4": 0.08262108262108261,
+    "5": 0.1794871794871795,
+    "6": 0.3181818181818182,
+    "7": 0.3181818181818182,
+    "8": 0.3181818181818182,
+    "9": 0.3181818181818182,
+    "10": 0.42857142857142855,
+    "11": 0.42857142857142855,
+    "12": 0.5714285714285714,
+    "13": 0.5714285714285714,
+    "14": 0.5,
+    "15": 0.5,
+    "16": 0.5,
+    "17": 1.0
+  },
+  "gods": [
+    {
+      "id": "claude_skills_actuarial_visuals_init_assets_lib_api_scene",
+      "label": "Scene",
+      "degree": 19
+    },
+    {
+      "id": "claude_skills_actuarial_visuals_init_assets_lib_api_context",
+      "label": "Context",
+      "degree": 14
+    },
+    {
+      "id": "visuals_lib_api_context",
+      "label": "Context",
+      "degree": 13
+    },
+    {
+      "id": "claude_skills_actuarial_visuals_init_assets_lib_render_render_visual",
+      "label": "render_visual()",
+      "degree": 11
+    },
+    {
+      "id": "visuals_lib_render_render_visual",
+      "label": "render_visual()",
+      "degree": 11
+    },
+    {
+      "id": "visuals_gaussian_white_noise_as_an_isometry_scene_build",
+      "label": "build()",
+      "degree": 9
+    },
+    {
+      "id": "claude_skills_actuarial_visuals_init_assets_lib_render_write_html",
+      "label": "write_html()",
+      "degree": 9
+    },
+    {
+      "id": "visuals_lib_render_write_html",
+      "label": "write_html()",
+      "degree": 9
+    },
+    {
+      "id": "claude_skills_actuarial_visuals_init_assets_lib_viz_main",
+      "label": "main()",
+      "degree": 8
+    },
+    {
+      "id": "visuals_lib_viz_main",
+      "label": "main()",
+      "degree": 8
+    }
+  ],
+  "surprises": [
+    {
+      "source": "build()",
+      "target": "Scene",
+      "source_files": [
+        "Visuals/brownian-motion-paths/scene.py",
+        ".claude/skills/actuarial-visuals-init/assets/lib/api.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "build()",
+      "target": "Scene",
+      "source_files": [
+        "Visuals/gaussian-white-noise-as-an-isometry/scene.py",
+        ".claude/skills/actuarial-visuals-init/assets/lib/api.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "attach_animation()",
+      "target": "Scene",
+      "source_files": [
+        "Visuals/_lib/render.py",
+        ".claude/skills/actuarial-visuals-init/assets/lib/api.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "build_scene()",
+      "target": "Scene",
+      "source_files": [
+        "Visuals/_lib/render.py",
+        ".claude/skills/actuarial-visuals-init/assets/lib/api.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "compress()",
+      "target": "Scene",
+      "source_files": [
+        "Visuals/_lib/render.py",
+        ".claude/skills/actuarial-visuals-init/assets/lib/api.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "uses",
+      "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Scene` connect `lib/render.py` to `build`, `_lib/render.py`, `Context`?",
+      "why": "High betweenness centrality (0.188) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `Context` connect `Context` to `_lib/render.py`?",
+      "why": "High betweenness centrality (0.081) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `build()` connect `build` to `lib/render.py`, `_lib/theme.py`?",
+      "why": "High betweenness centrality (0.079) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 15 inferred relationships involving `Scene` (e.g. with `build()` and `attach_animation()`) actually correct?",
+      "why": "`Scene` has 15 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `build` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.06707317073170732 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `lib/render.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10952380952380952 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `_lib/render.py` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.11553030303030302 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

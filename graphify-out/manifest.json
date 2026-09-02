@@ -1,0 +1,230 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1788357991.5243723,
+    "seen": 1788358192.278543,
+    "ast_hash": "c90360750ffa5729401a73a32b98293b",
+    "semantic_hash": "c90360750ffa5729401a73a32b98293b"
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1787261295.7050784,
+    "seen": 1788358192.278545,
+    "ast_hash": "7fa89a36d7246876bbc0c56f26a05b2f",
+    "semantic_hash": "7fa89a36d7246876bbc0c56f26a05b2f"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/example/brownian-motion-paths/model.py": {
+    "mtime": 1787259752.0,
+    "seen": 1788358192.2785459,
+    "ast_hash": "944213964aaeab2f630673f991d82649",
+    "semantic_hash": "944213964aaeab2f630673f991d82649"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/example/brownian-motion-paths/scene.py": {
+    "mtime": 1787259752.0,
+    "seen": 1788358192.278547,
+    "ast_hash": "0f17ab590b736a0894cc6db3dbf9d91c",
+    "semantic_hash": "0f17ab590b736a0894cc6db3dbf9d91c"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/api.py": {
+    "mtime": 1787259040.0,
+    "seen": 1788358192.278547,
+    "ast_hash": "622cfeda03368f205031a41ad7a48ce0",
+    "semantic_hash": "622cfeda03368f205031a41ad7a48ce0"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/doctor.py": {
+    "mtime": 1787258881.0,
+    "seen": 1788358192.278548,
+    "ast_hash": "eda834b31dd2d476f8950e2dc84e3d1a",
+    "semantic_hash": "eda834b31dd2d476f8950e2dc84e3d1a"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/gallery.py": {
+    "mtime": 1787259494.0,
+    "seen": 1788358192.278548,
+    "ast_hash": "21a51b1b04819887979dca612946b625",
+    "semantic_hash": "21a51b1b04819887979dca612946b625"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/render.py": {
+    "mtime": 1787259494.0,
+    "seen": 1788358192.278549,
+    "ast_hash": "0579e9a3838552a847c142b154553fab",
+    "semantic_hash": "0579e9a3838552a847c142b154553fab"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/scaffold.py": {
+    "mtime": 1787259441.0,
+    "seen": 1788358192.278549,
+    "ast_hash": "221db6bd95f9092ba711230737cc0a58",
+    "semantic_hash": "221db6bd95f9092ba711230737cc0a58"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/templates/gallery.js": {
+    "mtime": 1787258807.0,
+    "seen": 1788358192.27855,
+    "ast_hash": "fb634f09719cb18372137b8b1aa1351b",
+    "semantic_hash": "fb634f09719cb18372137b8b1aa1351b"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/templates/page.js": {
+    "mtime": 1787258789.0,
+    "seen": 1788358192.278551,
+    "ast_hash": "65cae893f806445b8e20473711d8216c",
+    "semantic_hash": "65cae893f806445b8e20473711d8216c"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/theme.py": {
+    "mtime": 1787258687.0,
+    "seen": 1788358192.278551,
+    "ast_hash": "dca76fd565fd4618080ab1ddc5f25769",
+    "semantic_hash": "dca76fd565fd4618080ab1ddc5f25769"
+  },
+  ".claude/skills/actuarial-visuals-init/assets/lib/viz.py": {
+    "mtime": 1787258916.0,
+    "seen": 1788358192.278552,
+    "ast_hash": "ec0e0d49d7cf6e6672fd6e960a336403",
+    "semantic_hash": "ec0e0d49d7cf6e6672fd6e960a336403"
+  },
+  ".claude/skills/actuarial-visuals/references/example-brownian-motion/model.py": {
+    "mtime": 1787259756.0,
+    "seen": 1788358192.278552,
+    "ast_hash": "944213964aaeab2f630673f991d82649",
+    "semantic_hash": "944213964aaeab2f630673f991d82649"
+  },
+  ".claude/skills/actuarial-visuals/references/example-brownian-motion/scene.py": {
+    "mtime": 1787259756.0,
+    "seen": 1788358192.278553,
+    "ast_hash": "0f17ab590b736a0894cc6db3dbf9d91c",
+    "semantic_hash": "0f17ab590b736a0894cc6db3dbf9d91c"
+  },
+  "11 MathFin/Exercises/Week 1/1.5.R": {
+    "mtime": 1788094708.4645405,
+    "seen": 1788358192.278553,
+    "ast_hash": "1fc9d7ca8059f186bb5e4de6a7a20caf",
+    "semantic_hash": "1fc9d7ca8059f186bb5e4de6a7a20caf"
+  },
+  "11 StatIns/Exercises/Week 1/1.2.R": {
+    "mtime": 1787742908.178924,
+    "seen": 1788358192.2785542,
+    "ast_hash": "214f235a4436640150490d3368e732ea",
+    "semantic_hash": "214f235a4436640150490d3368e732ea"
+  },
+  "Visuals/_lib/.integrity.json": {
+    "mtime": 1787306337.052826,
+    "seen": 1788358192.2785542,
+    "ast_hash": "3fef54ed3ed03c1fc5eca110725886c8",
+    "semantic_hash": "3fef54ed3ed03c1fc5eca110725886c8"
+  },
+  "Visuals/_lib/api.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278555,
+    "ast_hash": "622cfeda03368f205031a41ad7a48ce0",
+    "semantic_hash": "622cfeda03368f205031a41ad7a48ce0"
+  },
+  "Visuals/_lib/doctor.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.2785559,
+    "ast_hash": "eda834b31dd2d476f8950e2dc84e3d1a",
+    "semantic_hash": "eda834b31dd2d476f8950e2dc84e3d1a"
+  },
+  "Visuals/_lib/gallery.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.2785559,
+    "ast_hash": "21a51b1b04819887979dca612946b625",
+    "semantic_hash": "21a51b1b04819887979dca612946b625"
+  },
+  "Visuals/_lib/render.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.2785568,
+    "ast_hash": "0579e9a3838552a847c142b154553fab",
+    "semantic_hash": "0579e9a3838552a847c142b154553fab"
+  },
+  "Visuals/_lib/scaffold.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278558,
+    "ast_hash": "221db6bd95f9092ba711230737cc0a58",
+    "semantic_hash": "221db6bd95f9092ba711230737cc0a58"
+  },
+  "Visuals/_lib/templates/gallery.js": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278558,
+    "ast_hash": "fb634f09719cb18372137b8b1aa1351b",
+    "semantic_hash": "fb634f09719cb18372137b8b1aa1351b"
+  },
+  "Visuals/_lib/templates/page.js": {
+    "mtime": 1787306262.688327,
+    "seen": 1788358192.278559,
+    "ast_hash": "949f5ef2d0686fe07204db180f59064d",
+    "semantic_hash": "949f5ef2d0686fe07204db180f59064d"
+  },
+  "Visuals/_lib/theme.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278559,
+    "ast_hash": "dca76fd565fd4618080ab1ddc5f25769",
+    "semantic_hash": "dca76fd565fd4618080ab1ddc5f25769"
+  },
+  "Visuals/_lib/viz.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.27856,
+    "ast_hash": "ec0e0d49d7cf6e6672fd6e960a336403",
+    "semantic_hash": "ec0e0d49d7cf6e6672fd6e960a336403"
+  },
+  "Visuals/brownian-motion-paths/data/.meta.json": {
+    "mtime": 1787306337.3859172,
+    "seen": 1788358192.27856,
+    "ast_hash": "cd104413c74bf56ad3a8da55fa505a45",
+    "semantic_hash": "cd104413c74bf56ad3a8da55fa505a45"
+  },
+  "Visuals/brownian-motion-paths/model.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278561,
+    "ast_hash": "944213964aaeab2f630673f991d82649",
+    "semantic_hash": "944213964aaeab2f630673f991d82649"
+  },
+  "Visuals/brownian-motion-paths/scene.py": {
+    "mtime": 1787259776.0,
+    "seen": 1788358192.278561,
+    "ast_hash": "0f17ab590b736a0894cc6db3dbf9d91c",
+    "semantic_hash": "0f17ab590b736a0894cc6db3dbf9d91c"
+  },
+  "Visuals/gaussian-white-noise-as-an-isometry/data/.meta.json": {
+    "mtime": 1787306338.222625,
+    "seen": 1788358192.278562,
+    "ast_hash": "781ffc29035ae87cbe6c9b753eefee7e",
+    "semantic_hash": "781ffc29035ae87cbe6c9b753eefee7e"
+  },
+  "Visuals/gaussian-white-noise-as-an-isometry/model.py": {
+    "mtime": 1787305352.7379973,
+    "seen": 1788358192.278562,
+    "ast_hash": "5b10d41259b19a0873c27cc8c187f2b6",
+    "semantic_hash": "5b10d41259b19a0873c27cc8c187f2b6"
+  },
+  "Visuals/gaussian-white-noise-as-an-isometry/scene.py": {
+    "mtime": 1787305493.794728,
+    "seen": 1788358192.278563,
+    "ast_hash": "648e8514964a8932f8a89b3013bbf3ee",
+    "semantic_hash": "648e8514964a8932f8a89b3013bbf3ee"
+  },
+  "Visuals/modes-of-convergence-of-stochastic-sequences/data/.meta.json": {
+    "mtime": 1788009718.9890606,
+    "seen": 1788358192.2785642,
+    "ast_hash": "849040b8e26c14d54e3fa4407b6328c6",
+    "semantic_hash": "849040b8e26c14d54e3fa4407b6328c6"
+  },
+  "Visuals/modes-of-convergence-of-stochastic-sequences/model.py": {
+    "mtime": 1788009718.9935083,
+    "seen": 1788358192.2785642,
+    "ast_hash": "1d5ad99e059a2e27906f2089ce29358b",
+    "semantic_hash": "1d5ad99e059a2e27906f2089ce29358b"
+  },
+  "Visuals/modes-of-convergence-of-stochastic-sequences/scene.py": {
+    "mtime": 1788009718.9944327,
+    "seen": 1788358192.2785652,
+    "ast_hash": "842e1a24b5ac4b51326abacf4aedda9f",
+    "semantic_hash": "842e1a24b5ac4b51326abacf4aedda9f"
+  },
+  "renv/activate.R": {
+    "mtime": 1787742908.2044356,
+    "seen": 1788358192.2785652,
+    "ast_hash": "d15cc714c8517424204ea62254b8e892",
+    "semantic_hash": "d15cc714c8517424204ea62254b8e892"
+  },
+  "renv/settings.json": {
+    "mtime": 1787742908.2049215,
+    "seen": 1788358192.278566,
+    "ast_hash": "9e799b495675aeaa6f074e1d11329ec0",
+    "semantic_hash": "9e799b495675aeaa6f074e1d11329ec0"
+  }
+}
