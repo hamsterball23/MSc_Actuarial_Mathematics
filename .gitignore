@@ -38,3 +38,6 @@ Thumbs.db
 # Logs / temp
 *.log
 .tmp/
+
+# graphify (regenerated via `graphify update .`)
+graphify-out/
