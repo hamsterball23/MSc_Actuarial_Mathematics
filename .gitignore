@@ -39,5 +39,3 @@ Thumbs.db
 *.log
 .tmp/
 
-# graphify (regenerated via `graphify update .`)
-graphify-out/
