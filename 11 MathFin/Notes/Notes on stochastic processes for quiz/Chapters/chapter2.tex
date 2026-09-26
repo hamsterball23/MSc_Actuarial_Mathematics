@@ -1,0 +1,35 @@
+% ==================================================================
+\section{Chapter 2 --- Brownian Motion}
+% ==================================================================
+
+\subsection{Pre-Brownian motion}
+\begin{definition}[Pre-Brownian motion] \todo{via Gaussian white noise $G$ with intensity Lebesgue measure: $B_t = G([0,t])$} \end{definition}
+\begin{proposition}[Characterisations] \todo{centred Gaussian with $\Cov(B_s,B_t)=s\wedge t$ $\iff$ independent Gaussian increments $\iff$ \dots} \LG{Prop 2.3} \end{proposition}
+\begin{remark} \todo{fdd determine the law; Gaussian white noise from pre-BM} \end{remark}
+
+\subsection{Continuity of sample paths}
+\begin{definition}[Modification vs.\ indistinguishable] \todo{} \end{definition}
+\begin{theorem}[Kolmogorov's lemma] \todo{$\E|X_s-X_t|^q\le C|t-s|^{1+\varepsilon}$ $\Rightarrow$ $\alpha$-Hölder modification for $\alpha<\varepsilon/q$} \end{theorem}
+\begin{idea} \todo{dyadic chaining + Borel--Cantelli} \end{idea}
+\begin{corollary} \todo{BM exists; paths locally $\alpha$-Hölder for all $\alpha<1/2$} \end{corollary}
+\begin{definition}[Brownian motion, Wiener measure, canonical construction] \todo{} \end{definition}
+\begin{quizbox} Statement of Kolmogorov + why $q$ large gives any $\alpha<1/2$ for BM. \end{quizbox}
+
+\subsection{Properties of Brownian sample paths}
+\begin{proposition}[Invariance properties] \todo{symmetry, scaling, simple Markov $B_{t+s}-B_s$, time inversion $tB_{1/t}$} \end{proposition}
+\begin{theorem}[Blumenthal's 0--1 law] \todo{$\F_{0+}$ is trivial} \end{theorem}
+\begin{corollary} \todo{$\sup_{s\le\varepsilon}B_s>0$, $\inf<0$ a.s.; $T_a<\infty$; $\limsup B_t=+\infty$; infinitely many zeros near $0$} \end{corollary}
+\begin{proposition} \todo{not monotone on any interval; nowhere differentiable (remark)} \end{proposition}
+\begin{proposition}[Quadratic variation of BM] \todo{$\sum (B_{t_i}-B_{t_{i-1}})^2\to t$ in $L^2$ along mesh $\to0$} \end{proposition}
+\begin{idea} \todo{variance computation: independent centred terms, $\Var \le 2t\cdot\text{mesh}$} \end{idea}
+\begin{quizbox} Blumenthal and its corollaries; the $L^2$ QV computation. \end{quizbox}
+\begin{usedin} QV of BM $\to$ \cref{sec:qv} (general $\br{M}$), Itô's formula, realised volatility. \end{usedin}
+
+\subsection{Strong Markov property}
+\begin{definition} \todo{stopping time w.r.t.\ canonical filtration (preview of Ch.\ 3)} \end{definition}
+\begin{theorem}[Strong Markov property] \todo{$B^{(T)}_t = \ind_{\{T<\infty\}}(B_{T+t}-B_T)$ is BM indep.\ of $\F_T$} \end{theorem}
+\begin{idea} \todo{discretise $T_n=\lceil 2^nT\rceil/2^n$, use simple Markov, pass to limit by continuity} \end{idea}
+\begin{theorem}[Reflection principle] \todo{$\PP(S_t\ge a, B_t\le b)=\PP(B_t\ge 2a-b)$} \end{theorem}
+\begin{corollary} \todo{$S_t\eqd|B_t|$; density of $T_a$; $T_a\eqd a^2/B_1^2$} \end{corollary}
+\begin{quizbox} Reflection principle proof and the law of $T_a$. \end{quizbox}
+\begin{usedin} Barrier options; hitting-time Laplace transforms in \cref{sec:ost}. \end{usedin}

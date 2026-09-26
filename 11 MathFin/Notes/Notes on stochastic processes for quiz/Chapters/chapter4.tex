@@ -1,0 +1,32 @@
+% ==================================================================
+\section{Chapter 4 --- Continuous Semimartingales}
+% ==================================================================
+
+\subsection{Finite variation processes}
+\begin{definition} \todo{FV function, total variation $|a|$, signed measure $da$, Lebesgue--Stieltjes integral} \end{definition}
+\begin{proposition} \todo{$|\int h\,da|\le\int|h|\,|da|$; Riemann sum approximation for continuous $h$} \end{proposition}
+\begin{definition} \todo{FV process; $\int_0^t H_s\,dA_s$ for progressive $H$ is FV and adapted} \end{definition}
+
+\subsection{Continuous local martingales}
+\begin{definition} \todo{local martingale, reducing sequence} \end{definition}
+\begin{proposition}[Properties] \todo{(a) nonneg.\ $\Rightarrow$ supermartingale; (b) dominated by integrable r.v.\ $\Rightarrow$ UI martingale; (c) canonical reducing seq.\ $T_n=\inf\{|M_t|\ge n\}$} \end{proposition}
+\begin{theorem} \todo{continuous local martingale of finite variation $\Rightarrow$ constant} \end{theorem}
+\begin{idea} \todo{reduce to bounded; $\E[M_t^2]=\E\sum(\Delta M)^2\le\E[\sup|\Delta M|\cdot V_t]\to0$} \end{idea}
+\begin{quizbox} This theorem: it is the uniqueness engine for $\br{M}$ and the semimartingale decomposition. \end{quizbox}
+\begin{trap} Local martingale $\not\Rightarrow$ martingale, even UI (e.g.\ inverse Bessel-3). \end{trap}
+
+\subsection{Quadratic variation of a continuous local martingale}\label{sec:qv}
+\begin{theorem}[Existence of $\br{M}$] \todo{unique increasing continuous $\br{M}$, $\br{M}_0=0$, $M^2-\br{M}$ loc.\ mart; limit of $\sum(M_{t_i}-M_{t_{i-1}})^2$ in probability} \end{theorem}
+\begin{idea} \todo{bounded case first, $L^2$-Cauchy via Doob; localise} \end{idea}
+\begin{proposition} \todo{$\br{M^T}=\br{M}^T$; $M$ constant on $[a,b]$ iff $\br{M}$ is} \end{proposition}
+\begin{theorem}[$L^2$-bounded martingales] \todo{$M\in\HH$ $\iff$ $\E\br{M}_\infty<\infty$; then $M^2-\br{M}$ UI martingale; $\E[M_\infty^2]=\E[M_0^2]+\E\br{M}_\infty$} \end{theorem}
+\begin{corollary} \todo{$\E\br{M}_t<\infty\ \forall t$ $\Rightarrow$ true martingale} \end{corollary}
+\begin{definition}[Bracket $\br{M,N}$] \todo{polarisation; bilinear, symmetric; limit of cross-products} \end{definition}
+\begin{proposition}[Kunita--Watanabe] \todo{$\int|H||K|\,|d\br{M,N}|\le(\int H^2d\br{M})^{1/2}(\int K^2d\br{N})^{1/2}$} \end{proposition}
+\begin{quizbox} $\br{M}$ characterisation; the $\HH$ criterion; KW. \end{quizbox}
+\begin{usedin} $\HH$ is the Hilbert space of Ch.\ 5; KW gives $\br{H\cdot M,N}$ well-defined. \end{usedin}
+
+\subsection{Continuous semimartingales}
+\begin{definition} \todo{$X=X_0+M+A$; uniqueness of decomposition} \end{definition}
+\begin{definition} \todo{$\br{X,Y}:=\br{M,N}$} \end{definition}
+\begin{proposition} \todo{$\br{X,Y}$ is limit of $\sum\Delta X\Delta Y$; FV parts contribute nothing} \end{proposition}

@@ -1,0 +1,34 @@
+% ==================================================================
+\section{Chapter 1 --- Gaussian Variables and Gaussian Processes (essentials)}
+% ==================================================================
+\emph{Only what Chapters 2--5 lean on.}
+
+\subsection{Gaussian variables and vectors}
+\begin{definition} \todo{$X\sim\mathcal N(m,\sigma^2)$ via $\E[e^{i\xi X}]=e^{im\xi-\sigma^2\xi^2/2}$; $\sigma=0$ allowed (degenerate)} \end{definition}
+\begin{proposition} \todo{$L^2$- or a.s.\ limits of centred Gaussians are Gaussian (variances converge)} \end{proposition}
+\begin{definition}[Gaussian vector] \todo{every linear combination $\langle u,X\rangle$ is Gaussian; law determined by mean and covariance $K_X$} \end{definition}
+\begin{proposition}[Independence $\iff$ uncorrelated] \todo{for a Gaussian vector: $X_1,\dots,X_d$ independent iff $K_X$ diagonal} \end{proposition}
+
+%Trap for indepenence
+\begin{trap} Needs \emph{jointly} Gaussian: two uncorrelated Gaussians need not be independent.\end{trap}
+
+\begin{counterexample} 
+Let $X \sim \Norm{0}{1}$ and $Y = \varepsilon X$ for $\varepsilon \in \{-1,1\}$ independent of $X$ with $P(\varepsilon = -1) = 1/2 = P(\varepsilon = 1)$. Then $X$ and $Y$ are:
+\begin{itemize}
+    \item both standard Gaussian: $P(Y \leq y)=\frac12P(X \leq y) + \frac12 P(-X \leq y)=P(X \leq y)$.
+    \item uncorrelated: $\Cov{X}{Y}=\E[\varepsilon X^2]=\E[\varepsilon]\E[X^2]=0\cdot1=0$
+    \item \textbf{not} jointly Gaussian: $(1,1)\begin{pmatrix}X \\ Y\end{pmatrix}=X+Y=\begin{cases}2X, \quad &\text{ with probability 1/2} \\ 0, \quad &\text{ with probability 1/2}\end{cases}$, which has an atom of mass at $0$, but is not a constant, so that it cannot be a Gaussian variable (not even degenerate).
+    \item \textbf{not independent}: We have $|Y|=|X|$ so $P(|X| \leq 1, |Y|>1)=0 \neq P(|X|\leq1)P(|Y| >1)>0$ 
+\end{itemize}
+\end{counterexample}
+
+\subsection{Gaussian processes and Gaussian spaces}
+\begin{definition} \todo{Gaussian space: closed linear subspace of $L^2(\Omega)$ of centred Gaussians; Gaussian process: all fdd Gaussian} \end{definition}
+\begin{theorem}[Independence = orthogonality] \todo{closed subspaces $H_1,H_2$ of a Gaussian space: $\sigma(H_1)\perp\!\!\!\perp\sigma(H_2)\iff H_1\perp H_2$} \end{theorem}
+\begin{corollary}[Conditional expectation = projection] \todo{$\E[X\mid\sigma(K)]=p_K(X)$; conditional law is $\mathcal N(p_K(X),\E[(X-p_K(X))^2])$} \end{corollary}
+\begin{theorem}[Existence] \todo{any symmetric positive semi-definite $\Gamma(s,t)$ is the covariance of a centred Gaussian process} \end{theorem}
+\begin{quizbox} Independence $\iff$ orthogonality in a Gaussian space; conditional expectation is linear projection. \end{quizbox}
+
+\subsection{Gaussian white noise}
+\begin{definition} \todo{isometry $G:L^2(E,\mu)\to$ Gaussian space; $G(A):=G(\ind_A)\sim\mathcal N(0,\mu(A))$, independent on disjoint sets, additive} \end{definition}
+\begin{usedin} $\mu=$ Lebesgue on $\R_+$, $B_t=G([0,t])$ gives pre-BM (Ch.\ 2). $G(f)=\int f\,dB$ is the Wiener integral: the deterministic-integrand special case of Ch.\ 5. \end{usedin}

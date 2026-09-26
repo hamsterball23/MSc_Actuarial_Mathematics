@@ -1,0 +1,45 @@
+% ==================================================================
+\section{Chapter 5 --- Stochastic Integration}
+% ==================================================================
+
+\subsection{Construction of stochastic integrals}
+\subsubsection{Martingales bounded in $L^2$}
+\begin{definition} \todo{$\HH$ with norm $\|M\|=\E[M_\infty^2]^{1/2}$; Hilbert space} \end{definition}
+\begin{definition} \todo{$\LtwoM$; elementary processes $\mathcal E$; dense in $\LtwoM$} \end{definition}
+\begin{theorem}[Itô isometry / characterisation] \todo{$H\mapsto H\cdot M$ isometry $\LtwoM\to\HH$; $H\cdot M$ unique s.t.\ $\br{H\cdot M,N}=H\cdot\br{M,N}\ \forall N\in\HH$} \end{theorem}
+\begin{proposition} \todo{associativity $K\cdot(H\cdot M)=(KH)\cdot M$; stopping $(H\cdot M)^T=H\ind_{[0,T]}\cdot M=H\cdot M^T$} \end{proposition}
+\subsubsection{Local martingales}
+\begin{theorem} \todo{extension to $\Lloc$ by localisation; same characterisation} \end{theorem}
+\begin{remark} \todo{when is $H\cdot M$ a true martingale: $\E\int_0^tH_s^2d\br{M}_s<\infty$} \end{remark}
+\subsubsection{Semimartingales}
+\begin{definition} \todo{locally bounded progressive $H$; $H\cdot X=H\cdot M+H\cdot A$} \end{definition}
+\subsubsection{Convergence of stochastic integrals}
+\begin{proposition}[Dominated convergence] \todo{} \end{proposition}
+\begin{proposition}[Riemann sums] \todo{$H$ adapted continuous: $\sum H_{t_{i-1}}(X_{t_i}-X_{t_{i-1}})\to\int H\,dX$ in probability} \end{proposition}
+\begin{quizbox} The characterisation via $\br{H\cdot M,N}$ and the isometry — most proofs in 5.2--5.4 run through them. \end{quizbox}
+
+\subsection{Itô's formula}
+\begin{proposition}[Integration by parts] \todo{$X_tY_t=X_0Y_0+\int X\,dY+\int Y\,dX+\br{X,Y}_t$} \end{proposition}
+\begin{theorem}[Itô's formula] \todo{$F\in C^2(\R^p)$, multidimensional} \end{theorem}
+\begin{idea} \todo{IBP $\Rightarrow$ polynomials by induction $\Rightarrow$ Weierstrass + localisation; or Taylor + Riemann sums} \end{idea}
+\begin{proposition}[Stochastic exponential] \todo{$\Exp(M)_t=\exp(M_t-\tfrac12\br{M}_t)$ is a nonneg.\ loc.\ mart / supermartingale} \end{proposition}
+\begin{quizbox} Itô for $f(t,B_t)$ and for products; computing brackets of Itô processes. \end{quizbox}
+
+\subsection{Consequences of Itô's formula}
+\begin{theorem}[Lévy's characterisation] \todo{$\br{X^i,X^j}_t=\delta_{ij}t$ $\Rightarrow$ BM} \end{theorem}
+\begin{idea} \todo{$\exp(i\xi\cdot X_t+\tfrac12|\xi|^2t)$ is a bounded martingale} \end{idea}
+\begin{theorem}[Dambis--Dubins--Schwarz] \todo{$M_t=\beta_{\br{M}_t}$} \end{theorem}
+\begin{theorem}[Burkholder--Davis--Gundy] \todo{$c_p\E[\br{M}_T^{p/2}]\le\E[(M_T^*)^p]\le C_p\E[\br{M}_T^{p/2}]$} \end{theorem}
+\begin{theorem}[Martingale representation] \todo{Brownian filtration: every $L^2$ martingale is $c+\int H\,dB$} \end{theorem}
+\begin{usedin} Representation $\Rightarrow$ market completeness / hedging; Lévy $\Rightarrow$ Girsanov proof. \end{usedin}
+
+\subsection{Girsanov's theorem}
+\begin{proposition} \todo{$\QQ\ll\PP$ on $\F_\infty$, $D_t=\E[\tfrac{d\QQ}{d\PP}\mid\F_t]$ continuous $\Rightarrow$ $D=\Exp(L)$} \end{proposition}
+\begin{theorem}[Girsanov] \todo{$M$ $\PP$-loc.\ mart $\Rightarrow$ $M-\br{M,L}$ is $\QQ$-loc.\ mart; brackets unchanged} \end{theorem}
+\begin{proposition}[Novikov] \todo{$\E\exp(\tfrac12\br{L}_\infty)<\infty\Rightarrow\Exp(L)$ UI martingale} \end{proposition}
+\begin{quizbox} Girsanov for BM with drift: identify $L$, check Novikov, write the $\QQ$-BM. \end{quizbox}
+
+\subsection{Applications of Girsanov's theorem}
+\begin{theorem}[Cameron--Martin] \todo{law of $B+h$, $h\in H$ (Cameron--Martin space)} \end{theorem}
+\begin{example} \todo{law of $T_a$ for BM with drift; weak solutions of SDEs with drift} \end{example}
+\begin{usedin} Risk-neutral measure; drift removal in pricing. \end{usedin}

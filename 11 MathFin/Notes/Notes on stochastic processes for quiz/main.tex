@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+
+
+% ------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+\setlist{nosep,leftmargin=*}
+\setcounter{tocdepth}{2}
+\usepackage{fancyhdr, lastpage}
+\usepackage{dsfont}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+% ------------------------------------------------------------------
+% Theorem environments (numbered per section, shared counter)
+% ------------------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\theoremstyle{plain}
+\newtheorem{counterexample}[definition]{Counterexample}
+
+% Proof idea: the 2--4 line skeleton you should be able to reproduce
+\newenvironment{idea}{\begin{proof}[Proof idea]}{\end{proof}}
+
+% Boxes
+\newtcolorbox{quizbox}{colback=red!4,colframe=red!50!black,
+  title=Quiz-critical,fonttitle=\bfseries,breakable}
+\newtcolorbox{usedin}{colback=blue!3,colframe=blue!40!black,
+  title=Used later in,fonttitle=\bfseries\small,fontupper=\small,breakable}
+\newtcolorbox{trap}{colback=orange!5,colframe=orange!60!black,
+  title=Common trap,fonttitle=\bfseries\small,fontupper=\small,breakable}
+
+% Reference to the book: \LG{Thm 2.9}
+\newcommand{\LG}[1]{\textsf{\small[LG #1]}}
+% Placeholder marker
+\newcommand{\todo}[1]{\textcolor{gray}{\emph{[#1]}}}
+
+% ------------------------------------------------------------------
+% Notation
+% ------------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Fil}{(\F_t)_{t\ge0}}
+\newcommand{\br}[1]{\langle #1\rangle}      % bracket <M>, <M,N>
+\newcommand{\HH}{\mathbb{H}^2}              % L^2-bounded cont. martingales
+\newcommand{\LtwoM}{L^2(M)}
+\newcommand{\Lloc}{L^2_{\mathrm{loc}}(M)}
+\newcommand{\ind}{\mathbf{1}}
+\newcommand{\eqd}{\overset{d}{=}}
+\newcommand{\Exp}{\mathcal{E}}              % stochastic exponential
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\CovOp}{Cov}
+
+% ------------------------------------------------------------------
+% Selfmade shortcuts
+% ------------------------------------------------------------------
+\newcommand{\Norm}[2]{\mathcal{N}(#1,#2)}
+\newcommand{\Cov}[2]{\CovOp\left(#1, #2\right)}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% ------------------------------------------------------------------
+% Header and footer
+% ------------------------------------------------------------------
+
+%Sidehoved og sidefod
+%Sidehoved/fod alle andre sider end første
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{nqh266}
+\fancyhead[R]{MathFin notes - Quiz preparation}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[L]{MathFin 2026}
+\fancyfoot[R]{Side \thepage \hspace{1pt} af \pageref*{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%Sidefod kun
+\fancypagestyle{declarationstyle}
+{
+   \fancyhf{}
+   \fancyhead[L]{nqh266}
+   \fancyhead[R]{MathFin notes - Quiz preparation}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ------------------------------------------------------------------
+% Front page
+% ------------------------------------------------------------------
+
+\title{Le Gall, Chapters 1--5\\[2pt]\large Quiz notes}
+\author{Kasper Svejgård Nielsen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% 0 - How to use notes
+\section*{How to use these notes}
+\addcontentsline{toc}{section}{How to use these notes}
+Each section follows the book. For every result:
+\emph{statement} (precise hypotheses) $\to$ \emph{proof idea} (only if the
+proof is examinable or the technique recurs) $\to$ \emph{used later in}.
+Red boxes mark what must be reproducible under time pressure.
+
+% 1 - Chapter 1
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/chapter1}
+
+% 2 - Chapter 2
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/chapter2}
+
+% 3 - Chapter 3
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/chapter3}
+
+% 4 - Chapter 4
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/chapter4}
+
+% 5 - Chapter 5
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/chapter5}
+
+% Finally - Quiz toolbox
+\include{11 MathFin/Notes/Notes on stochastic processes for quiz/Chapters/quiz_toolbox}
+
+\end{document}
+

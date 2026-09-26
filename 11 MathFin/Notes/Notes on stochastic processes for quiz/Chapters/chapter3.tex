@@ -1,0 +1,58 @@
+% ==================================================================
+\section{Chapter 3 --- Filtrations and Martingales}
+% ==================================================================
+Throughout this chapter we consider a probability space $(\Omega, \mc{F}, P)$.
+\subsection{Filtrations and processes}
+\begin{definition}[Filtration and filtered probability space]\label{chap3:filtration}
+A \textit{filtration} on $(\Omega, \mc{F}, P)$ is a collection $(\mc{F})_{0 \leq t \leq \infty}$ of sub-$\sigma$-algebras of $\mc{F}$ indexed by $[0,\infty]$, such that $\mc{F}_s \subset \mc{F}_t$ for every $0 \leq s \leq t \leq \infty$. We thus have, for every $0 \leq s < t$ $$\mc{F}_0 \subset \mc{F}_s \subset \mc{F}_t \subset \mc{F}_\infty \subset \mc{F}.$$
+We also say that $(\Omega, \mc{F}, (\mc{F}_t), P)$ is a \textit{filtered probability space}.
+\end{definition}
+
+\begin{definition}[Right-continous filtration]\label{chap3:right_cont_filtration}
+Let $(\mc{F})_{0 \leq t \leq \infty}$ be a filtration on $(\Omega, \mc{F}, P)$. For every $t \geq 0$, set
+$$\mc{F}_{t+}=\bigcap_{s>t}\mc{F}_s$$
+and $\mc{F}_{\infty+}=\mc{F}_\infty$. Note that $\mc{F}_t \subset \mc{F}_{t+}$ and that the collection $(\mc{F}_{t+})_{0 \leq t \leq \infty}$ is also a filtration. We say that the filtration $(\mc{F}_t)$ is \textit{right-continous} if
+$$\mc{F}_{t+}=\mc{F}_t, \quad \forall t \geq 0.$$
+By construction, the filtration $(\mc{F}_{t+})$ is right-continous.
+\end{definition}
+
+\begin{definition}
+\todo{adaptedness, canonical filtration}
+\end{definition}
+
+\begin{definition}
+\todo{¬Completeness}
+\end{definition}
+
+\todo{set standard assumptions down}
+
+
+
+\begin{definition} \todo{adapted, progressive; hierarchy measurable $\supset$ progressive $\supset$ adapted+right-cont.} \end{definition}
+\begin{proposition} \todo{adapted with right-continuous (or left-) paths $\Rightarrow$ progressive} \end{proposition}
+\begin{trap} Adapted $\not\Rightarrow$ progressive in general; progressive is what makes $\int_0^t H_s\,ds$ and $X_T$ behave. \end{trap}
+
+\subsection{Stopping times and associated $\sigma$-fields}\label{sec:st}
+\begin{definition} \todo{stopping time; $\F_T$; $\F_{T+}$} \end{definition}
+\begin{proposition} \todo{right-continuous filtration: $T$ s.t.\ iff $\{T<t\}\in\F_t$} \end{proposition}
+\begin{proposition}[Properties] \todo{$S\le T\Rightarrow\F_S\subset\F_T$; $S\wedge T$, $S\vee T$; $\{S\le T\}\in\F_S\cap\F_T$; $T_n\downarrow T$} \end{proposition}
+\begin{proposition} \todo{$X$ progressive $\Rightarrow$ $X_T\ind_{\{T<\infty\}}$ is $\F_T$-measurable; stopped process progressive} \end{proposition}
+\begin{proposition}[Hitting times] \todo{open set: s.t.\ for $\F_{t+}$; closed set + continuous paths: s.t.} \end{proposition}
+\begin{quizbox} Hitting-time results (which set type needs which hypothesis) and $X_T\in\F_T$. \end{quizbox}
+
+\subsection{Continuous-time martingales and supermartingales}
+\begin{definition} \todo{(sub/super)martingale} \end{definition}
+\begin{example}[Brownian martingales] \todo{$B_t$, $B_t^2-t$, $\exp(\theta B_t-\theta^2t/2)$} \end{example}
+\begin{proposition}[Maximal inequality, Doob's $L^p$ inequality] \todo{via discrete version on countable dense set + right-continuity} \end{proposition}
+\begin{proposition}[Upcrossing inequality] \todo{} \end{proposition}
+\begin{theorem}[Regularity / càdlàg modification] \todo{right-cont.\ filtration + usual cond.\ + $t\mapsto\E X_t$ right-cont.\ $\Rightarrow$ càdlàg modification} \end{theorem}
+\begin{theorem}[Convergence] \todo{a.s.\ convergence if bounded in $L^1$; closed by $X_\infty$ $\iff$ UI $\iff$ $L^1$-convergence} \end{theorem}
+\begin{quizbox} Doob $L^2$: $\E[\sup_{s\le t}X_s^2]\le4\E[X_t^2]$. UI $\iff$ closed martingale. \end{quizbox}
+
+\subsection{Optional stopping theorems}\label{sec:ost}
+\begin{theorem}[Optional stopping, UI case] \todo{$S\le T$ s.t., $X$ UI càdlàg: $\E[X_T\mid\F_S]=X_S$} \end{theorem}
+\begin{corollary} \todo{bounded stopping times; stopped martingale $X^T$ is a martingale} \end{corollary}
+\begin{proposition}[Supermartingale version] \todo{nonnegative supermartingale} \end{proposition}
+\begin{example}[Applications] \todo{exit of $(-a,b)$: $\PP(T_{-a}<T_b)=\tfrac{b}{a+b}$, $\E T=ab$; $\E[e^{-\lambda T_a}]=e^{-a\sqrt{2\lambda}}$} \end{example}
+\begin{quizbox} Every application in the example: be fast at choosing the right martingale and justifying the limit (dominated/bounded convergence). \end{quizbox}
+\begin{trap} $\E[B_{T_a}]=a\ne0$: OST fails without UI/boundedness. \end{trap}
