@@ -71,7 +71,7 @@ In all cases, we say that the sequence of stopping times $(T_n)$ \textit{reduces
     \item A non-negative continous local martingale $M$ such that $M_0 \in L^1$ is a supermartingale.
     \item A continuous local martingale $M$ such that there exists a random variable $Z \in L^1$ with $|M_t| \leq Z$ for every $t \geq 0$ (in particular a bounded continuous local martingale) is a uniformly integrable martingale.
     \item If $M$ is a continous local martingale and $M_0=0$ ( or more generally $M_0 \in L^1$), the sequence of stopping times
-    $$T_n = \inf\{t \geq 0 | \;|M_t| \geq 0\}$$
+    $$T_n = \inf\{t \geq 0 | \;|M_t| \geq n\}$$
     reduces M.
 \end{enumerate}
 \end{proposition}
@@ -83,16 +83,22 @@ For (iii) then observe that $M^{T_n}$ is dominated by $n+|M_0|$ and use (ii).
 \end{proofidea}
 \begin{trap}
 Considering property (ii) in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales}, one might expect that a continuous local martingale $M$ such that the collection $(M_t)_{t\geq 0}$ is uniformly integrable is automatically a martingale. This is incorrect! This condition is slightly weaker than in the Proposition, and, for instance, if $B$ is a three-dimensional Brownian Motion started from $x\neq 0$, then the process $M_t=1/|B_t|$ is a continous local martingale bounded in $L^2$, but it is not a martingale. \\
-In general not even the slightly stronger condition a continuous local martingale satisfies the stronger property of being bounded in $L^p$ for some $p>1$ can save the statement in the generallity.
+In general not even the slightly stronger condition a continuous local martingale satisfies the stronger property of being bounded in $L^p$ for some $p>1$ can save the statement in the generality.
 \end{trap}
 
 Now we observe that the classes of finite variation processes and continuous local martingales are distinct classes with one unique (degenerate) common member: 
 \begin{theorem}\label{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process}
 \LG{Theorem 4.8}
 Let $M$ be a continous local martingale. Assume that $M$ is also a finite variation process (in particular $M_0=0$). Then $M_t = 0$ almost surely for every $t \geq 0$.
-
-\todo{Maybe add a statement about if $M_0=c \in \R$? Does that make sense Claude?}
 \end{theorem}
+
+\begin{corollary}\label{chap4.2:corollary-continous_FV_local_martingale_is_constant}
+Let $M$ be a continuous local martingale (not necessarily with $M_0=0$) which is also a finite variation process. Then $M_t=M_0$ almost surely, for every $t \geq 0$; that is, $M$ is a.s.\ constant.
+\end{corollary}
+\begin{proofidea}
+By definition, $N_t:=M_t-M_0$ is a continuous local martingale with $N_0=0$. Since $t \mapsto M_0$ is constant (hence FV) and $M$ is FV, $N=M-M_0$ is also a finite variation process (difference of two FV processes, with the total variation of $N$ on $[0,t]$ equal to that of $M$). Theorem \ref{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process} applied to $N$ gives $N_t=0$ a.s.\ for every $t$, i.e.\ $M_t=M_0$ a.s.
+\end{proofidea}
+\begin{usedin} This is precisely the ``uniqueness engine'' cited in the toolbox: it gives uniqueness of the semimartingale decomposition $X=X_0+M+A$ (\cref{sec:qv}) and, together with Lévy's characterisation, uniqueness of the quadratic variation $\br{M}$. \end{usedin}
 \begin{proofidea}
 Set $\tau_n = \inf\{t \geq 0| \; \int_0^t|dM_s| \geq n\}$
 for every integer $n \in \N_0$. This stopping time can for a fixed $n$ show that for the process $N=M^{\tau_n}$, that
@@ -106,8 +112,24 @@ for some subdivisions. Using a sequence of subdivisions whose mesh tends to 0, s
 \begin{theorem}[Existence of $\br{M}$] \todo{unique increasing continuous $\br{M}$, $\br{M}_0=0$, $M^2-\br{M}$ loc.\ mart; limit of $\sum(M_{t_i}-M_{t_{i-1}})^2$ in probability} \end{theorem}
 \begin{proofidea} \todo{bounded case first, $L^2$-Cauchy via Doob; localise} \end{proofidea}
 \begin{proposition} \todo{$\br{M^T}=\br{M}^T$; $M$ constant on $[a,b]$ iff $\br{M}$ is} \end{proposition}
-\begin{theorem}[$L^2$-bounded martingales] \todo{$M\in\HH$ $\iff$ $\E\br{M}_\infty<\infty$; then $M^2-\br{M}$ UI martingale; $\E[M_\infty^2]=\E[M_0^2]+\E\br{M}_\infty$} \end{theorem}
-\begin{corollary} \todo{$\E\br{M}_t<\infty\ \forall t$ $\Rightarrow$ true martingale} \end{corollary}
+\begin{theorem}[$L^2$-bounded martingales] \label{chap4.3:theorem-L2_bounded_martingales}
+\LG{Theorem 4.10 --- check numbering against your edition} \\
+Let $M$ be a continuous local martingale with $M_0 \in L^2$. Then $M$ is a (uniformly integrable, $L^2$-bounded) martingale of class $\HH$ if and only if $\E[\br{M}_\infty] < \infty$. In that case:
+\begin{enumerate}[(i)]
+    \item $M_t^2-\br{M}_t$ is a uniformly integrable martingale (not just a local martingale);
+    \item $\E[M_\infty^2]=\E[M_0^2]+\E[\br{M}_\infty]$, and more generally $\E[M_t^2]=\E[M_0^2]+\E[\br{M}_t]$ for every $t$.
+\end{enumerate}
+\end{theorem}
+\begin{proofidea}
+($\Leftarrow$) Localise with $T_n=\inf\{t:\br{M}_t\ge n\}$; on $M^{T_n}$ the process $(M^{T_n})^2-\br{M}^{T_n}$ is a true martingale (bounded increments in expectation), which gives $\E[(M_{t\wedge T_n})^2]=\E[M_0^2]+\E[\br{M}_{t\wedge T_n}]\le \E[M_0^2]+n$, so $M^{T_n}$ is $L^2$-bounded uniformly in $n$. Fatou plus $\E[\br M_\infty]<\infty$ (dominated convergence along $T_n\uparrow\infty$) upgrades this to $M\in\HH$ and to the identity in (ii); (i) then follows since $M^2-\br M$ is a local martingale dominated appropriately, hence UI by \cref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales}(ii)-type domination.
+($\Rightarrow$) If $M\in\HH$, apply the reverse estimate to $M^{T_n}$ and use monotone convergence $\br{M}_{t\wedge T_n}\uparrow\br{M}_t$ together with the $L^2$-bound $\sup_t\E[M_t^2]<\infty$ to conclude $\E[\br{M}_\infty]<\infty$.
+\end{proofidea}
+\begin{corollary}
+If $\E[\br{M}_t]<\infty$ for every $t\ge0$ (not necessarily $\E[\br M_\infty]<\infty$), then $M$ is a true martingale.
+\end{corollary}
+\begin{proofidea}
+Fix $t$ and apply \cref{chap4.3:theorem-L2_bounded_martingales} on $[0,t]$: the stopped process $M^t$ has $\E[\br{M^t}_\infty]=\E[\br{M}_t]<\infty$, so $M^t\in\HH$, in particular $M^t$ is a true (UI) martingale. Since $t$ was arbitrary and $M^t_s=M_s$ for $s\le t$, $M$ itself satisfies the martingale property on every finite horizon.
+\end{proofidea}
 \begin{definition}[Bracket $\br{M,N}$] \todo{polarisation; bilinear, symmetric; limit of cross-products} \end{definition}
 \begin{proposition}[Kunita--Watanabe] \todo{$\int|H||K|\,|d\br{M,N}|\le(\int H^2d\br{M})^{1/2}(\int K^2d\br{N})^{1/2}$} \end{proposition}
 \begin{quizbox} $\br{M}$ characterisation; the $\HH$ criterion; KW. \end{quizbox}
