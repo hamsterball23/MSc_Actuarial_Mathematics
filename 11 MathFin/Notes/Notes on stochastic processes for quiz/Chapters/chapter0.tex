@@ -1,0 +1,34 @@
+% ==================================================================
+\section*{Chapter 0 --- Functional-analysis toolkit}
+\addcontentsline{toc}{section}{Chapter 0 --- Functional-analysis toolkit}
+% ==================================================================
+\emph{Not in Le Gall. Lecturer's own preliminaries (week 1.1), built specifically to
+support the Hilbert-space construction of the stochastic integral in Chapter 5
+($\HH$ and $\LtwoM$ are Hilbert spaces; the isometric extension theorem below is
+literally how $H\cdot M$ is defined for general $H\in\LtwoM$). Also used to justify
+that a Brownian motion stays a Brownian motion under the completed filtration
+(monotone class theorem).}
+
+\subsection{Normed and Banach spaces}
+\begin{definition}[Linear, normed, complete normed space] \LN{Def 1.1, 2.1, 2.6} \todo{$\|\cdot\|$: homogeneity, triangle inequality, definiteness; induced metric $d(v,\tilde v)=\|v-\tilde v\|$; Cauchy sequence; Banach space = complete normed space} \end{definition}
+\begin{example} \todo{sup-norm on bounded functions; $L^2$-norm; both are Banach} \end{example}
+\begin{quizbox} Know the three norm axioms and the definition of completeness cold --- they recur every time a space is asserted to be Hilbert (e.g.\ $\HH$, $\LtwoM$ in Ch.\ 5). \end{quizbox}
+
+\subsection{Inner product and Hilbert spaces}
+\begin{definition}[Inner product space, Hilbert space] \LN{Def 3.1, 3.8} \todo{symmetry, bilinearity, positive definiteness; induced norm $\|v\|=\sqrt{\langle v,v\rangle}$; Hilbert space = complete inner product space} \end{definition}
+\begin{proposition}[Cauchy--Schwarz] \LN{Lemma 3.2} \todo{$|\langle v,\tilde v\rangle|\le\|v\|\|\tilde v\|$} \end{proposition}
+\begin{definition}[Orthogonality, orthogonal complement] \LN{Def 3.6} \todo{$h\perp\tilde h \iff \langle h,\tilde h\rangle=0$; $\underline H^\perp$} \end{definition}
+\begin{theorem}[Orthogonal projection] \LN{Thm 3.10} \todo{closed subspace $\underline H\subseteq H$: unique decomposition $h=\underline h+\underline h^{(\perp)}$} \end{theorem}
+\begin{corollary}[Density criterion] \label{chap0:corollary-density_criterion} \LN{Cor 3.11} \todo{$\underline H^\perp=\{0\}\Rightarrow \underline H$ dense in $H$} \end{corollary}
+\begin{usedin} Density criterion $\Rightarrow$ elementary processes $\mathcal E$ dense in $\LtwoM$ (\cref{sec:qv} toolbox, Prop.\ 5.3): the whole construction of the stochastic integral rests on showing $\mathcal E^\perp=\{0\}$ via Thm.\ 4.8 (FV local mart.\ $\Rightarrow0$). \end{usedin}
+
+\subsection{Isometric extension theorem}
+\begin{theorem}[Linear isometric extension] \label{chap0:theorem-isometric_extension} \LN{Thm 2.12} \todo{$\underline V$ dense linear subspace of normed $V$; $\Lambda:\underline V\to V_\rhd$ linear isometry into a Banach space $V_\rhd$ $\Rightarrow$ unique linear isometric extension $\bar\Lambda:V\to V_\rhd$} \end{theorem}
+\begin{proofidea} \todo{density gives approximating sequence $\underline v_n\to v$; isometry turns it into a Cauchy sequence in $V_\rhd$; define $\bar\Lambda(v)=\lim\Lambda(\underline v_n)$; well-defined and norm-preserving by continuity} \end{proofidea}
+\begin{quizbox} This is \emph{the} mechanism behind Theorem 5.4: the simple integral $H\mapsto H\cdot M$ is a linear isometry $\mathcal E\to\HH$ on a dense subspace, so it extends uniquely to $H\mapsto H\cdot M$ on all of $\LtwoM$. Reproduce the three-step proof (density $\to$ Cauchy $\to$ limit) --- it is exactly the proof of existence of the stochastic integral. \end{quizbox}
+
+\subsection{Monotone class theorem}
+\begin{theorem}[Monotone class theorem, for sets] \LN{Thm 4.2} \todo{$\mathcal C$ closed under finite intersection, $\mathcal D$ a $\lambda$-system (monotone class) with $\Omega\in\mathcal D$, closed under proper differences and increasing unions; $\mathcal C\subseteq\mathcal D\Rightarrow\sigma(\mathcal C)\subseteq\mathcal D$} \end{theorem}
+\begin{theorem}[Monotone class theorem, for functions] \LN{Thm 4.4} \todo{$\mathcal M$ closed under multiplication, $\mathcal V$ a monotone vector space containing $1$; $\mathcal M\subseteq\mathcal V \Rightarrow \mathcal V$ contains all bounded $\sigma(\mathcal M)$-measurable functions} \end{theorem}
+\begin{usedin} Used to show $B_u-B_t \perp\!\!\!\perp \mathcal F_t^B\cup\mathcal N$ (negligible sets), i.e.\ that a Brownian motion is still a Brownian motion w.r.t.\ the \emph{completed} canonical filtration (week 2.2): take $\mathcal C=\mathcal F_t^B$, and note the sets independent of $B_u-B_t$ form a monotone class. \end{usedin}
+\begin{quizbox} State both versions precisely and know the one-line application to the completed Brownian filtration --- it is the standard justification for working with $(\mathcal F_t')$ instead of $(\mathcal F_t^B)$ throughout Ch.\ 3--5. \end{quizbox}
