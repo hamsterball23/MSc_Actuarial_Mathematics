@@ -182,6 +182,11 @@ Note that Proposition \ref{chap3.1:proposition-right_continuity_implies_progress
 $$\text{Adapted + right-continous sample paths} \implies \text{Progressive} \implies \text{Measurable and adapted}$$
 \end{remark}
 
+\begin{quizbox}
+The implication chain $\text{Adapted}+\text{right- (or left-) continuous paths} \Rightarrow \text{Progressive} \Rightarrow \text{Adapted}+\text{Measurable}$ is the single most-reused fact of this subsection: every process we actually work with (BM, càdlàg martingales, stochastic-integral integrands) is progressive \emph{because} it is adapted with one-sided-continuous paths, never by checking the definition directly. \\
+Also know \emph{why} we assume the \textit{usual conditions} (complete and right-continuous filtration): completeness makes running suprema like $\sup_{s\le t}X_s$ genuinely $\mc F_t$-measurable (needed for Doob's inequalities and OST) even though the sup is over an uncountable set, while right-continuity of $(\mc F_t)$ is exactly what makes hitting times of \emph{open} sets stopping times without needing the $\mc F_{t+}$ workaround (\cref{chap3.2:proposition-hitting_times} below).
+\end{quizbox}
+
 \begin{proposition}[The progressive $\sigma$-algebra]
 \LG{p. 43} \\
 The collection $\mc{P}$ of all sets $A \in \mc{F} \otimes \mc{B}(\R_+)$ such that the process $X_t(\omega)=1_A(\omega,t)$ is progressive forms a $\sigma$-algebra on $\Omega \times \R_+$, which is called \textit{the progressive $\sigma$-algebra}. \\
@@ -344,7 +349,7 @@ $\{S_t\in A\}\in\mathcal F_t$. As $t$ was arbitrary, $(S_t)$ is adapted.
 \begin{proposition} \todo{right-continuous filtration: $T$ s.t.\ iff $\{T<t\}\in\F_t$} \end{proposition}
 \begin{proposition}[Properties] \todo{$S\le T\Rightarrow\F_S\subseteq\F_T$; $S\wedge T$, $S\vee T$; $\{S\le T\}\in\F_S\cap\F_T$; $T_n\downarrow T$} \end{proposition}
 \begin{proposition} \todo{$X$ progressive $\Rightarrow$ $X_T\ind_{\{T<\infty\}}$ is $\F_T$-measurable; stopped process progressive} \end{proposition}
-\begin{proposition}[Hitting times] \todo{open set: s.t.\ for $\F_{t+}$; closed set + continuous paths: s.t.} \end{proposition}
+\begin{proposition}[Hitting times] \label{chap3.2:proposition-hitting_times} \todo{open set: s.t.\ for $\F_{t+}$; closed set + continuous paths: s.t.} \end{proposition}
 \begin{quizbox} Hitting-time results (which set type needs which hypothesis) and $X_T\in\F_T$. \end{quizbox}
 
 
