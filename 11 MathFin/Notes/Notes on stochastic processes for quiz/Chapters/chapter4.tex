@@ -2,10 +2,22 @@
 \section{Chapter 4 --- Continuous Semimartingales}
 % ==================================================================
 
+\subsection{Finite variation calculus (Lebesgue--Stieltjes toolkit)}
+\emph{Not Le Gall (he sketches this in passing, \LG{p.\ 71}). This is the lecturer's own build-up (weeks 3.1--3.2), taking finiteness of variation as the starting point rather than deriving it from an alternative construction.}
+\begin{definition}[Variation, positive/negative variation] \LN{Def 7.1} \todo{$|a|(t)=\sup_\pi\sum|a(t_i\wedge t)-a(t_{i-1}\wedge t)|$; $|a|_\pm(t)$ via $x^\pm$; finite variation $\iff |a|(t)<\infty\ \forall t$} \end{definition}
+\begin{theorem}[Jordan decomposition] \LN{Thm 7.5} \todo{$a(\cdot)$ FV $\iff$ difference of two non-decreasing functions; canonical: $a(t)=a(0)+|a|_+(t)-|a|_-(t)$, $|a|=|a|_++|a|_-$} \end{theorem}
+\begin{definition}[CADLAG function] \LN{Def 6.1} \todo{right-continuous with left limits; jump $\Delta a(t)=a(t)-a(t-)$; at most countably many jumps} \end{definition}
+\begin{theorem}[Characterisation of FV via partition sums] \LN{Thm 7.8} \todo{$a$ CADLAG: $a$ is FV $\iff$ $V^a(\cdot;\pi_n)\to$ some non-decreasing $g(\cdot)$ uniformly on compacts for every mesh$\to0$ sequence $\pi_n$; then $g=|a|$} \end{theorem}
+\begin{definition}[Lebesgue--Stieltjes measure and integral] \LN{Def 8.3, 8.7, Prop 8.5} \todo{$\lambda^a((s,t])=a(t)-a(s)$ via Jordan decomposition; $\int_0^t\varphi\,da=\int\varphi\,d|a|_+-\int\varphi\,d|a|_-$ for $a$-integrable $\varphi$ ($\int|\varphi|\,d|a|<\infty$); $\lambda^a(\{t\})=\Delta a(t)$} \end{definition}
+\begin{proposition}[$a$-absolute continuity] \LN{Def 8.10, Prop 8.11} \todo{$y(t)=y_0+\int_0^t\varphi\,da$ is CADLAG FV; $\Delta y(t)=\varphi(t)\Delta a(t)$; continuous if $a$ is; chain rule $\int\psi\,dy=\int\psi\varphi\,da$} \end{proposition}
+\begin{theorem}[Integration by parts / Itô formula for FV functions] \LN{Thm 9.1, 9.2} \todo{$a(t)\tilde a(t)-a(0)\tilde a(0)=\int_0^t a\,d\tilde a+\int_0^t\tilde a(s-)\,da$; for $f\in C^1$: $f(a(t))-f(a(0))=\int_0^t f'(a(s-))\,da(s)+\sum_{0<s\le t}\big(f(a(s))-f(a(s-))-f'(a(s-))\Delta a(s)\big)$} \end{theorem}
+\begin{trap} This pathwise Lebesgue--Stieltjes machinery \emph{requires} the integrator to be FV. Since Brownian paths are a.s.\ not FV (\cref{sec:qv} recap below), it cannot be applied to define $\int H\,dB$ --- this is precisely the gap Itô calculus (Ch.\ 5) fills. \end{trap}
+\begin{quizbox} Jordan decomposition statement; that CADLAG FV functions form a linear space; the FV Itô formula (with its jump-correction sum) --- this is the deterministic skeleton the stochastic Itô formula in Ch.\ 5 generalises. \end{quizbox}
+
 \subsection{Finite variation processes}
-\begin{definition} \todo{FV function, total variation $|a|$, signed measure $da$, Lebesgue--Stieltjes integral} \end{definition}
-\begin{proposition} \todo{$|\int h\,da|\le\int|h|\,|da|$; Riemann sum approximation for continuous $h$} \end{proposition}
-\begin{definition} \todo{FV process; $\int_0^t H_s\,dA_s$ for progressive $H$ is FV and adapted} \end{definition}
+\begin{definition} \LG{Def 4.4} \todo{continuous process of finite variation: adapted, continuous paths, every sample path FV, $A_0=0$} \end{definition}
+\begin{proposition}[Integral process] \LG{Prop 4.5} \todo{$(H\cdot A)_t(\omega)=\int_0^t H_s(\omega)\,dA_s(\omega)$ path-by-path for progressive $H$; well-defined if $\int_0^t|H_s|\,d|A|_s<\infty$; $H\cdot A$ is again continuous FV; chain rule $K\cdot(H\cdot A)=(KH)\cdot A$} \end{proposition}
+\begin{usedin} Localization toolkit (stopped processes, deterministic/local consistency lemmas) built here is reused verbatim for local martingales (\cref{sec:qv} below) and for extending the stochastic integral from $\HH$ to continuous local martingales (Ch.\ 5). \end{usedin}
 
 \subsection{Continuous local martingales}
 Once again we consider a filtered probability space $(\Omega, \mc{F}, (\mc{F}_t), P)$.
