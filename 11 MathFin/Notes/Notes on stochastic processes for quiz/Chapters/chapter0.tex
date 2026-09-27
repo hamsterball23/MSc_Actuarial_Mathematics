@@ -10,25 +10,69 @@ that a Brownian motion stays a Brownian motion under the completed filtration
 (monotone class theorem).}
 
 \subsection{Normed and Banach spaces}
-\begin{definition}[Linear, normed, complete normed space] \LN{Def 1.1, 2.1, 2.6} \todo{$\|\cdot\|$: homogeneity, triangle inequality, definiteness; induced metric $d(v,\tilde v)=\|v-\tilde v\|$; Cauchy sequence; Banach space = complete normed space} \end{definition}
-\begin{example} \todo{sup-norm on bounded functions; $L^2$-norm; both are Banach} \end{example}
-\begin{quizbox} Know the three norm axioms and the definition of completeness cold --- they recur every time a space is asserted to be Hilbert (e.g.\ $\HH$, $\LtwoM$ in Ch.\ 5). \end{quizbox}
+\begin{definition}[Linear, normed space] \label{chap0:definition-normed_space} \LN{Def 1.1, 2.1} \\
+A \textit{linear space} $V$ over $\R$ is a set with addition $(v,\tilde v)\mapsto v+\tilde v$ and scalar multiplication $(\alpha,v)\mapsto\alpha v$ satisfying the usual axioms; in particular $\alpha v+\beta\tilde v\in V$ for all $v,\tilde v\in V$, $\alpha,\beta\in\R$. A \textit{norm} on $V$ is a function $\|\cdot\|:V\to[0,\infty)$ satisfying
+\begin{itemize}
+    \item $\|\alpha v\|=|\alpha|\cdot\|v\|$ (absolute homogeneity)
+    \item $\|v+\tilde v\|\le\|v\|+\|\tilde v\|$ (triangle inequality)
+    \item $\|v\|=0 \iff v=0$ (definiteness)
+\end{itemize}
+The pair $(V,\|\cdot\|)$ is a \textit{normed space}. The norm induces a metric $d(v,\tilde v)=\|v-\tilde v\|$, and $v_n\to v$ in $V$ means $\|v_n-v\|\to0$. The norm and the vector-space operations are continuous w.r.t.\ this convergence: $v_n\to v,\ \tilde v_n\to\tilde v,\ \alpha_n\to\alpha \Rightarrow \|v_n\|\to\|v\|,\ v_n+\tilde v_n\to v+\tilde v,\ \alpha_n v_n\to\alpha v$.
+\end{definition}
+
+\begin{definition}[Complete normed space / Banach space] \label{chap0:definition-banach_space} \LN{Def 2.4, 2.6} \\
+$(v_n)$ is a \textit{Cauchy sequence} in $(V,\|\cdot\|)$ if $\|v_m-v_n\|\to0$ as $m,n\uparrow\infty$; every convergent sequence is Cauchy. $(V,\|\cdot\|)$ is \textit{complete} if every Cauchy sequence converges to a vector in $V$; a complete normed space is a \textit{Banach space}.
+\end{definition}
+
+\begin{example} \LN{Example 2.2, 2.7} \\
+The sup-norm $\|f\|_\infty=\sup_\omega|f(\omega)|$ on bounded functions, and the $L^2$-norm $\|f\|_{L^2}=(\int_I|f(x)|^2dx)^{1/2}$ on square-integrable functions on $I$ (identified a.e.), are both Banach.
+\end{example}
+
+\begin{theorem}[Linear isometric extension] \label{chap0:theorem-isometric_extension} \LN{Thm 2.12} \\
+Let $(V,\|\cdot\|)$ be a normed space, $\underline V\subseteq V$ a \textit{dense} linear subspace (for every $v\in V$ there is $(\underline v_n)\subseteq\underline V$ with $\underline v_n\to v$), $(V_\rhd,\|\cdot\|_\rhd)$ a Banach space, and $\Lambda:\underline V\to V_\rhd$ a linear isometry ($\Lambda(\alpha v+\beta\tilde v)=\alpha\Lambda(v)+\beta\Lambda(\tilde v)$, $\|\Lambda(v)\|_\rhd=\|v\|$). Then $\Lambda$ has a \textit{unique} linear isometric extension $\bar\Lambda:V\to V_\rhd$.
+\end{theorem}
+\begin{proofidea}
+Fix $v\in V$ and pick $\underline v_n\to v$ in $V$ by density. Since $\Lambda$ is an isometry, $\|\Lambda(\underline v_m)-\Lambda(\underline v_n)\|_\rhd=\|\underline v_m-\underline v_n\|\to0$, so $(\Lambda(\underline v_n))$ is Cauchy in the complete space $V_\rhd$; define $\bar\Lambda(v)=\lim_n\Lambda(\underline v_n)$. This preserves the norm since $\|\bar\Lambda(v)\|_\rhd=\lim\|\Lambda(\underline v_n)\|_\rhd=\lim\|\underline v_n\|=\|v\|$, and linearity/uniqueness follow from continuity of the operations (\cref{chap0:definition-normed_space}).
+\end{proofidea}
+\begin{quizbox} This is \emph{the} mechanism behind Theorem 5.4: the simple integral $H\mapsto H\cdot M$ is a linear isometry from the elementary processes $\mathcal E$ (dense in $\LtwoM$) into $\HH$, so it extends uniquely to $H\mapsto H\cdot M$ on all of $\LtwoM$. Reproduce the three-step proof (density $\to$ Cauchy $\to$ limit) --- it \emph{is} the proof of existence of the stochastic integral, just with $(\underline V,V,V_\rhd)=(\mathcal E,\LtwoM,\HH)$. \end{quizbox}
 
 \subsection{Inner product and Hilbert spaces}
-\begin{definition}[Inner product space, Hilbert space] \LN{Def 3.1, 3.8} \todo{symmetry, bilinearity, positive definiteness; induced norm $\|v\|=\sqrt{\langle v,v\rangle}$; Hilbert space = complete inner product space} \end{definition}
-\begin{proposition}[Cauchy--Schwarz] \LN{Lemma 3.2} \todo{$|\langle v,\tilde v\rangle|\le\|v\|\|\tilde v\|$} \end{proposition}
-\begin{definition}[Orthogonality, orthogonal complement] \LN{Def 3.6} \todo{$h\perp\tilde h \iff \langle h,\tilde h\rangle=0$; $\underline H^\perp$} \end{definition}
-\begin{theorem}[Orthogonal projection] \LN{Thm 3.10} \todo{closed subspace $\underline H\subseteq H$: unique decomposition $h=\underline h+\underline h^{(\perp)}$} \end{theorem}
-\begin{corollary}[Density criterion] \label{chap0:corollary-density_criterion} \LN{Cor 3.11} \todo{$\underline H^\perp=\{0\}\Rightarrow \underline H$ dense in $H$} \end{corollary}
-\begin{usedin} Density criterion $\Rightarrow$ elementary processes $\mathcal E$ dense in $\LtwoM$ (\cref{sec:qv} toolbox, Prop.\ 5.3): the whole construction of the stochastic integral rests on showing $\mathcal E^\perp=\{0\}$ via Thm.\ 4.8 (FV local mart.\ $\Rightarrow0$). \end{usedin}
+\begin{definition}[Inner product space, Hilbert space] \label{chap0:definition-hilbert_space} \LN{Def 3.1, 3.8} \\
+An \textit{inner product} on a linear space $V$ is $\langle\cdot,\cdot\rangle:V\times V\to\R$ with
+\begin{itemize}
+    \item $\langle v,\tilde v\rangle=\langle\tilde v,v\rangle$ (symmetry)
+    \item $\langle\alpha\tilde v+\beta\breve v,v\rangle=\alpha\langle\tilde v,v\rangle+\beta\langle\breve v,v\rangle$ (linearity)
+    \item $\langle v,v\rangle\ge0$, with equality iff $v=0$ (positive definiteness)
+\end{itemize}
+Every inner product induces a norm $\|v\|=\sqrt{\langle v,v\rangle}$ (Thm 3.3), and the inner product is continuous w.r.t.\ the induced norm (Lemma 3.4). $(H,\langle\cdot,\cdot\rangle)$ is a \textit{Hilbert space} if it is complete w.r.t.\ this induced norm, i.e.\ a Banach space under $\|\cdot\|$.
+\end{definition}
 
-\subsection{Isometric extension theorem}
-\begin{theorem}[Linear isometric extension] \label{chap0:theorem-isometric_extension} \LN{Thm 2.12} \todo{$\underline V$ dense linear subspace of normed $V$; $\Lambda:\underline V\to V_\rhd$ linear isometry into a Banach space $V_\rhd$ $\Rightarrow$ unique linear isometric extension $\bar\Lambda:V\to V_\rhd$} \end{theorem}
-\begin{proofidea} \todo{density gives approximating sequence $\underline v_n\to v$; isometry turns it into a Cauchy sequence in $V_\rhd$; define $\bar\Lambda(v)=\lim\Lambda(\underline v_n)$; well-defined and norm-preserving by continuity} \end{proofidea}
-\begin{quizbox} This is \emph{the} mechanism behind Theorem 5.4: the simple integral $H\mapsto H\cdot M$ is a linear isometry $\mathcal E\to\HH$ on a dense subspace, so it extends uniquely to $H\mapsto H\cdot M$ on all of $\LtwoM$. Reproduce the three-step proof (density $\to$ Cauchy $\to$ limit) --- it is exactly the proof of existence of the stochastic integral. \end{quizbox}
+\begin{proposition}[Cauchy--Schwarz] \LN{Lemma 3.2} \\
+$|\langle v,\tilde v\rangle|\le\|v\|\cdot\|\tilde v\|$ for every $v,\tilde v\in V$.
+\end{proposition}
+
+\begin{definition}[Orthogonality, orthogonal complement] \LN{Def 3.6} \\
+$h,\tilde h\in H$ are \textit{orthogonal}, $h\perp\tilde h$, if $\langle h,\tilde h\rangle=0$. For $\underline H\subseteq H$, its \textit{orthogonal complement} is $\underline H^\perp=\{h\in H\mid h\perp\underline h\ \forall\underline h\in\underline H\}$.
+\end{definition}
+
+\begin{theorem}[Orthogonal projection] \LN{Thm 3.10} \\
+If $\underline H$ is a \textit{closed} linear subspace of a Hilbert space $H$, every $h\in H$ has a unique decomposition $h=\underline h+\underline h^{(\perp)}$ with $\underline h\in\underline H$, $\underline h^{(\perp)}\in\underline H^\perp$.
+\end{theorem}
+
+\begin{corollary}[Density criterion] \label{chap0:corollary-density_criterion} \LN{Cor 3.11} \\
+If $\underline H$ is a linear subspace of $H$ with $\underline H^\perp=\{0\}$, then $\underline H$ is dense in $H$: for every $h\in H$ there is $(\underline h_n)\subseteq\underline H$ with $\underline h_n\to h$.
+\end{corollary}
+\begin{proofidea} Write $h=\underline h+\underline h^{(\perp)}$ via the orthogonal projection onto $\overline{\underline H}$ (the closure of $\underline H$, itself a closed subspace). If $\underline h^{(\perp)}\ne0$ it is a nonzero element of $\underline H^\perp$, contradicting the hypothesis; so $\underline h^{(\perp)}=0$ and $h=\underline h\in\overline{\underline H}$. \end{proofidea}
+\begin{usedin} This density criterion is exactly how the elementary processes $\mathcal E$ are shown dense in $\LtwoM$ (Ch.\ 5, Prop.\ 5.3): take $\underline H=\mathcal E$, $H=\LtwoM$, and show $\mathcal E^\perp=\{0\}$ by constructing, for $K\in\mathcal E^\perp$, the continuous FV process $X_t=\int_0^t K_u\,d\br{M}_u$, proving it is also a continuous martingale (using $K\perp\mathcal E$), and invoking Theorem 4.8 (continuous local martingale + FV $\Rightarrow$ constant $=0$) to conclude $K=0$ $\mu_M$-a.e. \end{usedin}
 
 \subsection{Monotone class theorem}
-\begin{theorem}[Monotone class theorem, for sets] \LN{Thm 4.2} \todo{$\mathcal C$ closed under finite intersection, $\mathcal D$ a $\lambda$-system (monotone class) with $\Omega\in\mathcal D$, closed under proper differences and increasing unions; $\mathcal C\subseteq\mathcal D\Rightarrow\sigma(\mathcal C)\subseteq\mathcal D$} \end{theorem}
-\begin{theorem}[Monotone class theorem, for functions] \LN{Thm 4.4} \todo{$\mathcal M$ closed under multiplication, $\mathcal V$ a monotone vector space containing $1$; $\mathcal M\subseteq\mathcal V \Rightarrow \mathcal V$ contains all bounded $\sigma(\mathcal M)$-measurable functions} \end{theorem}
-\begin{usedin} Used to show $B_u-B_t \perp\!\!\!\perp \mathcal F_t^B\cup\mathcal N$ (negligible sets), i.e.\ that a Brownian motion is still a Brownian motion w.r.t.\ the \emph{completed} canonical filtration (week 2.2): take $\mathcal C=\mathcal F_t^B$, and note the sets independent of $B_u-B_t$ form a monotone class. \end{usedin}
-\begin{quizbox} State both versions precisely and know the one-line application to the completed Brownian filtration --- it is the standard justification for working with $(\mathcal F_t')$ instead of $(\mathcal F_t^B)$ throughout Ch.\ 3--5. \end{quizbox}
+\begin{theorem}[Monotone class theorem, for sets] \label{chap0:theorem-monotone_class_sets} \LN{Thm 4.2} \\
+Let $\mc C$ be a collection of subsets of $\Omega$ closed under finite intersections, and $\mc D$ a \textit{monotone class}: $\Omega\in\mc D$; $A,B\in\mc D,\ A\subseteq B \Rightarrow B\setminus A\in\mc D$; and $(A_n)\subseteq\mc D$ increasing $\Rightarrow \bigcup_n A_n\in\mc D$. If $\mc C\subseteq\mc D$, then $\sigma(\mc C)\subseteq\mc D$.
+\end{theorem}
+
+\begin{theorem}[Monotone class theorem, for functions] \label{chap0:theorem-monotone_class_functions} \LN{Thm 4.4} \\
+Let $\mc M$ be a collection of bounded real-valued functions on $\Omega$ closed under multiplication, and $\mc V$ a \textit{monotone vector space}: a linear space of bounded functions containing the constant $1$, such that if $(f_n)\subseteq\mc V$ is an increasing sequence of non-negative functions with $\sup_n f_n$ bounded, then $\sup_n f_n\in\mc V$. If $\mc M\subseteq\mc V$, then $\mc V$ contains every bounded $\sigma(\mc M)$-measurable function.
+\end{theorem}
+
+\begin{usedin} Used to show $B_u-B_t$ is independent of $\mc F_t^B\cup\mc N$ (the completed canonical filtration $\mc F_t'=\sigma(\mc F_t^B\cup\mc N)$), i.e.\ that a Brownian motion is still a Brownian motion w.r.t.\ the \emph{completed} filtration (week 2.2). Sketch: negligible sets $\mc N$ are trivially independent of anything; $B_u-B_t\perp\!\!\!\perp\mc F_t^B$ by the defining property of BM; the collection of sets independent of $B_u-B_t$ is itself a monotone class (of sets) containing $\mc F_t^B\cup\mc N$, which is closed under finite intersection --- so by \cref{chap0:theorem-monotone_class_sets}, $B_u-B_t\perp\!\!\!\perp\sigma(\mc F_t^B\cup\mc N)=\mc F_t'$. \end{usedin}
+\begin{quizbox} State both versions precisely and know the one-line application to the completed Brownian filtration --- it is the standard justification for working with the ``usual conditions'' $(\mc F_t')$ instead of the bare canonical filtration $(\mc F_t^B)$ throughout Ch.\ 3--5. \end{quizbox}
