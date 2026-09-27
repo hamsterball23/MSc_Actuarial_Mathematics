@@ -120,7 +120,7 @@ In all cases, we say that the sequence of stopping times $(T_n)$ \textit{reduces
 \end{remark}
 \begin{trap} Local martingale $\not\Rightarrow$ martingale, even UI (e.g.\ inverse Bessel-3). \end{trap}
 
-\begin{properties}
+\begin{properties}\label{chap4.2:properties-properties_of_continous_local_martingale}
 \LG{pp. 76-77}
 \begin{enumerate}[(a)]
     \item A (true) martingale with continous sample paths is a continous local martingale, and the sequende $T_n=n$ reduces $M$.
@@ -181,9 +181,41 @@ By definition, $N_t:=M_t-M_0$ is a continuous local martingale with $N_0=0$. Sin
 
 
 \subsection{Quadratic variation of a continuous local martingale}\label{sec:qv}
-\begin{theorem}[Existence of $\br{M}$] \todo{unique increasing continuous $\br{M}$, $\br{M}_0=0$, $M^2-\br{M}$ loc.\ mart; limit of $\sum(M_{t_i}-M_{t_{i-1}})^2$ in probability} \end{theorem}
-\begin{proofidea} \todo{bounded case first, $L^2$-Cauchy via Doob; localise} \end{proofidea}
+\begin{theorem}[Existence of $\br{M,M}$] \label{chap4.3:theorem-existence_of_quadratic_variation}
+\LG{Theorem 4.9}\\
+Let $M=(M_t)_{t \geq 0}$ be a continous local martingale. There exists an increasing process denoted by $(\br{M,M}_t)_{t\geq0}$, which is unique up to a indistinguishability, such that $M^2_t-\br{M,M}_t$ is a continous local martingale. 
+
+Furthermore, for every fixed $t > 0$, if $0=t_0^n<t_1^n<...<t_{p_n}^n=t$ is an increasing sequence of subdivisions of $[0,t]$ with mesh size tending to 0, we have
+\begin{equation}\tag{4.3}\label{chap4.3:eq-quadratic_variation_as_limit_of_subdivision_quadratic_variations}
+\sum_{i=1}^{p_n} (M_{t_i^n}-M_{t_{i-1}^n})^2 \overset{\mb{P}}{\underset{n \to \infty}{\to}} \br{M,M}_t
+\end{equation}
+The process $\br{M,M}$ is called the \textbf{quadratic variation} of $M$.
+\end{theorem}
+\begin{proofidea}
+\begin{itemize}
+    \item Uniqueness by applying Theorem \ref{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process}
+    \item Bounded case first
+    \item $L^2$-Cauchy via Doob application
+    \item Localize using reducing sequence as in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales} (c).
+\end{itemize}
+\end{proofidea}
+A special case is of course using a Brownian Motion, where $\br{B,B}_t=t$.
+\begin{remark}
+\begin{enumerate}[(i)]
+    \item Observe that the process $\br{M,M}$ does not depend on the initial value $M_0$, but only in the increment of $M$, that is, if $M_t=M_0+N_t$, we have $\br{M,M}=\br{N,N}$. This is obvious from the second assertion of the theorem.
+    \item In the second assertion of the theorem, it is in fact not necessary to assume that the sequence is increasing - the subdivisions only need to get finer, not contain exactly the same rougher grid points the whole way.
+    \item Note that the Lecture Notes take a slightly way to defining what the quadratic variation is. It defines it as the limit of subdivisions whose mesh size tends to 0, in similar fashion as Proposition \ref{chap4.4:proposition-bracket_as_limit_of_subdivisions} (\LG{Proposition 4.21}), but here for continous local martingales.
+\end{enumerate}
+\end{remark}
+
+\begin{proposition}
+Let $M$ be a continous local martingale and let $T$ be a stopping time. Then we have almost surely for every $t \geq 0$,
+$$\br{M^T, M^T}_t=\br{M,M}_{t \land T}$$
+\end{proposition}
+This follows from the fact that $M^2_{t \land T} - \br{M,M}_{t \land T}$ is a continuous local martingale (use property (c) of Properties \ref{chap4.2:properties-properties_of_continous_local_martingale}).
+
 \begin{proposition} \todo{$\br{M^T}=\br{M}^T$; $M$ constant on $[a,b]$ iff $\br{M}$ is} \end{proposition}
+
 \begin{theorem}[$L^2$-bounded martingales] \label{chap4.3:theorem-L2_bounded_martingales}
 \LG{Theorem 4.10 --- check numbering against your edition} \\
 Let $M$ be a continuous local martingale with $M_0 \in L^2$. Then $M$ is a (uniformly integrable, $L^2$-bounded) martingale of class $\HH$ if and only if $\E[\br{M}_\infty] < \infty$. In that case:
@@ -210,4 +242,6 @@ Fix $t$ and apply \cref{chap4.3:theorem-L2_bounded_martingales} on $[0,t]$: the 
 \subsection{Continuous semimartingales}\label{sec:continous_semimartingales}
 \begin{definition} \todo{$X=X_0+M+A$; uniqueness of decomposition} \end{definition}
 \begin{definition} \todo{$\br{X,Y}:=\br{M,N}$} \end{definition}
-\begin{proposition} \todo{$\br{X,Y}$ is limit of $\sum\Delta X\Delta Y$; FV parts contribute nothing} \end{proposition}
+\begin{proposition} \label{chap4.4:proposition-bracket_as_limit_of_subdivisions}
+\LG{Proposition 4.21} \\
+\todo{$\br{X,Y}$ is limit of $\sum\Delta X\Delta Y$; FV parts contribute nothing} \end{proposition}
