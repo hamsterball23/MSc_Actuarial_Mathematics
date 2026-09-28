@@ -337,7 +337,7 @@ By subtracting initial values, we may assume that $B_0=B_0'=0$. Then observe tha
     \item The increments of $X_t$ are Gaussian: $X_t-X_s$ is a linear combination of the independent Gaussians $B_t-B_s\sim\Norm{0}{t-s}$ and $B'_t-B'_s\sim\Norm{0}{t-s}$, hence Gaussian with mean $0$ and variance $\tfrac12\big((t-s)+(t-s)\big)=t-s$.
     \item Continuous sample paths: $X$ is a linear combination of the continuous processes $B$ and $B'$, so its sample paths are continuous.
 \end{enumerate}
-By \cref{chap2.1:proposition-characterisations_of_brownian_motion} \LG{Prop.\ 2.3}, these four properties show that $X$ is an $(\mc F_t)$-Brownian motion. Then Proposition \ref{chap2.3:proposition-quadratic_variation_of_brownian_motion} (\todo{add \LG{} reference --- see note below})
+By \cref{chap2.1:proposition-characterisations_of_brownian_motion} \LG{Prop.\ 2.3}, these four properties show that $X$ is an $(\mc F_t)$-Brownian motion. Then Proposition \ref{chap2.3:proposition-quadratic_variation_of_brownian_motion} \LG{Prop.\ 2.16}
 implies that $\br{X,X}_t=t$ and using bilinearity:
 $$\br{B,B'}_t=\frac12(\br{\sqrt{2}X,\sqrt{2}X}_t-\br{B,B}_t-\br{B',B'}_t)=\frac12(2t-t-t)=0$$
 \end{proof}
