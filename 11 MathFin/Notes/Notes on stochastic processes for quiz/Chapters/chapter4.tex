@@ -13,7 +13,7 @@ $$|a|_+(t)=\sup_\pi\sum_{i=1}^p\big(a(t_i\wedge t)-a(t_{i-1}\wedge t)\big)^+, \q
 Link to Le Gall's notation: $|a|(t)=\int_0^t|da(s)|$ \LG{p.\ 71}.
 \end{definition}
 
-\begin{proposition}[Basic properties] 
+\begin{proposition}[Basic properties] \label{chap4.0:proposition-basic_properties_of_variation}
 \LN{Prop 7.2, 7.3, 7.4} \\
 Every monotone function is FV on compacts, with $|a|(t)=|a(t)-a(0)|$. The collection of FV functions is a linear space, and if $a(\cdot)$ is FV then $|a|(\cdot)$, $|a|_+(\cdot)$, $|a|_-(\cdot)$ are all non-decreasing.
 \end{proposition}
@@ -23,11 +23,11 @@ $a(\cdot)$ is FV if and only if it can be written as the difference of two non-d
 $$a(t)=a(0)+|a|_+(t)-|a|_-(t), \qquad |a|(t)=|a|_+(t)+|a|_-(t).$$
 \end{theorem}
 
-\begin{definition}[CADLAG function] \LN{Def 6.1} \\
+\begin{definition}[CADLAG function] \label{chap4.0:definition-cadlag_function} \LN{Def 6.1} \\
 $a:[0,\infty)\to\R$ is \textit{CADLAG} (\textit{Continue \`A Droite, Limites \`A Gauche}) if it is right-continuous, $a(t)=a(t+)$, and has finite left limits $a(t-)=\lim_{s\uparrow t}a(s)$ for every $t>0$. Write $\Delta a(t)=a(t)-a(t-)$ for the jump at $t$. CADLAG functions form a linear space, and a CADLAG function has at most countably many jump times \LN{Prop 6.2, 6.3}.
 \end{definition}
 
-\begin{proposition}[CADLAG functions of finite variation] \LN{Prop 7.7, 7.9} \\
+\begin{proposition}[CADLAG functions of finite variation] \label{chap4.0:proposition-cadlag_fv_functions} \LN{Prop 7.7, 7.9} \\
 The CADLAG FV functions form a linear space, and the variation functions $|a|,|a|_\pm$ inherit the CADLAG property, with jumps determined directly: $\Delta|a|(t)=|\Delta a(t)|$ and $\Delta|a|_\pm(t)=(\Delta a(t))^\pm$.
 \end{proposition}
 
@@ -126,8 +126,8 @@ In all cases, we say that the sequence of stopping times $(T_n)$ \textit{reduces
 \begin{enumerate}[(a)]
     \item A (true) martingale with continuous sample paths is a continuous local martingale, and the sequende $T_n=n$ reduces $M$.
     \item In the definition of a continuous local martingale starting from 0, one can replace "uniformly integrable martingale" by merely "martingale".
-    \item If $M$ is a continuous local martingale, then, for every stopping time $T$, then $M^T$ is a continouous local martingale. (This follows from Corollary 3.24 (\todo{Add ref})).
-    \item If $(T_n)$ reduces $M$ and if $(S_n)$ is a sequence of stopping times such that $S_n \uparrow \infty$, then the sequence $(T_n \land S_n)$ also reduces $M$ (This follows from Corollary 3.24 again (\todo{Add ref})).
+    \item If $M$ is a continuous local martingale, then, for every stopping time $T$, then $M^T$ is a continouous local martingale. (This follows from \cref{chap3.4:corollary-stopped_martingale_is_martingale}).
+    \item If $(T_n)$ reduces $M$ and if $(S_n)$ is a sequence of stopping times such that $S_n \uparrow \infty$, then the sequence $(T_n \land S_n)$ also reduces $M$ (This follows from \cref{chap3.4:corollary-stopped_martingale_is_martingale} again).
 \end{enumerate}
 \end{properties}
 \begin{proof}
@@ -204,7 +204,7 @@ The process $\br{M,M}$ is called the \textbf{quadratic variation} of $M$.
 \end{itemize}
 \end{proofidea}
 A special case is of course using a Brownian Motion, where $\br{B,B}_t=t$.
-\begin{remark}
+\begin{remark}\label{chap4.3:remark-remarks_on_quadratic_variation_definition}
 \begin{enumerate}[(i)]
     \item Observe that the process $\br{M,M}$ does not depend on the initial value $M_0$, but only in the increment of $M$, that is, if $M_t=M_0+N_t$, we have $\br{M,M}=\br{N,N}$. This is obvious from the second assertion of the theorem.
     \item In the second assertion of the theorem, it is in fact not necessary to assume that the sequence is increasing - the subdivisions only need to get finer, not contain exactly the same rougher grid points the whole way.
@@ -287,6 +287,7 @@ after which we remove the stopping.
 
 \textit{(ii)} Apply (i) to the stopped process $M^a=(M_{t\wedge a})_{t\ge0}$ for each $a\ge0$, noting that $\br{M^a,M^a}_\infty=\br{M,M}_a$.
 \end{proofidea}
+\begin{quizbox} $\br{M,M}$ is the \emph{unique} non-decreasing process making $M^2-\br{M,M}$ a continuous local martingale (uniqueness via \cref{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process}); it is the probability limit of squared increments along any mesh-$\to0$ subdivision (\cref{chap4.3:eq-quadratic_variation_as_limit_of_subdivision_quadratic_variations}); it depends only on the increments of $M$, not $M_0$; it is stable under stopping (\cref{chap4.3:proposition-stopping_a_quadratic_variation}); and $\br{M,M}=0\iff M$ is a.s.\ constant (\cref{chap4.3:proposition-constant_quadratic_variation_gives_constant_continuous_local_martingale}). The $L^2$-boundedness criterion $E[\br{M,M}_\infty]<\infty\iff M$ is a true martingale bounded in $L^2$ (\cref{chap4.3:theorem-L2_bounded_martingales_and_quadratic_variation}) is the standard way to upgrade a local martingale to a true one. \end{quizbox}
 
 \subsection{The Bracket of Two continuous Local Martingales}
 \textit{Assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete.}}
@@ -331,13 +332,12 @@ Let $B$ and $B'$ be two independent $(\mc{F}_t)$-Brownian motions. Then $\br{B,B
 \begin{proof}
 By subtracting initial values, we may assume that $B_0=B_0'=0$. Then observe that $X_t = \frac{1}{\sqrt{2}}(B_t+B_t')$ is a martingale, as a linear combination of martingales. We argue that $X_t$ is a Brownian motion:
 \begin{enumerate}
-    \item $X_0=0$: ...
-    \item $X$ has independent increments:
-    \item The increments of $X_t$ are Gaussian:
-    \item Continuous sample paths
+    \item $X_0=0$: since $B_0=B_0'=0$.
+    \item $X$ has independent increments: for $s<t$, $X_t-X_s=\tfrac{1}{\sqrt2}\big((B_t-B_s)+(B'_t-B'_s)\big)$ is a function of the increments $(B_t-B_s,B'_t-B'_s)$ over $(s,t]$, which are independent of $\mc F_s$ because $B$ and $B'$ are each $(\mc F_t)$-Brownian motions and are independent of each other.
+    \item The increments of $X_t$ are Gaussian: $X_t-X_s$ is a linear combination of the independent Gaussians $B_t-B_s\sim\Norm{0}{t-s}$ and $B'_t-B'_s\sim\Norm{0}{t-s}$, hence Gaussian with mean $0$ and variance $\tfrac12\big((t-s)+(t-s)\big)=t-s$.
+    \item Continuous sample paths: $X$ is a linear combination of the continuous processes $B$ and $B'$, so its sample paths are continuous.
 \end{enumerate}
-Then Proposition 
-%\ref{CLAUDE ADD REF!}
+By \cref{chap2.1:proposition-characterisations_of_brownian_motion} \LG{Prop.\ 2.3}, these four properties show that $X$ is an $(\mc F_t)$-Brownian motion. Then Proposition \ref{chap2.3:proposition-quadratic_variation_of_brownian_motion} (\todo{add \LG{} reference --- see note below})
 implies that $\br{X,X}_t=t$ and using bilinearity:
 $$\br{B,B'}_t=\frac12(\br{\sqrt{2}X,\sqrt{2}X}_t-\br{B,B}_t-\br{B',B'}_t)=\frac12(2t-t-t)=0$$
 \end{proof}
@@ -364,10 +364,11 @@ $$
 $$
 \end{proposition}
 \begin{proofidea}
-\todo{}
+Pathwise, $\br{aM+bN,aM+bN}\ge0$ for every $a,b\in\R$ forces a Cauchy--Schwarz-type domination of measures, $|d\br{M,N}_s|\le\sqrt{d\br{M,M}_s\,d\br{N,N}_s}$; apply the ordinary Cauchy--Schwarz inequality to $\int|H_s||K_s|\,|d\br{M,N}_s|$ against this domination.
 \end{proofidea}
 
 \begin{usedin} $\HH$ is the Hilbert space of Ch.\ 5; KW gives $\br{H\cdot M,N}$ well-defined. \end{usedin}
+\begin{quizbox} $\br{M,N}=\tfrac12(\br{M+N}-\br{M}-\br{N})$ is the \emph{unique} finite variation process making $MN-\br{M,N}$ a continuous local martingale (\cref{chap4.4:properties-properties_of_the_bracket_process} (i)); it is symmetric, bilinear, the probability limit of cross-increment sums, and stable under stopping. Orthogonality ($\br{M,N}=0\iff MN$ is a continuous local martingale) is the key structural notion --- independent Brownian motions are always orthogonal (\cref{chap4.4:proposition-independence_of_brownian_motions_implies_zero_bracket_process}). Kunita--Watanabe is the Cauchy--Schwarz inequality for the (signed) measure $d\br{M,N}$; it is exactly what is needed to make sense of integrating one local martingale's integrand against another's bracket, which is how the stochastic integral is characterised in Ch.\ 5. \end{quizbox}
 
 
 \subsection{Continuous semimartingales}\label{sec:continuous_semimartingales}
@@ -393,7 +394,8 @@ In particular, we have $\br{X,X}_t = \br{M,M}_t$
 \begin{proposition} \label{chap4.5:proposition-bracket_as_limit_of_subdivisions}
 \LG{Proposition 4.21} \\
 Let $0=t_0^n<t_1^n<...<t_{p_n}^n=t$ be an increasing sequence of subdivisions of $[0,t]$ whose mesh tends to $0$. Then
-$$\sum_{i=1}^{p_n}(X_{t_i^n}-X_{t_{i-1}^n})(Y_{t_i^n}-Y_{t_{i-1}^n})\overset{P}{\underset{n\to\infty}{\to}}\br{X,Y}_t 
+$$\sum_{i=1}^{p_n}(X_{t_i^n}-X_{t_{i-1}^n})(Y_{t_i^n}-Y_{t_{i-1}^n})\overset{P}{\underset{n\to\infty}{\to}}\br{X,Y}_t
 $$
 
 \end{proposition}
+\begin{quizbox} The canonical decomposition $X=X_0+M+A$ (local martingale $+$ FV part) is \emph{unique} --- this is again the uniqueness engine \cref{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process} in disguise, applied to the difference of two candidate decompositions. The semimartingale bracket $\br{X,Y}:=\br{M,M'}$ depends only on the martingale parts (the FV parts contribute nothing, since FV$\times$FV is again FV and does not show up in a genuine quadratic-variation limit), and is again recoverable as the probability limit of cross-increment sums over shrinking subdivisions (\cref{chap4.5:proposition-bracket_as_limit_of_subdivisions}) --- this is the class on which the stochastic integral $H\cdot X$ and Itô's formula (Ch.\ 5) are built. \end{quizbox}
