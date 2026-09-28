@@ -363,12 +363,14 @@ $\{S_t\in A\}\in\mathcal F_t$. As $t$ was arbitrary, $(S_t)$ is adapted.
 \begin{proposition}[Upcrossing inequality] \todo{} \end{proposition}
 \begin{theorem}[Regularity / càdlàg modification] \todo{right-cont.\ filtration + usual cond.\ + $t\mapsto\E X_t$ right-cont.\ $\Rightarrow$ càdlàg modification} \end{theorem}
 \begin{theorem}[Convergence] \todo{a.s.\ convergence if bounded in $L^1$; closed by $X_\infty$ $\iff$ UI $\iff$ $L^1$-convergence} \end{theorem}
-\begin{quizbox} Doob $L^2$: $\E[\sup_{s\le t}X_s^2]\le4\E[X_t^2]$. UI $\iff$ closed martingale. \end{quizbox}
+\begin{quizbox} Doob $L^2$: $E[\sup_{s\le t}X_s^2]\le4E[X_t^2]$. UI $\iff$ closed martingale. \end{quizbox}
 
 \subsection{Optional stopping theorems}\label{sec:ost}
-\begin{theorem}[Optional stopping, UI case] \todo{$S\le T$ s.t., $X$ UI càdlàg: $\E[X_T\mid\F_S]=X_S$} \end{theorem}
+
+\begin{theorem}[Optional stopping, UI case]\label{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria}
+\todo{$S\le T$ s.t., $X$ UI càdlàg: $E[X_T\mid\F_S]=X_S$} \end{theorem}
 \begin{corollary} \todo{bounded stopping times; stopped martingale $X^T$ is a martingale} \end{corollary}
 \begin{proposition}[Supermartingale version] \todo{nonnegative supermartingale} \end{proposition}
-\begin{example}[Applications] \todo{exit of $(-a,b)$: $\PP(T_{-a}<T_b)=\tfrac{b}{a+b}$, $\E T=ab$; $\E[e^{-\lambda T_a}]=e^{-a\sqrt{2\lambda}}$} \end{example}
+\begin{example}[Applications] \todo{exit of $(-a,b)$: $\PP(T_{-a}<T_b)=\tfrac{b}{a+b}$, $\E T=ab$; $E[e^{-\lambda T_a}]=e^{-a\sqrt{2\lambda}}$} \end{example}
 \begin{quizbox} Every application in the example: be fast at choosing the right martingale and justifying the limit (dominated/bounded convergence). \end{quizbox}
-\begin{trap} $\E[B_{T_a}]=a\ne0$: OST fails without UI/boundedness. \end{trap}
+\begin{trap} $E[B_{T_a}]=a\ne0$: OST fails without UI/boundedness. \end{trap}

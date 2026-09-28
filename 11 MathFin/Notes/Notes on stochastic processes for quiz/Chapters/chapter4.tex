@@ -13,7 +13,8 @@ $$|a|_+(t)=\sup_\pi\sum_{i=1}^p\big(a(t_i\wedge t)-a(t_{i-1}\wedge t)\big)^+, \q
 Link to Le Gall's notation: $|a|(t)=\int_0^t|da(s)|$ \LG{p.\ 71}.
 \end{definition}
 
-\begin{proposition}[Basic properties] \LN{Prop 7.2, 7.3, 7.4} \\
+\begin{proposition}[Basic properties] 
+\LN{Prop 7.2, 7.3, 7.4} \\
 Every monotone function is FV on compacts, with $|a|(t)=|a(t)-a(0)|$. The collection of FV functions is a linear space, and if $a(\cdot)$ is FV then $|a|(\cdot)$, $|a|_+(\cdot)$, $|a|_-(\cdot)$ are all non-decreasing.
 \end{proposition}
 
@@ -101,31 +102,31 @@ Use the commutative properties of $\land$.
 \LG{Definition 4.6} \\
 Let $M=(M_t)_{t \geq 0}$ be a random process with continuous sample paths with $M_0=0$ a.s. If there exists a non-decreasing countable sequence $(T_n)_{n \in \N_0}$ of stopping times such that for every $\omega \in \Omega$ then $T_n(\omega) \uparrow\infty$ (written $T_n \uparrow\infty$) and, for every $n$, the stopped process $M^{T_n}$ is uniformly integrable (note property (b) below!), then we call $M$ a \textit{continuous local martingale}.
 
-More generally, when we do not assume that $M_0=0$ a.s., we say that $M$ is a continous local martingale if the process $N_t=M_t-M_0$ is a continous local martingale. 
+More generally, when we do not assume that $M_0=0$ a.s., we say that $M$ is a continuous local martingale if the process $N_t=M_t-M_0$ is a continuous local martingale. 
 
 In all cases, we say that the sequence of stopping times $(T_n)$ \textit{reduces} $M$ if $T_n \uparrow \infty$ and, for every $n$, the stopped process $M^{T_n}$ is a uniformly integrable martingale.
 \end{definition}
 
-\begin{remark}[Remarks on chosen definition] \label{chap4.2:remark-remarks_on_definition_of_continous_local_martingale}
+\begin{remark}[Remarks on chosen definition] \label{chap4.2:remark-remarks_on_definition_of_continuous_local_martingale}
 \LG{p. 76}
 \begin{enumerate}[(i)]
     \item We do not require that $M_t$ are in $L^1$ in the definition of a continuous local martingale. In particular, the variable $M_0$ may be any $\mc{F}_0$-measurable random variable, even though the continuity of the process disallows very degenerate distributions (for example it disallows $M_0=\infty$ a.s., because then $M$ would not be continuous).
     \item Any martingale with continuous sample paths is a continuous local martingale but the converse is false, and for this reason we will sometimes speak of \textit{true martingales} to emphasize the difference with local martingales. Examples:
     \begin{enumerate}[label=(Ex.\arabic*.)]
-        \item Let $B$ be an ($\mc{F}_t$)-Brownian motion started from 0, and let $Z$ be an $\mc{F}_0$-measurable random variables. Then the process $M_t = Z + B_t$ is always a continuous local martingale, but it is not a martingale if $\E[|Z|]=\infty$
-        \item If we require $M_0=0$, we can consider $M_t=ZB_t$, which is always a continuous local martingale (Exercise 4.22 in Le Gall or 5.3 (a) in problem sheets for the course) but is not a martingale if $\E[|Z|]=\infty$.
+        \item Let $B$ be an ($\mc{F}_t$)-Brownian motion started from 0, and let $Z$ be an $\mc{F}_0$-measurable random variables. Then the process $M_t = Z + B_t$ is always a continuous local martingale, but it is not a martingale if $E[|Z|]=\infty$
+        \item If we require $M_0=0$, we can consider $M_t=ZB_t$, which is always a continuous local martingale (Exercise 4.22 in Le Gall or 5.3 (a) in problem sheets for the course) but is not a martingale if $E[|Z|]=\infty$.
     \end{enumerate}
     \item One can define a notion of local martingale with càdlàg sample paths. In this course, however, we consider only continuous local martingales.
 \end{enumerate}
 \end{remark}
 \begin{trap} Local martingale $\not\Rightarrow$ martingale, even UI (e.g.\ inverse Bessel-3). \end{trap}
 
-\begin{properties}\label{chap4.2:properties-properties_of_continous_local_martingale}
+\begin{properties}\label{chap4.2:properties-properties_of_continuous_local_martingale}
 \LG{pp. 76-77}
 \begin{enumerate}[(a)]
-    \item A (true) martingale with continous sample paths is a continous local martingale, and the sequende $T_n=n$ reduces $M$.
-    \item In the definition of a continous local martingale starting from 0, one can replace "uniformly integrable martingale" by merely "martingale".
-    \item If $M$ is a continous local martingale, then, for every stopping time $T$, then $M^T$ is a continouous local martingale. (This follows from Corollary 3.24 (\todo{Add ref})).
+    \item A (true) martingale with continuous sample paths is a continuous local martingale, and the sequende $T_n=n$ reduces $M$.
+    \item In the definition of a continuous local martingale starting from 0, one can replace "uniformly integrable martingale" by merely "martingale".
+    \item If $M$ is a continuous local martingale, then, for every stopping time $T$, then $M^T$ is a continouous local martingale. (This follows from Corollary 3.24 (\todo{Add ref})).
     \item If $(T_n)$ reduces $M$ and if $(S_n)$ is a sequence of stopping times such that $S_n \uparrow \infty$, then the sequence $(T_n \land S_n)$ also reduces $M$ (This follows from Corollary 3.24 again (\todo{Add ref})).
 \end{enumerate}
 \end{properties}
@@ -136,54 +137,57 @@ In all cases, we say that the sequence of stopping times $(T_n)$ \textit{reduces
 
 \begin{proposition}[Three useful properties] 
 \LG{pp. 77-78}
-\label{chap4.2:proposition-three_useful_properties_of_continous_local_martingales}
+\label{chap4.2:proposition-three_useful_properties_of_continuous_local_martingales}
 \begin{enumerate}[(i)]
-    \item A non-negative continous local martingale $M$ such that $M_0 \in L^1$ is a supermartingale.
+    \item A non-negative continuous local martingale $M$ such that $M_0 \in L^1$ is a supermartingale.
     \item A continuous local martingale $M$ such that there exists a random variable $Z \in L^1$ with $|M_t| \leq Z$ for every $t \geq 0$ (in particular a bounded continuous local martingale) is a uniformly integrable martingale.
-    \item If $M$ is a continous local martingale and $M_0=0$ ( or more generally $M_0 \in L^1$), the sequence of stopping times
+    \item If $M$ is a continuous local martingale and $M_0=0$ ( or more generally $M_0 \in L^1$), the sequence of stopping times
     $$T_n = \inf\{t \geq 0 | \;|M_t| \geq n\}$$
     reduces M.
 \end{enumerate}
 \end{proposition}
 \begin{proofidea}
 Write $M_t=M_0+N_t$. The idea is to use the sequence $(T_n)$ of stopping times that reduces $N_t$ to the martingale property, adding $M_0$ on both sides to see
-$$M_{s \land T_n}=\E[M_{t \land T_n}| \mc{F}_s], \quad s \leq t,$$
+$$M_{s \land T_n}=E[M_{t \land T_n}| \mc{F}_s], \quad s \leq t,$$
 Using Fatou's Lemma in (i) shows the supermartingale property. Using dominated convergence shows in (ii) shows $L^1$ convergence $M_{t \land T_n} \to M_t$, which can be used to show the martingale property. 
 For (iii) then observe that $M^{T_n}$ is dominated by $n+|M_0|$ and use (ii).
 \end{proofidea}
 \begin{trap}
-Considering property (ii) in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales}, one might expect that a continuous local martingale $M$ such that the collection $(M_t)_{t\geq 0}$ is uniformly integrable is automatically a martingale. This is incorrect! This condition is slightly weaker than in the Proposition, and, for instance, if $B$ is a three-dimensional Brownian Motion started from $x\neq 0$, then the process $M_t=1/|B_t|$ is a continous local martingale bounded in $L^2$, but it is not a martingale. \\
+Considering property (ii) in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continuous_local_martingales}, one might expect that a continuous local martingale $M$ such that the collection $(M_t)_{t\geq 0}$ is uniformly integrable is automatically a martingale. This is incorrect! This condition is slightly weaker than in the Proposition, and, for instance, if $B$ is a three-dimensional Brownian Motion started from $x\neq 0$, then the process $M_t=1/|B_t|$ is a continuous local martingale bounded in $L^2$, but it is not a martingale. \\
 In general not even the slightly stronger condition a continuous local martingale satisfies the stronger property of being bounded in $L^p$ for some $p>1$ can save the statement in the generality.
 \end{trap}
 
 Now we observe that the classes of finite variation processes and continuous local martingales are distinct classes with one unique (degenerate) common member: 
-\begin{theorem}\label{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process}
+\begin{theorem}\label{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process}
 \LG{Theorem 4.8}
-Let $M$ be a continous local martingale. Assume that $M$ is also a finite variation process with $M_0=0$. Then $M_t = 0$ almost surely for every $t \geq 0$.
+Let $M$ be a continuous local martingale. Assume that $M$ is also a finite variation process with $M_0=0$. Then $M_t = 0$ almost surely for every $t \geq 0$.
 \end{theorem}
 \begin{quizbox} This theorem is the uniqueness engine for $\br{M}$ and the semimartingale decomposition. \end{quizbox}
 \begin{proofidea}
 Set $\tau_n = \inf\{t \geq 0| \; \int_0^t|dM_s| \geq n\}$
 for every integer $n \in \N_0$. This stopping time can for a fixed $n$ show that for the process $N=M^{\tau_n}$, that
-$$\E[N^2_t] \leq n \E\left[\sup_{1 \leq i \leq p} |N_{t_i}-N_{t_{i-1}}| \right]$$
-for some subdivisions. Using a sequence of subdivisions whose mesh tends to 0, shows that $\E[N^2_t]=0$ and hence $M_{t \land \tau_n}=0$ a.s. Letting $n \to \infty$ shows $M_t=0$ a.s.
+$$E[N^2_t] \leq n \E\left[\sup_{1 \leq i \leq p} |N_{t_i}-N_{t_{i-1}}| \right]$$
+for some subdivisions. Using a sequence of subdivisions whose mesh tends to 0, shows that $E[N^2_t]=0$ and hence $M_{t \land \tau_n}=0$ a.s. Letting $n \to \infty$ shows $M_t=0$ a.s.
 \end{proofidea}
 
-\begin{corollary}\label{chap4.2:corollary-continous_FV_local_martingale_is_constant}
+\begin{corollary}\label{chap4.2:corollary-continuous_FV_local_martingale_is_constant}
 Let $M$ be a continuous local martingale (not necessarily with $M_0=0$) which is also a finite variation process. Then $M_t=M_0$ almost surely, for every $t \geq 0$; that is, $M$ is a.s.\ constant.
 \end{corollary}
 
 \begin{proofidea}
-By definition, $N_t:=M_t-M_0$ is a continuous local martingale with $N_0=0$. Since $t \mapsto M_0$ is constant (hence FV) and $M$ is FV, $N=M-M_0$ is also a finite variation process (difference of two FV processes, with the total variation of $N$ on $[0,t]$ equal to that of $M$). Theorem \ref{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process} applied to $N$ gives $N_t=0$ a.s.\ for every $t$, i.e.\ $M_t=M_0$ a.s.
+By definition, $N_t:=M_t-M_0$ is a continuous local martingale with $N_0=0$. Since $t \mapsto M_0$ is constant (hence FV) and $M$ is FV, $N=M-M_0$ is also a finite variation process (difference of two FV processes, with the total variation of $N$ on $[0,t]$ equal to that of $M$). Theorem \ref{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process} applied to $N$ gives $N_t=0$ a.s.\ for every $t$, i.e.\ $M_t=M_0$ a.s.
 \end{proofidea}
-\begin{usedin} This is precisely the ``uniqueness engine'' cited in the toolbox: it gives uniqueness of the semimartingale decomposition $X=X_0+M+A$ (\cref{sec:continous_semimartingales}) and, together with Lévy's characterisation, uniqueness of the quadratic variation $\br{M}$. \end{usedin}
+\begin{usedin} This is precisely the ``uniqueness engine'' cited in the toolbox: it gives uniqueness of the semimartingale decomposition $X=X_0+M+A$ (\cref{sec:continuous_semimartingales}) and, together with Lévy's characterisation, uniqueness of the quadratic variation $\br{M}$. \end{usedin}
 
 
 
 \subsection{Quadratic variation of a continuous local martingale}\label{sec:qv}
+
+\textit{Assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete.}}
+
 \begin{theorem}[Existence of $\br{M,M}$] \label{chap4.3:theorem-existence_of_quadratic_variation}
 \LG{Theorem 4.9}\\
-Let $M=(M_t)_{t \geq 0}$ be a continous local martingale. There exists an increasing process denoted by $(\br{M,M}_t)_{t\geq0}$, which is unique up to a indistinguishability, such that $M^2_t-\br{M,M}_t$ is a continous local martingale. 
+Let $M=(M_t)_{t \geq 0}$ be a continuous local martingale. There exists a non-decreasing process denoted by $(\br{M,M}_t)_{t\geq0}$, which is unique up to a indistinguishability, such that $M^2_t-\br{M,M}_t$ is a continuous local martingale. 
 
 Furthermore, for every fixed $t > 0$, if $0=t_0^n<t_1^n<...<t_{p_n}^n=t$ is an increasing sequence of subdivisions of $[0,t]$ with mesh size tending to 0, we have
 \begin{equation}\tag{4.3}\label{chap4.3:eq-quadratic_variation_as_limit_of_subdivision_quadratic_variations}
@@ -193,10 +197,10 @@ The process $\br{M,M}$ is called the \textbf{quadratic variation} of $M$.
 \end{theorem}
 \begin{proofidea}
 \begin{itemize}
-    \item Uniqueness by applying Theorem \ref{chap4.2:theorem-continous_local_martingale_plus_finite_variation_process_implies_zero_process}
+    \item Uniqueness by applying Theorem \ref{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process}
     \item Bounded case first
     \item $L^2$-Cauchy via Doob application
-    \item Localize using reducing sequence as in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales} (c).
+    \item Localize using reducing sequence as in Proposition \ref{chap4.2:proposition-three_useful_properties_of_continuous_local_martingales} (c).
 \end{itemize}
 \end{proofidea}
 A special case is of course using a Brownian Motion, where $\br{B,B}_t=t$.
@@ -204,44 +208,192 @@ A special case is of course using a Brownian Motion, where $\br{B,B}_t=t$.
 \begin{enumerate}[(i)]
     \item Observe that the process $\br{M,M}$ does not depend on the initial value $M_0$, but only in the increment of $M$, that is, if $M_t=M_0+N_t$, we have $\br{M,M}=\br{N,N}$. This is obvious from the second assertion of the theorem.
     \item In the second assertion of the theorem, it is in fact not necessary to assume that the sequence is increasing - the subdivisions only need to get finer, not contain exactly the same rougher grid points the whole way.
-    \item Note that the Lecture Notes take a slightly way to defining what the quadratic variation is. It defines it as the limit of subdivisions whose mesh size tends to 0, in similar fashion as Proposition \ref{chap4.4:proposition-bracket_as_limit_of_subdivisions} (\LG{Proposition 4.21}), but here for continous local martingales.
+    \item Note that the Lecture Notes take a slightly way to defining what the quadratic variation is. It defines it as the limit of subdivisions whose mesh size tends to 0, in similar fashion as Proposition \ref{chap4.5:proposition-bracket_as_limit_of_subdivisions} (\LG{Proposition 4.21}), but here for continuous local martingales.
 \end{enumerate}
 \end{remark}
 
-\begin{proposition}
-Let $M$ be a continous local martingale and let $T$ be a stopping time. Then we have almost surely for every $t \geq 0$,
-$$\br{M^T, M^T}_t=\br{M,M}_{t \land T}$$
+\begin{proposition}[Stable under stopping of a quadratic variation]\label{chap4.3:proposition-stopping_a_quadratic_variation}
+\LG{Proposition 4.11} \\
+Let $M$ be a continuous local martingale and let $T$ be a stopping time. Then we have almost surely for every $t \geq 0$, that the quadratic variation is stable under stopping:
+$$\br{M^T, M^T}_t=\br{M,M}_{t \land T}=\br{M,M}_t^T$$
 \end{proposition}
-This follows from the fact that $M^2_{t \land T} - \br{M,M}_{t \land T}$ is a continuous local martingale (use property (c) of Properties \ref{chap4.2:properties-properties_of_continous_local_martingale}).
+This follows from the fact that $M^2_{t \land T} - \br{M,M}_{t \land T}$ is a continuous local martingale (use property (c) of Properties \ref{chap4.2:properties-properties_of_continuous_local_martingale}).
 
-\begin{proposition} \todo{$\br{M^T}=\br{M}^T$; $M$ constant on $[a,b]$ iff $\br{M}$ is} \end{proposition}
+\begin{proposition}\label{chap4.3:proposition-constant_quadratic_variation_gives_constant_continuous_local_martingale}
+\LG{Proposition 4.12} \\
+Let $M$ be a continuous local martingale such that $M_0=0$. Then we have that $\br{M,M}=0$ if and only if $M=0$ almost surely.
 
-\begin{theorem}[$L^2$-bounded martingales] \label{chap4.3:theorem-L2_bounded_martingales}
-\LG{Theorem 4.10 --- check numbering against your edition} \\
-Let $M$ be a continuous local martingale with $M_0 \in L^2$. Then $M$ is a (uniformly integrable, $L^2$-bounded) martingale of class $\HH$ if and only if $\E[\br{M}_\infty] < \infty$. In that case:
+More generally, if $M$ is a continuous local martingale with arbitrary $M_0 \in L^1$, then $\br{M,M}=0$ if and only if $M=M_0$ almost surely.
+\end{proposition}
+
+\begin{proof}
+\textit{The case $M_0=0$.}
+
+($\Leftarrow$) Suppose $M=0$ almost surely. The zero process is continuous, increasing and starts at $0$, and $M^2-0=0$ is trivially a continuous local martingale. By the uniqueness part of the definition of $\br{M,M}$ we get $\br{M,M}=0$.
+
+($\Rightarrow$) Suppose $\br{M,M}=0$. Then
+\[
+  M_t^2 = M_t^2-\br{M,M}_t, \qquad t\geq 0,
+\]
+so $M^2$ is a continuous local martingale. It is nonnegative and $M_0^2=0\in L^1$. By Proposition \ref{chap4.2:proposition-three_useful_properties_of_continuous_local_martingales} (i), $M^2$ is therefore a supermartingale. Hence for every $t\geq 0$
+$$0\leq E[M_t^2]\leq E[M_0^2]=0,$$
+so $M_t^2=0$, and thus $M_t=0$, almost surely for every $t\geq 0$.
+
+To get a statement for all $t$ simultaneously, set
+$$N=\bigcup_{q\in\mathbb{Q}_+}\{M_q\neq 0\}.$$
+This is a countable union of null sets, so $P(N)=0$. For $\omega\notin N$ the path $t\mapsto M_t(\omega)$ is continuous (discarding a further null set if needed) and vanishes on $\mathbb{Q}_+$. Since $\mathbb{Q}_+$ is dense in $\R_+$, we get $M_t(\omega)=0$ for all $t\geq 0$. Hence $M=0$ almost surely.
+
+\medskip
+\textit{The general case.} Put $N_t=M_t-M_0$. Then $N$ is a continuous local martingale with $N_0=0$, and by definition $\br{M,M}=\br{N,N}$. By the first part,
+$$\br{M,M}=0 \iff \br{N,N}=0 \iff N=0 \text{ a.s.} \iff M=M_0  \text{ a.s.}.$$
+\end{proof}
+
+
+\begin{theorem}[$L^2$-bounded martingales] \label{chap4.3:theorem-L2_bounded_martingales_and_quadratic_variation}
+\LG{Theorem 4.13} \\
+Let $M$ be a continuous local martingale with $M_0 \in L^2$.
 \begin{enumerate}[(i)]
-    \item $M_t^2-\br{M}_t$ is a uniformly integrable martingale (not just a local martingale);
-    \item $\E[M_\infty^2]=\E[M_0^2]+\E[\br{M}_\infty]$, and more generally $\E[M_t^2]=\E[M_0^2]+\E[\br{M}_t]$ for every $t$.
+    \item The following are equivalent:
+    \begin{enumerate}[(a)]
+        \item $M$ is a (true) martingale bounded in $L^2$, that is $\sup_{t \geq 0}E[M_t^2]< \infty$.
+        \item $E[\br{M,M}_\infty]<\infty.$
+    \end{enumerate}
+    Furthermore, if these properties hold, the process $M_t^2-\br{M,M}_t$ is a uniformly integrable martingale, and in particular $E[M^2_\infty]=E[M_0^2]+E[\br{M,M}]_\infty]$
+    \item The following are equivalent:
+    \begin{enumerate}[(a)]
+        \item $M$ is a true martingale and $M_t \in L^2$ for every $t \geq 0$.
+        \item $E[\br{M,M}_t]<\infty$ for every $t \geq 0$.
+        Furthermore, if these properties hold, the process $M_t^2-\br{M,M}_t$ is a martingale.
+    \end{enumerate}
 \end{enumerate}
 \end{theorem}
+\begin{remark}\label{chap4.3:remark-remarks_on_bounded_L2_continuous_local_martingals_and_quadratic_variation}
+In property (a) of (i) or (ii) it is essential to suppose that $M$ is a martingale, and not only a continuous local martingale - Doob's inequality used in the proof is not valid for in general for a continuous local martingale.
+
+
+Also note in (ii), then $M$ is not necessarily uniformly integrable - a Brownian motion is a counterexample to this.
+\end{remark}
+
 \begin{proofidea}
-($\Leftarrow$) Localise with $T_n=\inf\{t:\br{M}_t\ge n\}$; on $M^{T_n}$ the process $(M^{T_n})^2-\br{M}^{T_n}$ is a true martingale (bounded increments in expectation), which gives $\E[(M_{t\wedge T_n})^2]=\E[M_0^2]+\E[\br{M}_{t\wedge T_n}]\le \E[M_0^2]+n$, so $M^{T_n}$ is $L^2$-bounded uniformly in $n$. Fatou plus $\E[\br M_\infty]<\infty$ (dominated convergence along $T_n\uparrow\infty$) upgrades this to $M\in\HH$ and to the identity in (ii); (i) then follows since $M^2-\br M$ is a local martingale dominated appropriately, hence UI by \cref{chap4.2:proposition-three_useful_properties_of_continous_local_martingales}(ii)-type domination.
-($\Rightarrow$) If $M\in\HH$, apply the reverse estimate to $M^{T_n}$ and use monotone convergence $\br{M}_{t\wedge T_n}\uparrow\br{M}_t$ together with the $L^2$-bound $\sup_t\E[M_t^2]<\infty$ to conclude $\E[\br{M}_\infty]<\infty$.
+\textit{(i)} Replacing $M$ by $M-M_0$ we may assume $M_0=0$. The strategy is to stop the process so that $M^2-\br{M,M}$ is \emph{dominated}. By Proposition \ref{chap4.2:proposition-three_useful_properties_of_continuous_local_martingales} (ii) it is then a uniformly integrable martingale, which gives the key identity
+$$\E[M_{t\wedge\tau}^2]=\E[\br{M,M}_{t\wedge\tau}],$$
+after which we remove the stopping.
+
+[(a)$\Rightarrow$(b):] Doob's $L^2$ inequality (valid since $M$ is a true martingale) gives $\E[\sup_t M_t^2]\le C$. Stopping at $S_n=\inf\{t:\br{M,M}_t\ge n\}$ bounds $M^2-\br{M,M}$ by $\sup_s M_s^2+n$, so $\E[\br{M,M}_{t\wedge S_n}]\le C$. Monotone convergence ($n\to\infty$, then $t\to\infty$) gives $\E[\br{M,M}_\infty]\le C$.
+
+[(b)$\Rightarrow$(a):] Stopping at $T_n=\inf\{t:|M_t|\ge n\}$ bounds $M^2-\br{M,M}$ by $n^2+\br{M,M}_\infty$, so $\E[M_{t\wedge T_n}^2]\le \E[\br{M,M}_\infty]=:C'$. Fatou gives $\sup_t\E[M_t^2]\le C'$. The same bound makes $(M_{t\wedge T_n})_n$ uniformly integrable, so $M_{t\wedge T_n}\to M_t$ in $L^1$. We can therefore pass to the limit in $\E[M_{t\wedge T_n}\mid\mathcal F_s]=M_{s\wedge T_n}$, which shows that $M$ is a true martingale.
+
+[Last claim:] Under (a) and (b), $M^2-\br{M,M}$ is dominated by $\sup_t M_t^2+\br{M,M}_\infty\in L^1$, hence it is a uniformly integrable martingale. Taking expectations at $t=\infty$ gives $\E[M_\infty^2]=\E[M_0^2]+\E[\br{M,M}_\infty]$.
+
+\textit{(ii)} Apply (i) to the stopped process $M^a=(M_{t\wedge a})_{t\ge0}$ for each $a\ge0$, noting that $\br{M^a,M^a}_\infty=\br{M,M}_a$.
 \end{proofidea}
-\begin{corollary}
-If $\E[\br{M}_t]<\infty$ for every $t\ge0$ (not necessarily $\E[\br M_\infty]<\infty$), then $M$ is a true martingale.
-\end{corollary}
+
+\subsection{The Bracket of Two continuous Local Martingales}
+\textit{Assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete.}}
+
+\begin{definition}[Bracket $\br{M,N}$]\label{chap4.4:definition-bracket_process}
+\LG{Definition 4.14} \\
+If $M$ and $N$ are two continuous local martingales, then the \textit{bracket process} $\br{M,N}$ is the finite variation process defined by setting, for every $t \geq 0$,
+$$\br{M,N}_t=\frac12(\br{M+N,M+N}_t - \br{M,M}_t - \br{N,N}_t)$$
+\end{definition}
+Note that the Lecture Slides define the bracket process in a similar fashion to that of Proposition \ref{chap4.5:proposition-bracket_as_limit_of_subdivisions}.
+
+\begin{properties}[Properties of the bracket process]\label{chap4.4:properties-properties_of_the_bracket_process}
+\LG{Proposition 4.15} \\
+Let $M$ and $N$ be two continuous local martingales.
+\begin{enumerate}[(i)]
+    \item The process $\br{M,N}$ is the unique (up to indistinguishability) finite variation process such that the mapping
+    $M_tN_t - \br{M,N}_t$
+    is a continuous local martingale.
+    \item The mapping $(M,N) \mapsto \br{M,N}$ is:
+    \begin{enumerate}[(a)]
+        \item Symmetric: $\br{M,N}=\br{N,M}$
+        \item Bilinear: $\br{\alpha M+ \beta \tilde{M},N}=\alpha\br{M,N} + \beta\br{\tilde{M},N}$
+    \end{enumerate}
+    \item If $0 = t_0^n<t_1^n<...<t_{p_n}^n=t$ is an increasing sequence of subdivisions of $[0,t]$ with mesh tending to $0$, we have
+    $$\sum_{i=1}^{p_n}(M_{t_i^n}-M_{t_{i-1}^n})(N_{t_i^n}-N_{t_{i-1}^n})\overset{P}{\underset{n \to \infty}{\to}}\br{M,N}_t$$.
+    \item It is stable under stopping for any stopping time $T$: $\br{M^T,N^T}_t=\br{M^T,N}_t=\br{M,N}_{t \land T}$.
+    \item If $M$ and $N$ are two martingales (with continuous sample paths) bounded in $L^2$, then $M_tN_t-\br{M,N}_t$ is a uniformly integrable martingale. Consequently, $\br{M,N}_\infty$ is well defined as the almost sure limit of $\br{M,N}_t$ as $t \to \infty$, is integrable, and satisfies
+    $$E[M_\infty N_\infty]=E[M_0 N_0]+E[\br{M,N}_\infty]$$
+\end{enumerate}
+\end{properties}
+
+\begin{remark}\label{chap4.5:remark-remark_on_consequence_of_properties_of_bracket_process}
+A consequence of Properties \ref{chap4.4:properties-properties_of_the_bracket_process} (iv) is the fact the $M^T(N-N^T)$ is a continuous local martingale, which is not so easy to prove directly. To see this note that (i) shows that $M^TN-\br{M^T,N}$ and $M^TN^T - \br{M^T,N^T}$ are continuous local martingales. Then (iv) shows that $\br{M^T,N}=\br{M^T,N^T}$, and using that continuous local martingales form a linear space, then we see that
+$$M^T(N-N^T)=M^TN-\br{M^T,N}-(M^TN^T - \br{M^T,N^T})$$
+is a continuous local martingale.
+\end{remark}
+
+\begin{proposition}\label{chap4.4:proposition-independence_of_brownian_motions_implies_zero_bracket_process}
+\LG{Definition 4.16} \\
+Let $B$ and $B'$ be two independent $(\mc{F}_t)$-Brownian motions. Then $\br{B,B'}_t=0$ for every $t \geq 0$. 
+\end{proposition}
+\begin{proof}
+By subtracting initial values, we may assume that $B_0=B_0'=0$. Then observe that $X_t = \frac{1}{\sqrt{2}}(B_t+B_t')$ is a martingale, as a linear combination of martingales. We argue that $X_t$ is a Brownian motion:
+\begin{enumerate}
+    \item $X_0=0$: ...
+    \item $X$ has independent increments:
+    \item The increments of $X_t$ are Gaussian:
+    \item Continuous sample paths
+\end{enumerate}
+Then Proposition 
+%\ref{CLAUDE ADD REF!}
+implies that $\br{X,X}_t=t$ and using bilinearity:
+$$\br{B,B'}_t=\frac12(\br{\sqrt{2}X,\sqrt{2}X}_t-\br{B,B}_t-\br{B',B'}_t)=\frac12(2t-t-t)=0$$
+\end{proof}
+
+\begin{definition}[Orthogonality of continuous local martingales]\label{chap4.4:definition-orthogonality_of_continous_local_martingales}
+Two continuous local martingales $M$ and $N$ are said to be \textit{orthogonal} if $\br{M,N}=0$, which holds if and only if $MN$ is a continuous local martingale.
+\end{definition}
+\begin{remark}\label{chap4.4:remark-remarks_on_orthogonality_of_continous_local_martingales}
+In particular, two independent $(\mc{F}_t)$-Brownian motions are orthogonal martingales by Proposition \ref{chap4.4:proposition-independence_of_brownian_motions_implies_zero_bracket_process}.
+
+If $M$ and $N$ are two orthogonal martingales bounded in $L^2$, we have $E[M_tN_t]=E[M_0N_0]$, and even $E[M_sN_s]=E[M_0N_0]$ for any stopping time $S$. This follows from Theorem \ref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria} and using property (v) of Properties \ref{chap4.4:properties-properties_of_the_bracket_process}.
+\end{remark}
+
+\begin{proposition}[Kunita--Watanabe]\label{chap4.4:proposition-kunita_watanabe}
+\LG{Definition 4.18} \\
+Let $M$ and $N$ be two continuous local martingales and let $H$ and $K$ be two measurable processes. Then a.s.
+$$
+\int_0^\infty |H_s||K_s||d\br{M,N}_s| \leq \pa{
+\int_0^\infty H_s^2 d\br{M,M}_s
+}^{1/2}
+\cdot\pa{
+\int_0^\infty K_s^2 d\br{N,N}_s
+}^{1/2}
+$$
+\end{proposition}
 \begin{proofidea}
-Fix $t$ and apply \cref{chap4.3:theorem-L2_bounded_martingales} on $[0,t]$: the stopped process $M^t$ has $\E[\br{M^t}_\infty]=\E[\br{M}_t]<\infty$, so $M^t\in\HH$, in particular $M^t$ is a true (UI) martingale. Since $t$ was arbitrary and $M^t_s=M_s$ for $s\le t$, $M$ itself satisfies the martingale property on every finite horizon.
+\todo{}
 \end{proofidea}
-\begin{definition}[Bracket $\br{M,N}$] \todo{polarisation; bilinear, symmetric; limit of cross-products} \end{definition}
-\begin{proposition}[Kunita--Watanabe] \todo{$\int|H||K|\,|d\br{M,N}|\le(\int H^2d\br{M})^{1/2}(\int K^2d\br{N})^{1/2}$} \end{proposition}
-\begin{quizbox} $\br{M}$ characterisation; the $\HH$ criterion; KW. \end{quizbox}
+
 \begin{usedin} $\HH$ is the Hilbert space of Ch.\ 5; KW gives $\br{H\cdot M,N}$ well-defined. \end{usedin}
 
-\subsection{Continuous semimartingales}\label{sec:continous_semimartingales}
-\begin{definition} \todo{$X=X_0+M+A$; uniqueness of decomposition} \end{definition}
-\begin{definition} \todo{$\br{X,Y}:=\br{M,N}$} \end{definition}
-\begin{proposition} \label{chap4.4:proposition-bracket_as_limit_of_subdivisions}
+
+\subsection{Continuous semimartingales}\label{sec:continuous_semimartingales}
+\textit{Assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete.}} We now introduce the class of processes for which we will develop the theory of stochastic integrals.
+
+\begin{definition}\label{chap4.5:definition-continuous_semimartingale}
+\LG{Definition 4.19} \\
+A process $X=(X_t)_{t \geq 0}$ is a \textit{continuous semimartingale} if it can be written in the form
+$$X_t = X_0+M_t + A_t$$
+for $X_0 \in L^1$, where $M$ is a continuous local martingale and $A$ is a (continuous) finite variation process with $M_0=A_0=0$.
+\end{definition}
+The decomposition is unique up to indistinguishability thanks to Theorem \ref{chap4.2:theorem-continuous_local_martingale_plus_finite_variation_process_implies_zero_process}, and we say that this is the \textit{canonical decomposition} of $X$.
+
+By construction, continuous semimartingales have continuous sample paths, but it is possible to define a notion of semimartingales with càdlàg sample paths - in this course we will only work with \textit{continuous} semimartingales. 
+
+\begin{definition}\label{chap4.5:definition-semimartingale_bracket_process}
+\LG{Definition 4.20} \\
+Let $X=M+A$ and $Y=M'+A'$ be the canonical decompositios of two continuous semimartingales $X$ and $Y$. The \textit{bracket} $\br{X,Y}$ is the finite-variation process defined by
+$$\br{X,Y}_t = \br{M,M'}_t$$
+In particular, we have $\br{X,X}_t = \br{M,M}_t$
+\end{definition}
+
+\begin{proposition} \label{chap4.5:proposition-bracket_as_limit_of_subdivisions}
 \LG{Proposition 4.21} \\
-\todo{$\br{X,Y}$ is limit of $\sum\Delta X\Delta Y$; FV parts contribute nothing} \end{proposition}
+Let $0=t_0^n<t_1^n<...<t_{p_n}^n=t$ be an increasing sequence of subdivisions of $[0,t]$ whose mesh tends to $0$. Then
+$$\sum_{i=1}^{p_n}(X_{t_i^n}-X_{t_{i-1}^n})(Y_{t_i^n}-Y_{t_{i-1}^n})\overset{P}{\underset{n\to\infty}{\to}}\br{X,Y}_t 
+$$
+
+\end{proposition}
