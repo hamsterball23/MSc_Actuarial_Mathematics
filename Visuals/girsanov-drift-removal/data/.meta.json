@@ -1,0 +1,32 @@
+{
+  "id": "girsanov-drift-removal",
+  "title": "Girsanov drift removal",
+  "summary": "Reweighting a drifted Brownian ensemble by the exponential martingale D_t makes it look driftless -- Girsanov's theorem in one picture.",
+  "courses": [
+    "MathFin"
+  ],
+  "topics": [
+    "girsanov",
+    "change-of-measure",
+    "exponential-martingale",
+    "radon-nikodym",
+    "brownian-motion",
+    "martingale"
+  ],
+  "source": "MathFin -- Notes on stochastic processes, Chapter 5, Girsanov's theorem (Theorem 5.22) and applications",
+  "seed": 99408,
+  "params": {
+    "n_paths": 400,
+    "n_steps": 300,
+    "T": 1.0,
+    "c": 0.75,
+    "highlight": 4
+  },
+  "formats": [
+    "html",
+    "png",
+    "mp4"
+  ],
+  "fps": 15,
+  "created": "2026-10-01"
+}
