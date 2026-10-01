@@ -1,0 +1,28 @@
+# What this visual is, so the gallery and future-you can find it.
+id: girsanov-drift-removal
+title: "Girsanov drift removal"
+summary: "Reweighting a drifted Brownian ensemble by the exponential martingale D_t makes it look driftless -- Girsanov's theorem in one picture."
+
+# Filters in the gallery. A visual can belong to several courses.
+courses: [MathFin]
+topics: [girsanov, change-of-measure, exponential-martingale, radon-nikodym, brownian-motion, martingale]
+
+# Where in the material this comes from -- lecture, chapter, exercise.
+source: "MathFin -- Notes on stochastic processes, Chapter 5, Girsanov's theorem (Theorem 5.22) and applications"
+
+# Reproducibility. Never use a literal seed in model.py; read ctx.seed.
+seed: 99408
+
+# Model constants. Surfaced next to the figure, so they stay honest.
+params:
+  n_paths: 400
+  n_steps: 300
+  T: 1.0
+  c: 0.75
+  highlight: 4
+
+# html always works. png needs a headless browser, mp4 needs frames + ffmpeg.
+formats: [html, png, mp4]
+fps: 15
+
+created: 2026-10-01
