@@ -1,12 +1,47 @@
 % ==================================================================
 \section{Chapter 5 --- Stochastic Integration}
 % ==================================================================
-blalblalbla \textit{Assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete.}}
+Throughout this chapter, we argue on a filtered probability space $(\Omega, \mc{F}, (\mc{F}), P)$, and we assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete}. Unless otherwise specified, all processes in this chapter are indexed by $\R_+$ and take real values. We often say "continous martingale" instead of "martingale with continuous sample paths". 
 
 \subsection{Construction of stochastic integrals}
 \subsubsection{Martingales bounded in $L^2$}
-\begin{definition} \todo{$\HH$ with norm $\|M\|=\E[M_\infty^2]^{1/2}$; Hilbert space} \end{definition}
-\begin{definition} \todo{$\LtwoM$; elementary processes $\mathcal E$; dense in $\LtwoM$} \end{definition}
+\begin{definition}[Space of integrators $\mb{H}^2$]\label{chap5.2:definition-space_of_integrators_H2}
+\LG{Page 98} \\
+We define $\mb{H}^2$ to be the space of all continuous martingales $M$ which are bounded in $L^2$ and such that $M_0$. We apply the usual convention that two indistinguishable processes are equal.
+\end{definition}
+
+\begin{proposition}[Characteristics of $\mc{H}^2$]\label{chap5.2:proposition-characteristics_of_integrators_H2}
+\LG{Page 98} \\
+$M \in \mb{H}^2$ if and only if $M$ is a continuous local martingale such that $M_0=0$ and $E[\br{M,M}_\infty]< \infty$. \\
+Likewise if $M \in \mb{H}^2$, we have $M_t=E[M_\infty|\mc{F}_t]$ where $M_\infty \in L^2$ is the almost sure limit of $M_t$ as $t \to\infty$.
+\end{proposition}
+\begin{proof}
+Use Proposition \ref{chap4.3:theorem-L2_bounded_martingales_and_quadratic_variation} and  Theorem \ref{chap3.4:theorem-martingale_equivalence_of_L1_convergence}.
+\end{proof}
+
+
+\begin{proposition}[Inner/scalar product and norm on $\mb{H}^2$] \label{chap5.2:proposition-H2_scalar_product_and_norm}
+\LG{Page 98} \\
+If $M,N \in \mb{H}2$, the random variable $\br{M,N}_\infty$ is well defined, and we have $E[|\br{M,N}_\infty|]< \infty$. The mapping $\mb{H}^2\times\mb{H}^2 \to \R: (M,N) \to (M,N)_{\mb{H}^2}$ given by
+$$(M,N)_{\mb{H}^2}=E[\br{M,N}_\infty]=E[M_\infty N_\infty]$$
+is a symmetric, bilinear form, where $(M,N)_{\mb{H}^2}=0$ if and only if $M=0$. The scalar product $(M,N)_{\mb{H}^2}$ thus yields a norm on $\mb{H}^2$ given by
+$$||M||_{\mb{H}^2}=(M,N)_{\mb{H}^2}^{1/2}=E[\br{M,M}_\infty]^{1/2}=E[(M_\infty)^2]^{1/2}$$
+\end{proposition}
+
+\begin{proposition}\label{chap5.2:proposition-H2_Hilbert_Space}
+\LG{Proposition 5.1}\\
+The space $\mb{H}^2$ equipped with the scalar product $(M,N)_{\mb{H}^2}$ is a Hilbert space.
+\end{proposition}
+
+
+\begin{definition} 
+An \textit{elementary process} is a progressive process of the form
+$$H_s(\omega)=\sum_{i=0}^{p-1}H_{(i)}(\omega)1_{(t_{i}, t_{i+1}]}(s),$$
+where $0=t_0<t_1<...<t_p$ and for every $i \in \{0,1,...,p-1\}$, $H_{(i)}$ is a bounded $\mc{F}_{t_i}$-measurable random variable. \\
+Let $\mc{E}$ be the set of all elementary processes. 
+\end{definition}
+
+
 \begin{theorem}[Itô isometry / characterisation] \todo{$H\mapsto H\cdot M$ isometry $\LtwoM\to\HH$; $H\cdot M$ unique s.t.\ $\br{H\cdot M,N}=H\cdot\br{M,N}\ \forall N\in\HH$} \end{theorem}
 \begin{proposition} \todo{associativity $K\cdot(H\cdot M)=(KH)\cdot M$; stopping $(H\cdot M)^T=H\ind_{[0,T]}\cdot M=H\cdot M^T$} \end{proposition}
 \subsubsection{Local martingales}
