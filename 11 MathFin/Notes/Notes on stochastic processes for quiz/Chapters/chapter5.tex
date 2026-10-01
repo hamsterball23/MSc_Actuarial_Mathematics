@@ -4,13 +4,170 @@
 Throughout this chapter, we argue on a filtered probability space $(\Omega, \mc{F}, (\mc{F}), P)$, and we assume that the filtration $(\mc{F}_t)_{t\geq0}$ is \textbf{complete}. Unless otherwise specified, all processes in this chapter are indexed by $\R_+$ and take real values. We often say "continous martingale" instead of "martingale with continuous sample paths". 
 
 \subsection{Construction of stochastic integrals}
-\subsubsection{Martingales bounded in $L^2$}
+
+\subsubsection*{Overview: integrators, integrands and where to find what}
+\addcontentsline{toc}{subsubsection}{Overview of Section 5.1}
+\label{chap5.1:overview}
+
+The stochastic integral is built in three steps. At each step the class of \textit{integrators} becomes larger, while the class of admissible \textit{integrands} is adjusted to fit. The price of generality is that the integral loses guarantees: first the $L^2$-structure, then the martingale property.
+\begin{enumerate}
+    \item \textbf{5.1.1, $M\in\mb{H}^2$:} Define $H\cdot M$ explicitly for elementary $H\in\mc{E}$. Extend by density of $\mc{E}$ in $L^2(M)$ and the isometry $\|H\cdot M\|_{\mb{H}^2}=\|H\|_{L^2(M)}$ (a Hilbert-space argument).
+    \item \textbf{5.1.2, $M$ a continuous local martingale:} \textit{Localize}. Choose $T_n\uparrow\infty$ such that $M^{T_n}\in\mb{H}^2$ and $H\in L^2(M^{T_n})$, then glue the integrals $H\cdot M^{T_n}$ together.
+    \item \textbf{5.1.3, $X=M+V$ a continuous semimartingale:} \textit{Add a pathwise part}. Set $H\cdot X=H\cdot M+H\cdot V$, where $H\cdot V$ is the Lebesgue--Stieltjes integral from Section 4.1.
+    \item \textbf{5.1.4:} Convergence results (dominated convergence, Riemann sums), stated for semimartingales and hence valid at every level.
+\end{enumerate}
+Each extension agrees with the previous one where both are defined (Theorem \ref{chap5.1.2:theorem-stochastic_integral_local}(3), and Definition \ref{chap5.1.3:definition-stochastic_integral_semimartingale} with $V=0$ or $M=0$).
+
+\begin{figure}[h]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    box/.style={draw, rounded corners=3pt, align=center, text width=3.6cm, minimum height=1.9cm, font=\small, inner sep=4pt},
+    intgr/.style={box, fill=blue!7},
+    intgd/.style={box, fill=orange!10},
+    res/.style={box, fill=green!8},
+    mom/.style={box, fill=gray!8, text width=3.3cm},
+    head/.style={font=\bfseries\small, align=center},
+    tag/.style={font=\bfseries\small, align=center, text width=1.1cm},
+    down/.style={-{Stealth[length=2.2mm]}, thick},
+    lab/.style={font=\scriptsize, align=left, fill=white, inner sep=1pt},
+    x=1cm, y=1cm
+]
+% column headers
+\node[head] at (0,1.4)    {Integrator};
+\node[head] at (4.4,1.4)  {Integrand};
+\node[head] at (8.8,1.4)  {Integral is ...};
+\node[head] at (13.0,1.4) {Moment formulas};
+
+% row 1: H^2
+\node[tag] at (-2.6,0) {5.1.1};
+\node[intgr] (I1) at (0,0)    {$M\in\mb{H}^2$\\[2pt] \scriptsize cont.\ $L^2$-bounded martingale, $M_0=0$};
+\node[intgd] (H1) at (4.4,0)  {$H\in L^2(M)$\\[2pt] \scriptsize $E\big[\int_0^\infty H_s^2\,d\br{M,M}_s\big]<\infty$};
+\node[res]   (R1) at (8.8,0)  {$H\cdot M\in\mb{H}^2$\\[2pt] \scriptsize isometry $L^2(M)\to\mb{H}^2$\\ Thm.~\ref{chap5.1.1:theorem-stochastic_integral}};
+\node[mom]   (P1) at (13.0,0) {\textbf{always}\\[2pt] \scriptsize mean $0$, Itô isometry, martingale\\ Cor.~\ref{chap5.1.1:corollary-moments}};
+
+% row 2: local martingales
+\node[tag] at (-2.6,-3.2) {5.1.2};
+\node[intgr] (I2) at (0,-3.2)    {$M$ cont.\ local martingale};
+\node[intgd] (H2) at (4.4,-3.2)  {$H\in L^2_{loc}(M)$\\[2pt] \scriptsize $\int_0^t H_s^2\,d\br{M,M}_s<\infty$\\ $\forall t$, a.s.};
+\node[res]   (R2) at (8.8,-3.2)  {$H\cdot M$ cont.\ local martingale\\[2pt] \scriptsize Thm.~\ref{chap5.1.2:theorem-stochastic_integral_local}};
+\node[mom]   (P2) at (13.0,-3.2) {\textbf{conditionally}\\[2pt] \scriptsize on $[0,t]$ if $E\big[\int_0^t H_s^2\,d\br{M,M}_s\big]<\infty$\\ Prop.~\ref{chap5.1.2:proposition-moments_local}};
+
+% row 3: semimartingales
+\node[tag] at (-2.6,-6.4) {5.1.3\\5.1.4};
+\node[intgr] (I3) at (0,-6.4)    {$X=M+V$\\ cont.\ semimartingale};
+\node[intgd] (H3) at (4.4,-6.4)  {$H$ locally bounded\\[2pt] \scriptsize $\sup_{s\le t}|H_s|<\infty$\\ $\forall t$, a.s.};
+\node[res]   (R3) at (8.8,-6.4)  {$H\cdot X=H\cdot M+H\cdot V$\\ cont.\ semimartingale\\[2pt] \scriptsize Def.~\ref{chap5.1.3:definition-stochastic_integral_semimartingale}};
+\node[mom]   (P3) at (13.0,-6.4) {\textbf{not in general}\\[2pt] \scriptsize only for the martingale part $H\cdot M$ (row above)};
+
+% vertical connections: integrators
+\draw[down] (I1) -- node[lab, right] {$\subset$\\ localize $T_n$} (I2);
+\draw[down] (I2) -- node[lab, right] {$\subset$\\ add FV part $V$} (I3);
+% integrands
+\draw[down] (H1) -- node[lab, right] {$\subset$} (H2);
+\draw[down, dashed] (H3) -- node[lab, right] {$\subset$ for\\ every $M$} (H2);
+% results
+\draw[down] (R1) -- node[lab, right] {$\subset$} (R2);
+\draw[down] (R2) -- node[lab, right] {$\subset$} (R3);
+
+% horizontal flow
+\foreach \r in {1,2,3}{
+  \draw[-{Stealth[length=2mm]}, gray] (H\r) -- (R\r);
+  \draw[-{Stealth[length=2mm]}, gray] (R\r) -- (P\r);
+}
+\node[font=\Large, gray] at (2.2,0) {$\times$};
+\node[font=\Large, gray] at (2.2,-3.2) {$\times$};
+\node[font=\Large, gray] at (2.2,-6.4) {$\times$};
+\end{tikzpicture}}
+\caption{The three levels of the stochastic integral in Section 5.1. Solid arrows point to the more general class. The dashed arrow shows that locally bounded integrands are in $L^2_{loc}(M)$ for every continuous local martingale $M$ (Remark \ref{chap5.1.3:remark-locally_bounded}). The integrand class in row 3 is chosen independently of $X$ so that both $H\cdot M$ and $H\cdot V$ make sense.}
+\label{chap5.1:overview-figure}
+\end{figure}
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.18\textwidth}
+                >{\raggedright\arraybackslash}p{0.235\textwidth}
+                >{\raggedright\arraybackslash}p{0.235\textwidth}
+                >{\raggedright\arraybackslash}p{0.235\textwidth}}
+\toprule
+ & $M\in\mb{H}^2$, $H\in L^2(M)$ & $M$ c.l.m., $H\in L^2_{loc}(M)$ & $X$ semimart., $H$ loc.\ bdd. \\
+\midrule
+Construction &
+Thm.~\ref{chap5.1.1:theorem-stochastic_integral} &
+Thm.~\ref{chap5.1.2:theorem-stochastic_integral_local} &
+Def.~\ref{chap5.1.3:definition-stochastic_integral_semimartingale} \\
+The integral is &
+in $\mb{H}^2$ (true martingale) &
+c.l.m.\ (in $\mb{H}^2$ if $H\in L^2(M)$, Prop.~\ref{chap5.1.2:proposition-moments_local}) &
+cont.\ semimartingale; c.l.m.\ if $X$ is, FV if $X$ is (Prop.~\ref{chap5.1.3:proposition-properties}(iv)) \\
+Isometry $\|H\cdot M\|_{\mb{H}^2}=\|H\|_{L^2(M)}$ &
+\checkmark\ Thm.~\ref{chap5.1.1:theorem-stochastic_integral} &
+only if $H\in L^2(M)$ &
+--- \\
+Bracket $\br{H\cdot M,N}=H\cdot\br{M,N}$ &
+\checkmark\ for $N\in\mb{H}^2$, \eqref{chap5.1.1:eq-bracket_commutes} &
+\checkmark\ for all c.l.m.\ $N$, \eqref{chap5.1.2:eq-bracket_commutes_local} &
+\checkmark\ apply to the martingale parts \\
+$\br{\int H\,dM,\int K\,dN}=\int HK\,d\br{M,N}$ &
+Cor.~\ref{chap5.1.1:corollary-brackets} &
+Rem.~\ref{chap5.1.2:remark-brackets_local} &
+via martingale parts \\
+Stopping $(H\cdot X)^T$ &
+\eqref{chap5.1.1:eq-stopping} &
+\eqref{chap5.1.2:eq-stopping_local} &
+Prop.~\ref{chap5.1.3:proposition-properties}(iii) \\
+Associativity $K\cdot(H\cdot X)=(KH)\cdot X$ &
+Prop.~\ref{chap5.1.1:proposition-associativity} &
+Thm.~\ref{chap5.1.2:theorem-stochastic_integral_local}(2) &
+Prop.~\ref{chap5.1.3:proposition-properties}(ii) \\
+Step integrand $\sum_i H_{(i)}1_{(t_i,t_{i+1}]}$ &
+$H_{(i)}$ bounded: definition in Thm.~\ref{chap5.1.1:theorem-stochastic_integral} &
+covered by the next column &
+$H_{(i)}$ unbounded: Prop.~\ref{chap5.1.3:proposition-properties}(v) \\
+$E[\int_0^t H\,dM]=0$ and martingale property &
+\checkmark\ Cor.~\ref{chap5.1.1:corollary-moments} &
+if $E[\int_0^t H^2\,d\br{M,M}]<\infty$ (Prop.~\ref{chap5.1.2:proposition-moments_local}), or the weaker BDG condition (Rem.~\ref{chap5.3.3:remark-martingale_criterion_integrals}) &
+--- in general \\
+Itô isometry $E[(\int_0^t H\,dM)^2]=E[\int_0^t H^2\,d\br{M,M}]$ &
+\checkmark\ \eqref{chap5.1.1:eq-ito_isometry} &
+if $E[\int_0^t H^2\,d\br{M,M}]<\infty$; always ``$\le$'' \eqref{chap5.1.2:eq-moment_bound} &
+--- in general \\
+\midrule
+Convergence &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{0.745\textwidth}}{Stated for semimartingales, so valid in all columns: dominated convergence in probability (Prop.~\ref{chap5.1.4:proposition-dominated_convergence}); left-endpoint Riemann sums for continuous adapted $H$ (Prop.~\ref{chap5.1.4:proposition-riemann_sums}, Rem.~\ref{chap5.1.4:remark-left_endpoint}).} \\
+\bottomrule
+\end{tabular}
+\caption{Which properties hold at which level, with references. ``c.l.m.'' = continuous local martingale.}
+\label{chap5.1:overview-table}
+\end{table}
+
+\paragraph{Quick guide: what do I have, and what do I use?}
+\begin{itemize}
+    \item \textbf{Integrating against Brownian motion $B$.} $B$ is a c.l.m.\ with $\br{B,B}_t=t$, so you are in column 2:
+    \begin{itemize}
+        \item $\int_0^t H_s\,dB_s$ exists if $\int_0^t H_s^2\,ds<\infty$ a.s.
+        \item Mean zero and the Itô isometry hold if $E[\int_0^t H_s^2\,ds]<\infty$ (Prop.~\ref{chap5.1.2:proposition-moments_local}).
+        \item For deterministic $H$, it is the Wiener integral (Rem.~\ref{chap5.1.2:remark-wiener_integral}).
+    \end{itemize}
+    \item \textbf{The integrand is continuous and adapted} (e.g.\ $f(X_s)$ for continuous $f$). It is locally bounded, so $\int H\,dX$ exists for every continuous semimartingale $X$. Moreover, it is the limit of left-endpoint Riemann sums (Prop.~\ref{chap5.1.4:proposition-riemann_sums}). This is the standard situation in Itô's formula.
+    \item \textbf{You need $E[\int H\,dM]=0$ or a second moment.} Check the integrability condition $E[\int_0^t H_s^2\,d\br{M,M}_s]<\infty$ \emph{before} using it (Prop.~\ref{chap5.1.2:proposition-moments_local}). Without it, only the inequality \eqref{chap5.1.2:eq-moment_bound} is available.
+    \item \textbf{You need the quadratic variation of an integral.} Use $\br{H\cdot M,H\cdot M}=H^2\cdot\br{M,M}$ (Rem.~\ref{chap5.1.2:remark-brackets_local}). For a semimartingale integrator, only the martingale part contributes.
+    \item \textbf{You need a limit of integrals.} Use dominated convergence (Prop.~\ref{chap5.1.4:proposition-dominated_convergence}). It gives convergence \emph{in probability} only.
+    \item \textbf{Your integrand is a step process with random heights.} Use the explicit sum formula (Prop.~\ref{chap5.1.3:proposition-properties}(v)). Boundedness of the heights is not needed.
+    \item \textbf{You need to stop, or to substitute one integral into another.} Stopping: \eqref{chap5.1.2:eq-stopping_local} or Prop.~\ref{chap5.1.3:proposition-properties}(iii). Associativity, $dY=K\,dX\Rightarrow H\,dY=HK\,dX$: Prop.~\ref{chap5.1.3:proposition-properties}(ii).
+\end{itemize}
+
+
+
+\subsubsection{Stochastic Integrals for Martingales Bounded in \texorpdfstring{$L^2$}{L2}}
 \begin{definition}[Space of integrators $\mb{H}^2$]\label{chap5.1.1:definition-space_of_integrators_H2}
 \LG{Page 98} \\
 We define $\mb{H}^2$ to be the space of all continuous martingales $M$ which are bounded in $L^2$ and such that $M_0$. We apply the usual convention that two indistinguishable processes are equal.
 \end{definition}
 
-\begin{proposition}[Characteristics of $\mc{H}^2$]\label{chap5.1.1:proposition-characteristics_of_integrators_H2}
+\begin{proposition}[Characteristics of $\mb{H}^2$]\label{chap5.1.1:proposition-characteristics_of_integrators_H2}
 \LG{Page 98} \\
 $M \in \mb{H}^2$ if and only if $M$ is a continuous local martingale such that $M_0=0$ and $E[\br{M,M}_\infty]< \infty$. \\
 Likewise if $M \in \mb{H}^2$, we have $M_t=E[M_\infty|\mc{F}_t]$ where $M_\infty \in L^2$ is the almost sure limit of $M_t$ as $t \to\infty$.
@@ -59,7 +216,7 @@ $$H_s(\omega)=\sum_{i=0}^{p-1}H_{(i)}(\omega)1_{(t_{i}, t_{i+1}]}(s),$$
 where $0=t_0<t_1<\dots<t_p$ and for every $i \in \{0,1,\dots,p-1\}$, $H_{(i)}$ is a bounded $\mc{F}_{t_i}$-measurable random variable. Further, let $\mc{E}$ denote the set of all elementary processes.
 \end{definition}
 
-\begin{definition} \label{chap5.1.1:definition-elementary_process}
+\begin{definition} \label{chap5.1.1:definition-elementary_process_linear_space_and_dense}
 \LG{Page 100 and Proposition 5.3}\\
 The set $\mc{E}$ forms a linear subspace. Further, for every $M \in \mb{H}^2$, then $\mc{E}$ is dense in $L^2(M)$.
 \end{definition}
@@ -150,7 +307,7 @@ and $E[\int_0^t H_s\,dM_s]$ may be nonzero or undefined. If $E[\int_0^t H_s^2\, 
 % ==================================================================
 
 % ------------------------------------------------------------------
-\subsubsection{Stochastic integrals for local martingales}
+\subsubsection{Stochastic Integrals for Local Martingales}
 % ------------------------------------------------------------------
 
 \begin{definition}[The spaces $L^2_{loc}(M)$ and $L^2(M)$]\label{chap5.1.2:definition-L2loc}
@@ -228,7 +385,7 @@ By Remark \ref{chap5.1.2:remark-brackets_local}, $\br{(H\cdot M)^t,(H\cdot M)^t}
 \end{proofidea}
 
 % ------------------------------------------------------------------
-\subsubsection{Stochastic integrals for semimartingales}
+\subsubsection{Stochastic Integrals for Semimartingales}
 % ------------------------------------------------------------------
 
 \begin{definition}[Locally bounded process]\label{chap5.1.3:definition-locally_bounded}
