@@ -346,6 +346,16 @@ where $f_{n,i}=F''$ evaluated at an intermediate point.
 \textbf{General $p$:} The same argument, with cross terms $\Delta_iX^k\,\Delta_iX^l$ converging to $d\br{X^k,X^l}$.
 \end{proofidea}
 
+\begin{corollary}[Itô's formula with a finite variation argument]\label{chap5.2:corollary-ito_fv_argument}
+\LG{Slide, Lecture 5.2}\\
+Let $X$ be a continuous semimartingale and $A$ a continuous finite variation process. If $F(a,x)$ is once continuously differentiable in $a$ and twice continuously differentiable in $x$, then for every $t\geq0$,
+$$F(A_t,X_t)=F(A_0,X_0)+\int_0^t\frac{\partial F}{\partial a}(A_s,X_s)\,dA_s+\int_0^t\frac{\partial F}{\partial x}(A_s,X_s)\,dX_s+\frac12\int_0^t\frac{\partial^2F}{\partial x^2}(A_s,X_s)\,d\br{X,X}_s.$$
+\end{corollary}
+
+\begin{remark}
+This refines Theorem \ref{chap5.2:theorem-ito_formula} (applied with $p=2$ to the pair $(A,X)$): since $A$ has finite variation, $\br{A,A}=\br{A,X}=0$, so the second-order terms involving $A$ vanish regardless, and only $C^1$-regularity in $a$ is actually needed. This is exactly the form used to prove Proposition \ref{chap5.2:proposition-exponential_martingale} (with $A_t=\br{M,M}_t$) and Proposition \ref{chap5.5:proposition-stochastic_logarithm}.
+\end{remark}
+
 \begin{remark}[Differential notation]
 Itô's formula is often written in the shorthand
 $$dF(X_t)=F'(X_t)\,dX_t+\tfrac12F''(X_t)\,d\br{X,X}_t,$$
@@ -564,6 +574,30 @@ For $A\in\mc{F}_t$: $Q(A)=E_P[1_AD_\infty]=E_P[1_AE_P[D_\infty|\mc{F}_t]]$, so $
 For positivity, let $T_\varepsilon=\inf\{t:D_t<\varepsilon\}$. Then $Q(T_\varepsilon<\infty)=E_P[1_{\{T_\varepsilon<\infty\}}D_{T_\varepsilon}]\leq\varepsilon$, so $Q(\bigcap_n\{T_{1/n}<\infty\})=0$. By equivalence, this set is also $P$-null.
 \end{proofidea}
 
+\begin{proposition}[Bayes' rule for martingales]\label{chap5.5:proposition-bayes_rule}
+\LG{Slide, Lecture 5.2}\\
+Assume $P$ and $Q$ are mutually absolutely continuous on $\mc{F}_\infty$, with continuous density process $D_t=\frac{dQ}{dP}|_{\mc{F}_t}$ as in Proposition \ref{chap5.5:proposition-density_process}. Let $X$ be an adapted process with continuous sample paths. Then:
+\begin{enumerate}[(i)]
+    \item $X$ is a continuous (local) martingale under $Q$ if and only if $XD$ is a continuous (local) martingale under $P$.
+    \item The process $1/D$ is a continuous martingale under $Q$.
+    \item $X$ is a continuous semimartingale under $Q$ if and only if it is a continuous semimartingale under $P$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proofidea}
+\textbf{(i)} For $0\leq s\leq t$ and $A\in\mc{F}_s$, using $D_t=\frac{dQ}{dP}|_{\mc{F}_t}$,
+$$E_Q[X_t1_A]=E_P[X_tD_t1_A].$$
+If $XD$ is a $P$-martingale, the right-hand side equals $E_P[X_sD_s1_A]=E_Q[X_s1_A]$, so $X$ is a $Q$-martingale; the converse is the same computation read backwards. The local martingale case follows by localizing with the same stopping times on both sides, using $D_{T\wedge t}=\frac{dQ}{dP}|_{\mc{F}_{T\wedge t}}$ (Proposition \ref{chap5.5:proposition-density_process}).
+
+\textbf{(ii)} Since $P$ and $Q$ are mutually absolutely continuous, $\frac{dP}{dQ}|_{\mc{F}_t}=D_t^{-1}$ and $D_t^{-1}\cdot D_t=1$ is trivially a $P$-martingale, so by (i) applied with the roles of $P,Q$ reversed, $1/D$ is a $Q$-martingale.
+
+\textbf{(iii)} This is part (a) of Corollary \ref{chap5.5:corollary-girsanov_consequences}; it follows from (i) applied to the martingale part of the canonical decomposition, since finite variation is a measure-independent notion.
+\end{proofidea}
+
+\begin{remark}
+Part (i) is the key step used in the proof of Girsanov's theorem (applied to $X=\tilde M$, with $XD$ shown to be a $P$-local martingale via integration by parts).
+\end{remark}
+
 \begin{proposition}[Stochastic logarithm]\label{chap5.5:proposition-stochastic_logarithm}
 \LG{Proposition 5.21}\\
 Let $D$ be a continuous local martingale with strictly positive values. There exists a unique continuous local martingale $L$ such that
@@ -600,7 +634,7 @@ $$\tilde M_tD_t=M_0D_0+\int_0^t\tilde M_s\,dD_s+\int_0^tD_s\,dM_s-\int_0^tD_s\,d
 since $d\br{M,L}_s=D_s^{-1}\,d\br{M,D}_s$. The right-hand side is a $P$-local martingale.
 \end{proofidea}
 
-\begin{corollary}[Consequences of Girsanov]\label{chap5.5:corollary-consequences}
+\begin{corollary}[Consequences of Girsanov]\label{chap5.5:corollary-girsanov_consequences}
 \LG{Pages 135--136}\\
 Under the assumptions of Theorem \ref{chap5.5:theorem-girsanov}:
 \begin{enumerate}[(a)]
