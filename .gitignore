@@ -18,6 +18,24 @@ Visuals/_lib/vendor/
 # Visuals/*/data/*
 # !Visuals/*/data/.gitkeep
 
+# LaTeX build artifacts (compiled PDFs are tracked intentionally elsewhere in this repo)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+
 # R
 .Rhistory
 .RData
