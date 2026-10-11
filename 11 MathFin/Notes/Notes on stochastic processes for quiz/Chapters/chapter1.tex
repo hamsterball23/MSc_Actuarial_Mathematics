@@ -114,7 +114,7 @@ The characteristic function then factors and the components are then independent
 %Trap for independence
 \begin{trap} Needs \emph{jointly} Gaussian: two uncorrelated Gaussians need not be independent.\end{trap}
 
-\begin{counterexample} 
+\begin{counterexample} \label{chap1.2:counterexample-uncorrelated_not_independent}
 Let $X \sim \Norm{0}{1}$ and $Y = \varepsilon X$ for $\varepsilon \in \{-1,1\}$ independent of $X$ with $P(\varepsilon = -1) = 1/2 = P(\varepsilon = 1)$. Then $X$ and $Y$ are:
 \begin{itemize}
     \item both standard Gaussian: $P(Y \leq y)=\frac12P(X \leq y) + \frac12 P(-X \leq y)=P(X \leq y)$.
@@ -124,11 +124,28 @@ Let $X \sim \Norm{0}{1}$ and $Y = \varepsilon X$ for $\varepsilon \in \{-1,1\}$ 
 \end{itemize}
 \end{counterexample}
 
-\todo{Add small introduction to theorem}
-\begin{theorem}[]\label{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism}
+With the quadratic form $q_X$, we associate the unique symmetric endomorphism $\gamma_X$ of $\R^d$ such that
+$$q_X(u)=u^T\gamma_X(u), \qquad u \in \R^d$$
+(the matrix of $\gamma_X$ in the canonical basis is exactly the covariance matrix $\Var(X)=(\Cov{X_j}{X_k})_{1\leq j,k \leq d}$, but the definition of $\gamma_X$ does not depend on the choice of basis). Since $q_X$ is a nonnegative quadratic form, $\gamma_X$ is nonnegative in the sense that its eigenvalues are all nonnegative. From now on, to simplify the statements, we restrict our attention to \textit{centered} Gaussian vectors, i.e.\ such that $m_X=0$, but the following results are easily adapted to the non-centered case.
+
+\begin{theorem}[Existence and diagonalization of Gaussian vectors]\label{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism}
 \LG{Theorem 1.3} \\
-\todo{Add this theorem in the context of $\R^d$. Don't know if we tell it in an non-negative symmetric endomorphism way, or just merely connected to a non-negative symmetric matrix.}
+\begin{enumerate}[(i)]
+    \item Let $\gamma$ be a nonnegative symmetric endomorphism of $\R^d$. Then there exists a Gaussian vector $X$ such that $\gamma_X=\gamma$.
+    \item Let $X$ be a centered Gaussian vector. Let $(\varepsilon_1,...,\varepsilon_d)$ be a basis of $\R^d$ in which $\gamma_X$ is diagonal, $\gamma_X\varepsilon_j=\lambda_j\varepsilon_j$ for every $1 \leq j \leq d$, where
+    $$\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_r >0=\lambda_{r+1}=...=\lambda_d,$$
+    so that $r$ is the rank of $\gamma_X$. Then
+    $$X=\sum_{j=1}^rY_j\varepsilon_j,$$
+    where $Y_j$, $1 \leq j \leq r$, are independent (centered) Gaussian variables and the variance of $Y_j$ is $\lambda_j$. Consequently, if $P_X$ denotes the distribution of $X$, the topological support of $P_X$ is the vector space spanned by $\varepsilon_1,...,\varepsilon_r$. Furthermore, $P_X$ is absolutely continuous with respect to Lebesgue measure on $\R^d$ if and only if $r=d$, and in that case the density of $X$ is
+    $$p_X(x)=\frac{1}{(2\pi)^{d/2}\sqrt{\det \gamma_X}}\exp\left(-\frac12 x^T\gamma_X^{-1}x\right)$$
+\end{enumerate}
 \end{theorem}
+\begin{proofidea}
+\begin{itemize}[(i)]
+    \item Diagonalize $\gamma$ in an orthonormal basis $(\varepsilon_1,...,\varepsilon_d)$, take independent centered Gaussians $Y_j \sim \Norm{0}{\lambda_j}$ for the corresponding eigenvalues, and set $X=\sum_jY_j\varepsilon_j$. A direct computation of $q_X(u)=E[(\sum_ju_jY_j)^2]$ in this basis recovers $\gamma$.
+    \item Write $X$ in the diagonalizing basis: the matrix of $\gamma_X$ there is the covariance matrix of the coordinates $Y_1,...,Y_d$, which is diagonal, so Proposition \ref{chap1.2:proposition-independence_iff_uncorrelated_gaussian_vectors} gives independence of $Y_1,...,Y_d$; the coordinates with $\lambda_j=0$ vanish a.s.\ since $E[Y_j^2]=0$. The support statement follows by evaluating $P[X \in O]$ on rectangles spanned by $\varepsilon_1,...,\varepsilon_r$. When $r=d$, the density is obtained by the change of variables $x=\sum_jy_j\varepsilon_j$ in the joint density of the independent $Y_j \sim \Norm{0}{\lambda_j}$.
+\end{itemize}
+\end{proofidea}
 
 
 \subsection{Gaussian processes and Gaussian spaces}
@@ -139,16 +156,121 @@ A (centered) \textit{Gaussian space} is a closed linear subspace of $L^2(\Omega,
 \end{definition}
 For instance if $X=(X_1,...,X_d)$ is a centered Gaussian vector in $\R^d$, the vector space spanned by $\{X_1,...,X_d\}$ is a Gaussian space. Clearly any linear combination of these variables are in $L^2$ - they are Gaussian by definition of a Gaussian vector. The closedness stems from Proposition \ref{chap1.1:proposition-sequence_of_Gaussian_variables} that shows us that $L^2$-convergence in the space boils down to being convergence of sequences of coefficients of each component in the space.
 
-\begin{definition}[Random processes (in continuous time)]
-Let $(E, \mc{E})$ be a measurable space, and let $T$ be an arbitrary index set. A \textit{random process} (indexed by $T$) with values in $E$ is a collection $(X_t)_{t \in T}$ of random variables with values in E. If the measurable space $(E, \mc{E})$ is not specified, we will implicitly assume that $E=\R$ and $\mc{E}=\mc{B}(\R)$ being the Borel $\sigma$-algebra on $\R$
+\begin{definition}[Random processes (in continuous time)] \label{chap1.3:definition-random_process}
+\LG{Definition 1.5} \\
+Let $(E, \mc{E})$ be a measurable space, and let $T$ be an arbitrary index set. A \textit{random process} (indexed by $T$) with values in $E$ is a collection $(X_t)_{t \in T}$ of random variables with values in E. If the measurable space $(E, \mc{E})$ is not specified, we will implicitly assume that $E=\R$ and $\mc{E}=\mc{B}(\R)$ being the Borel $\sigma$-algebra on $\R$. Most of the time, the index set $T$ will be $\R_+$ or another interval of the real line.
 \end{definition}
 
+\begin{definition}[Gaussian process] \label{chap1.3:definition-gaussian_process}
+\LG{Definition 1.6} \\
+A (real-valued) random process $(X_t)_{t \in T}$ is called a (centered) \textit{Gaussian process} if any finite linear combination of the variables $X_t$, $t \in T$, is centered Gaussian.
+\end{definition}
 
-\begin{theorem}[Independence = orthogonality] \todo{closed subspaces $H_1,H_2$ of a Gaussian space: $\sigma(H_1)\perp\!\!\!\perp\sigma(H_2)\iff H_1\perp H_2$} \end{theorem}
-\begin{corollary}[Conditional expectation = projection] \todo{$E[X\mid\sigma(K)]=p_K(X)$; conditional law is $\mathcal N(p_K(X),E[(X-p_K(X))^2])$} \end{corollary}
-\begin{theorem}[Existence] \todo{any symmetric positive semi-definite $\Gamma(s,t)$ is the covariance of a centred Gaussian process} \end{theorem}
-\begin{quizbox} Independence $\iff$ orthogonality in a Gaussian space; conditional expectation is linear projection. \end{quizbox}
+\begin{proposition}[Gaussian space generated by a process] \label{chap1.3:proposition-gaussian_space_generated_by_process}
+\LG{Proposition 1.7} \\
+If $(X_t)_{t \in T}$ is a Gaussian process, the closed linear subspace of $L^2$ spanned by the variables $X_t$, $t \in T$, is a Gaussian space, called the \textit{Gaussian space generated by the process $X$}.
+\end{proposition}
+\begin{proof}
+It suffices to observe that an $L^2$-limit of centered Gaussian variables is still centered Gaussian, by Proposition \ref{chap1.1:proposition-sequence_of_Gaussian_variables}.
+\end{proof}
+
+We now turn to independence properties in a Gaussian space. For a collection $H$ of random variables we write $\sigma(H)$ for the $\sigma$-field it generates. The next theorem shows that, in some sense, independence is equivalent to orthogonality in a Gaussian space. This is a very particular property of the Gaussian distribution.
+
+\begin{theorem}[Independence = orthogonality] \label{chap1.3:theorem-independence_iff_orthogonality}
+\LG{Theorem 1.9} \\
+Let $H$ be a centered Gaussian space and let $(H_i)_{i \in I}$ be a collection of linear subspaces of $H$. Then the subspaces $H_i$, $i \in I$, are (pairwise) orthogonal in $L^2$ if and only if the $\sigma$-fields $\sigma(H_i)$, $i \in I$, are independent.
+\end{theorem}
+\begin{proof}
+Suppose the $\sigma$-fields $\sigma(H_i)$ are independent. Then, if $i \neq j$, for $X \in H_i$ and $Y \in H_j$, $E[XY]=E[X]E[Y]=0$, so the linear spaces $H_i$ are pairwise orthogonal.
+
+Conversely, suppose the linear spaces $H_i$ are pairwise orthogonal. It is enough to show that, for distinct $i_1,...,i_p \in I$, the $\sigma$-fields $\sigma(H_{i_1}),...,\sigma(H_{i_p})$ are independent, which (by a monotone class argument) reduces to showing that, for any fixed $\xi_1^1,...,\xi_{n_1}^1 \in H_{i_1}, ..., \xi_1^p,...,\xi_{n_p}^p \in H_{i_p}$, the vectors $(\xi_1^1,...,\xi_{n_1}^1),...,(\xi_1^p,...,\xi_{n_p}^p)$ are independent. For every $j \in \{1,...,p\}$, take an orthonormal basis $(\eta_1^j,...,\eta_{m_j}^j)$ of the linear subspace of $L^2$ spanned by $\{\xi_1^j,...,\xi_{n_j}^j\}$. The vector $(\eta_1^1,...,\eta_{m_1}^1,\eta_1^2,...,\eta_{m_2}^2,...,\eta_1^p,...,\eta_{m_p}^p)$ is Gaussian (its components lie in $H$) with covariance matrix equal to the identity, because $E[\eta_l^i\eta_r^j]=0$ for $i \neq j$ by orthogonality of $H_i$ and $H_j$. By Proposition \ref{chap1.2:proposition-independence_iff_uncorrelated_gaussian_vectors}, its components are independent, hence so are the sub-vectors $(\eta_1^j,...,\eta_{m_j}^j)_{j=1}^p$, and therefore so are the $(\xi_1^j,...,\xi_{n_j}^j)_{j=1}^p$, which was the desired result.
+\end{proof}
+\begin{trap}
+It is crucial that the subspaces $H_i$ live inside a \emph{common} Gaussian space $H$: Counterexample \ref{chap1.2:counterexample-uncorrelated_not_independent} already exhibits two uncorrelated --- hence orthogonal --- standard Gaussian variables $X$ and $Y=\varepsilon X$ that are \emph{not} independent, precisely because $(X,Y)$ fails to be a Gaussian vector, so $X,Y$ do not both belong to one Gaussian space.
+\end{trap}
+
+As an application of \cref{chap1.3:theorem-independence_iff_orthogonality}, we now discuss conditional expectations in the Gaussian framework; the fact that these can be computed as orthogonal projections is again very particular to the Gaussian setting.
+
+\begin{corollary}[Conditional expectation = projection] \label{chap1.3:corollary-conditional_expectation_as_projection}
+\LG{Corollary 1.10} \\
+Let $H$ be a (centered) Gaussian space, let $K$ be a closed linear subspace of $H$, let $p_K$ denote the orthogonal projection onto $K$ in the Hilbert space $L^2$, and let $X \in H$.
+\begin{enumerate}[(i)]
+    \item We have
+    $$E[X \mid \sigma(K)]=p_K(X)$$
+    \item Let $\sigma^2=E[(X-p_K(X))^2]$. Then, for every Borel subset $A$ of $\R$, the random variable $P[X \in A \mid \sigma(K)]$ is given by $P[X \in A \mid \sigma(K)](\omega)=Q(\omega,A)$, where $Q(\omega,\cdot)$ denotes the $\Norm{p_K(X)(\omega)}{\sigma^2}$-distribution (with the convention $Q(\omega,A)=\ind_A(p_K(X))$ if $\sigma=0$). Equivalently, the conditional distribution of $X$ knowing $\sigma(K)$ is $\Norm{p_K(X)}{\sigma^2}$.
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+Let $Y=X-p_K(X)$. Then $Y$ is orthogonal to $K$, so by Theorem \ref{chap1.3:theorem-independence_iff_orthogonality} (applied with the subspaces $K$ and $\R Y$ of $H$), $Y$ is independent of $\sigma(K)$.
+\begin{enumerate}[(i)]
+    \item $E[X \mid \sigma(K)]=E[p_K(X)\mid\sigma(K)]+E[Y\mid\sigma(K)]=p_K(X)+E[Y]=p_K(X)$.
+    \item For every nonnegative measurable $f$, $E[f(X)\mid\sigma(K)]=E[f(p_K(X)+Y)\mid\sigma(K)]=\int P_Y(dy)f(p_K(X)+y)$, using that $p_K(X)$ is $\sigma(K)$-measurable while $Y$ is independent of $\sigma(K)$ and $P_Y=\Norm{0}{\sigma^2}$ since $Y$ is centered Gaussian with variance $\sigma^2$. This is exactly (ii).
+\end{enumerate}
+\end{proof}
+\begin{remark}
+Property (i) also gives the principle of linear regression: if $(X_1,X_2,X_3)$ is a centered Gaussian vector in $\R^3$, the best $L^2$-approximation of $X_3$ as a (not necessarily linear) function of $X_1,X_2$ is the \emph{linear} combination $\lambda_1X_1+\lambda_2X_2$ obtained by orthogonal projection onto the span of $X_1,X_2$.
+\end{remark}
+
+Let $(X_t)_{t \in T}$ be a (centered) Gaussian process. The \textit{covariance function} of $X$ is $\Gamma: T \times T \to \R$ defined by $\Gamma(s,t)=\Cov{X_s}{X_t}=E[X_sX_t]$. This function characterizes the collection of finite-dimensional marginal distributions of $X$: for any distinct $t_1,...,t_p \in T$, the vector $(X_{t_1},...,X_{t_p})$ is a centered Gaussian vector in $\R^p$ with covariance matrix $(\Gamma(t_i,t_j))_{1\leq i,j \leq p}$.
+
+Given a function $\Gamma$ on $T \times T$, one may ask whether there exists a Gaussian process $X$ with covariance function $\Gamma$. Necessarily $\Gamma$ is symmetric ($\Gamma(s,t)=\Gamma(t,s)$) and of \textit{positive type}: for every real function $c$ on $T$ with finite support,
+$$\sum_{T \times T}c(s)c(t)\Gamma(s,t)\geq0,$$
+since this sum equals $\Var\left(\sum_Tc(s)X_s\right)\geq0$ whenever $\Gamma$ is the covariance function of some process $X$. When $T$ is finite, these conditions are also sufficient, by Theorem \ref{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism}. The following theorem solves the existence problem in general.
+
+\begin{theorem}[Existence] \label{chap1.3:theorem-existence_of_gaussian_process}
+\LG{Theorem 1.11} \\
+Let $\Gamma$ be a symmetric function of positive type on $T \times T$. There exists, on an appropriate probability space $(\Omega,\mc{F},P)$, a centered Gaussian process whose covariance function is $\Gamma$.
+\end{theorem}
+\begin{proofidea}
+This is a direct consequence of the Kolmogorov extension theorem: build the consistent family of finite-dimensional Gaussian marginals from $\Gamma$ via Theorem \ref{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism}, then glue them to a process on $\R^T$. We omit the details, as the general statement is not used in the sequel.
+\end{proofidea}
+\begin{usedin}
+Taking $T=\R$ and $\Gamma(s,t)=\int e^{i\xi(t-s)}\mu(d\xi)$ for a finite symmetric measure $\mu$ on $\R$ gives a \textit{stationary} centered Gaussian process (i.e.\ $(X_{t_1+t},...,X_{t_n+t})\overset{d}{=}(X_{t_1},...,X_{t_n})$ for every $t$), with $\mu$ its spectral measure (the converse is Bochner's theorem, not used here). The special case $T=L^2(E,\mc{E},\mu)$ with $\Gamma(f,g)=\langle f,g\rangle_{L^2(\mu)}$ is exactly how Gaussian white noise (\cref{chap1.4:definition-gaussian_white_noise} below) can alternatively be constructed.
+\end{usedin}
+\begin{quizbox} Independence $\iff$ orthogonality in a Gaussian space (\cref{chap1.3:theorem-independence_iff_orthogonality}), crucially for subspaces of a \emph{common} Gaussian space (\cref{chap1.2:counterexample-uncorrelated_not_independent}); conditional expectation is linear projection, with conditional law $\Norm{p_K(X)}{E[(X-p_K(X))^2]}$ (\cref{chap1.3:corollary-conditional_expectation_as_projection}); any symmetric positive-type function is the covariance of some centered Gaussian process (\cref{chap1.3:theorem-existence_of_gaussian_process}). \end{quizbox}
 
 \subsection{Gaussian white noise}
-\begin{definition} \todo{isometry $G:L^2(E,\mu)\to$ Gaussian space; $G(A):=G(\ind_A)\sim\mathcal N(0,\mu(A))$, independent on disjoint sets, additive} \end{definition}
-\begin{usedin} $\mu=$ Lebesgue on $\R_+$, $B_t=G([0,t])$ gives pre-BM (Ch.\ 2). $G(f)=\int f\,dB$ is the Wiener integral: the deterministic-integrand special case of Ch.\ 5. \end{usedin}
+\begin{definition}[Gaussian white noise] \label{chap1.4:definition-gaussian_white_noise}
+\LG{Definition 1.12} \\
+Let $(E,\mc{E})$ be a measurable space and let $\mu$ be a $\sigma$-finite measure on $(E,\mc{E})$. A \textit{Gaussian white noise} with intensity $\mu$ is an isometry $G$ from $L^2(E,\mc{E},\mu)$ into a (centered) Gaussian space. Hence, for $f,g \in L^2(E,\mc{E},\mu)$, $G(f)$ is centered Gaussian with
+$$E[G(f)^2]=\|f\|^2_{L^2(\mu)}=\int f^2\,d\mu, \qquad E[G(f)G(g)]=\langle f,g\rangle_{L^2(\mu)}=\int fg\,d\mu$$
+In particular, if $f=\ind_A$ with $\mu(A)<\infty$, we write $G(A):=G(\ind_A)$, and $G(A)\sim\Norm{0}{\mu(A)}$.
+\end{definition}
+
+\begin{properties}[Additivity and independence of $A \mapsto G(A)$] \label{chap1.4:properties-additivity_of_white_noise}
+\LG{p.\ 12} \\
+\begin{enumerate}[(a)]
+    \item If $A_1,...,A_n \in \mc{E}$ are disjoint with $\mu(A_j)<\infty$ for every $j$, then $(G(A_1),...,G(A_n))$ is a Gaussian vector with diagonal covariance matrix (since $\langle \ind_{A_i},\ind_{A_j}\rangle_{L^2(\mu)}=0$ for $i \neq j$), hence by Proposition \ref{chap1.2:proposition-independence_iff_uncorrelated_gaussian_vectors} the variables $G(A_1),...,G(A_n)$ are independent.
+    \item If $A \in \mc{E}$ with $\mu(A)<\infty$ is the disjoint union of a countable collection $A_1,A_2,...$ of measurable sets, then $\ind_A=\sum_{j=1}^\infty \ind_{A_j}$ in $L^2(\mu)$, and by the isometry property
+    $$G(A)=\sum_{j=1}^\infty G(A_j),$$
+    where the series converges in $L^2(\Omega,\mc{F},P)$ (and, since the $G(A_j)$ are independent, also a.s., by the convergence theorem for discrete martingales).
+\end{enumerate}
+\end{properties}
+\begin{trap}
+Property (b) makes $A \mapsto G(A)$ behave very much like a (signed) measure depending on $\omega$. It is \emph{not}, in general, an actual measure for fixed $\omega$: the map $A \mapsto G(A)(\omega)$ need not be countably additive pathwise.
+\end{trap}
+
+\begin{proposition}[Existence of Gaussian white noise] \label{chap1.4:proposition-existence_of_gaussian_white_noise}
+\LG{Proposition 1.13} \\
+Let $(E,\mc{E})$ be a measurable space and $\mu$ a $\sigma$-finite measure on $(E,\mc{E})$. There exists, on an appropriate probability space $(\Omega,\mc{F},P)$, a Gaussian white noise with intensity $\mu$.
+\end{proposition}
+\begin{proofidea}
+Let $(f_i,i\in I)$ be a total orthonormal system of the Hilbert space $L^2(E,\mc{E},\mu)$, and let $(X_i)_{i \in I}$ be independent $\Norm{0}{1}$ random variables. Writing $f=\sum_{i}\langle f,f_i\rangle f_i$ for $f \in L^2(\mu)$, set $G(f)=\sum_i\langle f,f_i\rangle X_i$ (convergent in $L^2(\Omega)$ since $\sum_i\langle f,f_i\rangle^2=\|f\|^2<\infty$). Then $G$ maps the orthonormal basis $(f_i)$ to the orthonormal system $(X_i)$, hence is an isometry into the Gaussian space generated by $(X_i)_{i \in I}$. Alternatively, apply Theorem \ref{chap1.3:theorem-existence_of_gaussian_process} with $T=L^2(E,\mc{E},\mu)$ and $\Gamma(f,g)=\langle f,g \rangle_{L^2(\mu)}$, and set $G(f)=X_f$.
+\end{proofidea}
+\begin{remark}
+When $(E,\mc{E})=(\R_+,\mc{B}(\R_+))$ and $\mu$ is Lebesgue measure, the construction only needs a sequence $(\xi_n)_{n\geq0}$ of independent $\Norm{0}{1}$ variables and an orthonormal basis $(\varphi_n)_{n\geq0}$ of $L^2(\R_+,\mc{B}(\R_+),dt)$: $G(f)=\sum_{n\geq0}\langle f,\varphi_n\rangle\xi_n$.
+\end{remark}
+
+\begin{proposition}[Recovering the intensity from finer partitions] \label{chap1.4:proposition-recovering_intensity}
+\LG{Proposition 1.14} \\
+Let $G$ be a Gaussian white noise on $(E,\mc{E})$ with intensity $\mu$. Let $A \in \mc{E}$ with $\mu(A)<\infty$, and assume there is a sequence of partitions $A=A_1^n\cup...\cup A_{k_n}^n$ whose mesh tends to $0$, in the sense that $\lim_{n\to\infty}\sup_{1\leq j \leq k_n}\mu(A_j^n)=0$. Then
+$$\lim_{n\to\infty}\sum_{j=1}^{k_n}G(A_j^n)^2=\mu(A) \quad \text{in } L^2$$
+\end{proposition}
+\begin{proof}
+For fixed $n$, the variables $G(A_1^n),...,G(A_{k_n}^n)$ are independent by Properties \ref{chap1.4:properties-additivity_of_white_noise} (a), with $E[G(A_j^n)^2]=\mu(A_j^n)$. Using that $\Var(Z^2)=E[Z^4]-E[Z^2]^2=3\sigma^4-\sigma^4=2\sigma^4$ for $Z\sim\Norm{0}{\sigma^2}$ (Proposition \ref{chap1.1:proposition-moments_of_standard_Gaussian_variables}), independence gives
+$$E\left[\left(\sum_{j=1}^{k_n}G(A_j^n)^2-\mu(A)\right)^2\right]=\sum_{j=1}^{k_n}\Var(G(A_j^n)^2)=2\sum_{j=1}^{k_n}\mu(A_j^n)^2 \leq 2\left(\sup_{1\leq j \leq k_n}\mu(A_j^n)\right)\mu(A),$$
+which tends to $0$ as $n \to \infty$ by assumption on the mesh.
+\end{proof}
+\begin{usedin}
+With $\mu=$ Lebesgue measure on $\R_+$, $B_t:=G([0,t])$ gives pre-Brownian motion (Ch.\ 2), and $G(f)=\int_0^\infty f\,dB$ is the \textit{Wiener integral} with respect to $B$ --- the deterministic-integrand special case of the stochastic integral built in Ch.\ 5. Proposition \ref{chap1.4:proposition-recovering_intensity} applied to $\mu=$ Lebesgue measure and dyadic partitions of $[0,t]$ is exactly the $L^2$ quadratic variation computation $\sum(B_{t_i}-B_{t_{i-1}})^2\to t$ (\cref{chap2.3:proposition-quadratic_variation_of_brownian_motion}).
+\end{usedin}
