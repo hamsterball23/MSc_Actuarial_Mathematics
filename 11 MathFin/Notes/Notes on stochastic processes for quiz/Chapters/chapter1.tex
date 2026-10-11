@@ -1,15 +1,117 @@
 % ==================================================================
 \section{Chapter 1 --- Gaussian Variables and Gaussian Processes (essentials)}
 % ==================================================================
-\emph{Only what Chapters 2--5 lean on.}
 
 \subsection{Gaussian variables and vectors}
-\begin{definition} \todo{$X\sim\mathcal N(m,\sigma^2)$ via $E[e^{i\xi X}]=e^{im\xi-\sigma^2\xi^2/2}$; $\sigma=0$ allowed (degenerate)} \end{definition}
-\begin{proposition} \todo{$L^2$- or a.s.\ limits of centred Gaussians are Gaussian (variances converge)} \end{proposition}
-\begin{definition}[Gaussian vector] \todo{every linear combination $\langle u,X\rangle$ is Gaussian; law determined by mean and covariance $K_X$} \end{definition}
-\begin{proposition}[Independence $\iff$ uncorrelated] \todo{for a Gaussian vector: $X_1,\dots,X_d$ independent iff $K_X$ diagonal} \end{proposition}
+The following definitions are the starting point of all continuous time processes we look at here: the Gaussian random variables, that are essential to define Brownian motion.
+\begin{definition}[Standard Gaussian random variable] \label{chap1.1:definition-standard_gaussian_variable}
+\LG{page 1} \\
+A real random variable $X$ is said to be a \textit{standard Gaussian (or normal)} variable if its law has density
+$$p_X(x)=\frac{1}{\sqrt{2\pi}}\exp{\left(-\frac{x^2}{2}\right)}$$
+with respect to the Lebesgue measure on $\R$.
+\end{definition}
 
-%Trap for indepenence
+\begin{proposition}[Moments of standard Gaussian variables]\label{chap1.1:proposition-moments_of_standard_Gaussian_variables}
+Let $X$ be a standard Gaussian random variable. Then 
+$$E[X]=0, \quad E[X^2]=1.$$
+More generally, for every integer $n \geq 0$, then
+\begin{equation}\label{chap1.1:equation-moments_of_standard_Gaussian_random_variables}
+E[X^{2n}]=\frac{(2n)!}{2^n n!}, \quad E[X^{2n+1}]=0.
+\end{equation}
+In particular then 
+$$E[X^4]=3, \quad E[X^6]=15, \quad E[X^8]=105$$
+\end{proposition}
+
+\begin{proposition}[Gaussian random variables] \label{chap1.1:proposition-properties_of_Gaussian_variables}
+\LG{page 1-3} \\
+Let $X$ be a standard Gaussian random variable. Define the real random variable $Y= \sigma X + m$ for $m \in \R$ and $\sigma \in (0,\infty)$. Then we say that $Y$ is \textit{Gaussian} with $\Norm{m}{\sigma^2}$-distribution, and we also write $Y \sim \Norm{m}{\sigma^2}$. \par
+
+The following three properties are equivalent:
+\begin{enumerate}
+    \item $Y = \sigma X + m$, where $X$ is standard Gaussian for some $m \in \R$ and $\sigma \in (0,\infty)$.
+    \item The law of $Y$ has density
+    $$p_Y(y)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp{\left(-\frac{(y-m)^2}{2\sigma^2}\right)}$$
+    \item The characteristic function of $Y$ is
+    $$E[e^{i\xi Y}]=\exp{\left(im\xi - \frac{\sigma^2}{2}\xi^2 \right)}$$ 
+    and we then have 
+    $$E[Y]=m, \quad \Var(Y)=\sigma^2$$
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}[Degenerate Gaussian and MGF] \label{chap1.1:remark-degenarate_gaussian_and_moment_generating_function_mgf}
+\LG{page 1-3} \\
+If $\sigma=0$ in above we likewise say that $Y=m$ is (degenerate) Gaussian with measure equal to the Dirac delta measure in $m \in \R$. Property 3 above then still holds, and Property 1, with the natural extension that $\sigma=0$, also holds. The degenerate Gaussian random variable cannot have a density with respect to the Lebesgue measure.
+
+The degenerate Gaussian random variable is introduced to make sure that the space of Gaussian variables are closed. Consider the sequence $X_n \sim \Norm{m}{1/n}$ of independent random variables. This sequence converges to $X=\lim_{n\to\infty}X_n$ which has atom with all the unit mass at $m$. Allowing for degenerate Gaussian random variables makes the space closed for exactly this type of sequence.
+
+Likewise the moment generating function comes from using the characteristic function at $\xi = -i\lambda$, and then we see
+$$M_Y(\lambda)=E[e^{\lambda Y}]= \exp{\left(m\lambda +\frac{\sigma^2}{2}\lambda^2\right)}$$
+\end{remark}
+
+\begin{remark}[Sums of Gaussian variables]\label{chap1.1:remark-sums_of_Gaussian_variables}
+\LG{page 3} \\
+Suppose $Y \sim \Norm{m}{\sigma^2}$, $Y' \sim \Norm{m',\sigma'^2}$, and that $Y$ and $Y'$ are independent. Then $Y+Y' \sim \Norm{m+m', \sigma^2+\sigma'^2}$. This is an immediate consequence of (iii).
+\end{remark}
+
+
+\begin{proposition}[Convergence of sequences of Gaussian variables] \label{chap1.1:proposition-sequence_of_Gaussian_variables}
+\LG{Proposition 1.1} \\
+Let $(X_n)_{n\geq1}$ be a sequence of real random variables such that, for every $n \geq 1$, $X_n$ follows the $\Norm{m_n}{\sigma_n^2}$-distribution. Suppose that $X_n$ converges in $L^2$ to $X$. Then
+\begin{itemize}[(i)]
+    \item $X \sim \Norm{m}{\sigma^2}$, where $m = \lim_{n\to\infty}m_n$ and $\sigma=\lim_{n\to\infty}\sigma_n$.
+    \item The convergence also holds in all $L^p$-spaces for $1\leq p < \infty$.
+\end{itemize}
+\end{proposition}
+
+\begin{proofidea}
+\begin{itemize}[(i)]
+\item The convergence in $L^2$ implies convergence of $m_n$ and $\sigma_n^2$. Taking the limit of characteristic function shows the wanted.
+\item Use $X_n=\sigma_nN+m_n$ for $N \sim \Norm{0}{1}$. Use that $(m_n)$ and $(\sigma_n)$ are bounded too see
+$$\forall q \geq 1: \quad \sup_nE[|X_n|^q]< \infty$$
+Using Minkowski's inequality then also
+$$\forall q \geq 1: \quad \sup_nE[|X_n-X|^q]< \infty$$
+Then $Y_n=|X_n-X|^p$ converges in probability to 0, and the sequence is uniformly integrable, because it is bounded in $L^2$ (by using the preceding bound with $q = 2p$). It folows that this sequence ocnverges to 0 in $L^1$, implying that $X_n\overset{L^p}{\underset{n \to \infty}{\to}}X$.
+\end{itemize}
+\end{proofidea}
+
+
+
+\subsection{Gaussian vectors}
+Compared to Le Gall, we will in this chapter exclusively consider with values in $\R^d$ and not a $d$-dimensional Euclidean space.
+\begin{definition}[Gaussian vector]\label{chap1.2:definition-gaussian_vector}
+A random variable with values in $\R^d$ is called a \textit{Gaussian vector} if, for every $u \in \R^d$ then
+$u^TX$ is a real Gaussian variable.
+\end{definition}
+
+Like Gaussian variables, Gaussian vectors are characterized by mean and variance functions. The following proposition tells us that such functions exists; Theorem \ref{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism} shows us that any functions fullfilling similar conditions results in a Gaussian vector.
+\begin{proposition}[]
+\LG{page 4} \\
+Let $X$ be a Gaussian vector with values in $\R^d$. Then there exists $m_X \in \R^d$ and a nonnegative quadratic form $q_X$ on $\R^d$ such that for every $u \in \R^d$, then
+\begin{align}
+E[u^TX]&=u^Tm_X \\
+\Var(u^TX)&=u^T\Var(X)u=:q(u)
+\end{align}
+The characteristic function of the Gaussian vector is given by
+$$E[\exp{\left(iu^TX\right)}])=\exp{\left(i u^Tm_X-\frac{1}{2}u^T\Var(X)u\right)}=\exp{\left(i u^Tm_X-\frac{1}{2}q_X(u)\right)}$$
+\end{proposition}
+
+\begin{proposition}[Independence $\iff$ uncorrelated] \label{chap1.2:proposition-independence_iff_uncorrelated_gaussian_vectors}
+\LG{Proposition 1.2} \\
+Let $X$ be a Gaussian vector in $R^d$, with marginals $X_1, X_2,...,X_d$. Then $X_1, X_2,...,X_d$ are independent if, and only if, the covariance matrix $\Var(X)=(\Cov{X_j}{X_k})_{1 \leq j,k\leq d}$ is diagonal.
+\end{proposition}
+\begin{proof}
+The necessity of the condition holds for any collection of independent random variables. To see that the condition is sufficient (which is a special property of Gaussian vectors) then assume the covariance matrix is diagonal, such that $\Cov{X_j}{X_k}=1_{k=j}\Var(X_j)$. Then using characteristic functions
+\begin{align*}
+E\left[\exp{\left(i \sum_{j = 1}^du_jX_j \right)} \right]
+&=\exp{\left(i \sum_{j = 1}^du_jE[X_j] -\frac{1}{2}\sum_{j=1}^d\sum_{k = 1}^d u_ju_k\Cov{X_j}{X_k}\right)} \\
+&= \exp{\left(i \sum_{j = 1}^du_jE[X_j] -\frac{1}{2}\sum_{j=1}^du_j^2\Var(X_j)\right)}\\
+&=\prod_{j=1}^d\exp{\left(i u_jE[X_j] -\frac{1}{2}u_j^2\Var(X_j)\right)}\\
+&=\prod_{j=1}^d E[\exp{\left(iu_jX_j \right)}]
+\end{align*}
+The characteristic function then factors and the components are then independent.
+\end{proof}
+
+%Trap for independence
 \begin{trap} Needs \emph{jointly} Gaussian: two uncorrelated Gaussians need not be independent.\end{trap}
 
 \begin{counterexample} 
@@ -22,8 +124,26 @@ Let $X \sim \Norm{0}{1}$ and $Y = \varepsilon X$ for $\varepsilon \in \{-1,1\}$ 
 \end{itemize}
 \end{counterexample}
 
+\todo{Add small introduction to theorem}
+\begin{theorem}[]\label{chap1.2:theorem-existence_of_Gaussian_vector_from_symmetric_endomorphism}
+\LG{Theorem 1.3} \\
+\todo{Add this theorem in the context of $\R^d$. Don't know if we tell it in an non-negative symmetric endomorphism way, or just merely connected to a non-negative symmetric matrix.}
+\end{theorem}
+
+
 \subsection{Gaussian processes and Gaussian spaces}
-\begin{definition} \todo{Gaussian space: closed linear subspace of $L^2(\Omega)$ of centred Gaussians; Gaussian process: all fdd Gaussian} \end{definition}
+From now on untill the end of this chapter, we consider only centered Gaussian variables, and we frequently omit the word "centered".
+\begin{definition}[Gaussian space]\label{chap1.3:definition-gaussian_space}
+\LG{Definition 1.4}
+A (centered) \textit{Gaussian space} is a closed linear subspace of $L^2(\Omega, \mc{F}, P)$ which contains only centered Gaussian variables. 
+\end{definition}
+For instance if $X=(X_1,...,X_d)$ is a centered Gaussian vector in $\R^d$, the vector space spanned by $\{X_1,...,X_d\}$ is a Gaussian space. Clearly any linear combination of these variables are in $L^2$ - they are Gaussian by definition of a Gaussian vector. The closedness stems from Proposition \ref{chap1.1:proposition-sequence_of_Gaussian_variables} that shows us that $L^2$-convergence in the space boils down to being convergence of sequences of coefficients of each component in the space.
+
+\begin{definition}[Random processes (in continuous time)]
+Let $(E, \mc{E})$ be a measurable space, and let $T$ be an arbitrary index set. A \textit{random process} (indexed by $T$) with values in $E$ is a collection $(X_t)_{t \in T}$ of random variables with values in E. If the measurable space $(E, \mc{E})$ is not specified, we will implicitly assume that $E=\R$ and $\mc{E}=\mc{B}(\R)$ being the Borel $\sigma$-algebra on $\R$
+\end{definition}
+
+
 \begin{theorem}[Independence = orthogonality] \todo{closed subspaces $H_1,H_2$ of a Gaussian space: $\sigma(H_1)\perp\!\!\!\perp\sigma(H_2)\iff H_1\perp H_2$} \end{theorem}
 \begin{corollary}[Conditional expectation = projection] \todo{$E[X\mid\sigma(K)]=p_K(X)$; conditional law is $\mathcal N(p_K(X),E[(X-p_K(X))^2])$} \end{corollary}
 \begin{theorem}[Existence] \todo{any symmetric positive semi-definite $\Gamma(s,t)$ is the covariance of a centred Gaussian process} \end{theorem}
