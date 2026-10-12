@@ -232,8 +232,14 @@ and in particular $E[T_a]=\infty$.
 \begin{proofidea}
 For every $t\ge0$, $\{T_a\le t\}=\{S_t\ge a\}$, and Theorem \ref{chap2.4:theorem-reflection_principle} gives $\PP(S_t\ge a)=\PP(|B_t|\ge a)=\PP(tB_1^2\ge a^2)$, i.e.\
 $$\PP(T_a\le t)=\PP\Big(\frac{a^2}{B_1^2}\le t\Big).$$
-Differentiating the right-hand side (a standard computation using the density of $B_1\sim\Norm01$) gives $f$. The density $g$ follows by differentiating Theorem \ref{chap2.4:theorem-reflection_principle} in $a,b$. Finiteness of $E[T_a]$ fails since $f(t)\sim a(2\pi)^{-1/2}t^{-3/2}$ as $t\to\infty$, which is not integrable.
+Differentiating the right-hand side (a standard computation using the density of $B_1\sim\Norm01$) gives $f$. The density $g$ follows by differentiating Theorem \ref{chap2.4:theorem-reflection_principle} in $a,b$. Finiteness of $E[T_a]$ fails: as $t\to\infty$, $f(t)\sim a(2\pi)^{-1/2}t^{-3/2}$, so $tf(t)\sim a(2\pi)^{-1/2}t^{-1/2}$, and $\int^\infty t^{-1/2}\,dt=\infty$ (the exponent $-\frac12$ is not below $-1$), hence $E[T_a]=\int_0^\infty tf(t)\,dt=\infty$.
 \end{proofidea}
+
+\begin{trap}[Density tail exponent $\neq$ survival-tail exponent] \label{chap2.4:trap-density_vs_survival_tail} \\
+It is tempting to read the density tail $f(t)\sim Ct^{-3/2}$ as a ``Pareto$(\frac32)$'' tail and conclude $E[T_a]<\infty$, since a genuine Pareto$(\alpha)$ law --- meaning $\PP(T>t)\sim t^{-\alpha}$ --- has a finite mean exactly when $\alpha>1$. This conflates the \emph{density} exponent with the \emph{survival-function} exponent, which differ by one power: integrating the density,
+$$\PP(T_a>t)=\int_t^\infty f(s)\,ds\sim\frac{Ct^{-1/2}}{1/2}=2a(2\pi)^{-1/2}t^{-1/2}\qquad(t\to\infty),$$
+using $\int_t^\infty s^{-p}\,ds\sim t^{-(p-1)}/(p-1)$ for $p>1$. It is this \emph{survival} exponent $\alpha=\frac12$ --- not the density exponent $\frac32$ --- that governs the mean via $E[T_a]=\int_0^\infty\PP(T_a>t)\,dt$, and $\frac12<1$ gives $E[T_a]=\infty$, consistent with the direct computation above. A true Pareto$(\frac32)$ law (survival tail $t^{-3/2}$, i.e.\ \emph{density} tail $t^{-5/2}$) would indeed have a finite first moment but infinite second moment; $T_a$ is not of that type --- it is a (one-sided) stable law of index $\frac12$, with \emph{no} finite moment of any order $\ge\frac12$.
+\end{trap}
 
 \begin{quizbox} Reflection principle: apply the strong Markov property at $T_a$; since $B^{(T_a)}$ is a Brownian motion independent of $T_a$, reflecting it ($B^{(T_a)}\mapsto-B^{(T_a)}$) leaves the joint law of $(T_a,B^{(T_a)})$ unchanged, which turns $\{S_t\ge a,B_t\le b\}$ into $\{B_t\ge2a-b\}$; the special case $b=a$ gives $S_t\eqd|B_t|$. Law of $T_a$: invert $\{T_a\le t\}=\{S_t\ge a\}=\{|B_t|\ge a\}$ to get $T_a\eqd a^2/B_1^2$, with density $\frac{a}{\sqrt{2\pi t^3}}e^{-a^2/2t}$ and $E[T_a]=\infty$ (heavy $t^{-3/2}$ tail). \end{quizbox}
 \begin{usedin} Barrier options; hitting-time Laplace transforms in \cref{sec:ost}. \end{usedin}
