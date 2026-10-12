@@ -368,6 +368,7 @@ Let $S,T$ (and a sequence $(T_n)$) be stopping times.
     \item $S\wedge T$ and $S\vee T$ are again stopping times, since $\{S\wedge T\le t\}=\{S\le t\}\cup\{T\le t\}$ and $\{S\vee T\le t\}=\{S\le t\}\cap\{T\le t\}$ both lie in $\mc F_t$; moreover $\mc F_{S\wedge T}=\mc F_S\cap\mc F_T$, and $\{S\le T\}, \{S=T\}\in\mc F_{S\wedge T}=\mc F_S\cap\mc F_T$.
     \item If $T_n\uparrow T$ (non-decreasing), $T$ is a stopping time, since $\{T\le t\}=\bigcap_n\{T_n\le t\}$.
     \item If $T_n\downarrow T$ (non-increasing), $T$ is a stopping time of $(\mc F_{t+})$ --- using $\{T<t\}=\bigcup_n\{T_n<t\}\in\mc F_t$ and \cref{chap3.2:proposition-stopping_time_of_right_cont_filtration} --- and $\mc F_{T+}=\bigcap_n\mc F_{T_n+}$. If in addition $(T_n)$ is \emph{eventually stationary at $T$} (for a.e.\ $\omega$, $T_n(\omega)=T(\omega)$ for $n$ large), then $T$ is already a stopping time of $(\mc F_t)$ itself, and $\mc F_T=\bigcap_n\mc F_{T_n}$.
+    \item (Le Gall's property (j), p.\ 47) A function $Y$ defined only on $\{T<\infty\}$ is $\mc F_T$-measurable if and only if, for every $t\ge0$, the restriction of $Y$ to $\{T\le t\}$ is $\mc F_t$-measurable. ($\Leftarrow$: $\{Y\in A\}\cap\{T\le t\}\in\mc F_t$ for every $t$ is exactly the defining property of $\mc F_T$. $\Rightarrow$: restrict the defining property to $\{T\le t\}$.) This is the criterion used just below to show $X_T$ is $\mc F_T$-measurable.
 \end{enumerate}
 In particular, for every stopping time $T$ the dyadic approximants
 $$T_n=\sum_{k=0}^\infty\frac{k+1}{2^n}\ind_{\{k2^{-n}<T\le(k+1)2^{-n}\}}+\infty\cdot\ind_{\{T=\infty\}}, \qquad n\ge0,$$
@@ -375,11 +376,23 @@ form a sequence of stopping times decreasing to $T$; this is the discretisation 
 \end{properties}
 \begin{usedin} The dyadic approximants $T_n\downarrow T$ are exactly how the discrete-time optional stopping theorem is bootstrapped up to continuous time in \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria,chap3.4:proposition-optional_stopping_nonnegative_supermartingales} below. \end{usedin}
 
-\begin{proposition}[Values of progressive processes at a stopping time] \label{chap3.2:proposition-progressive_at_stopping_time} \LG{Theorem 3.7, and Proposition 3.9 (discussion)} \\
-Let $(X_t)_{t\ge0}$ be progressive with values in $(E,\mc E)$ and let $T$ be a stopping time. Then $\omega\mapsto X_T(\omega):=X_{T(\omega)}(\omega)$, defined on $\{T<\infty\}$, is $\mc F_T$-measurable. Moreover, for every stopping time $T$, the stopped process $X^T=(X_{t\wedge T})_{t\ge0}$ is again progressive.
+We now record two closure properties of progressive processes under stopping, needed throughout the rest of this chapter (and, e.g., Definition \ref{chap4.1:definition-continuous_fv_process} in Chapter 4) to freely write down objects like $X_T$ or $X^T$ without re-checking measurability by hand every time.
+
+\begin{proposition}[$X_T$ is $\mc F_T$-measurable, and stopping preserves progressivity] \label{chap3.2:proposition-progressive_at_stopping_time}
+Let $(X_t)_{t\ge0}$ be progressive with values in $(E,\mc E)$ and let $T$ be a stopping time.
+\begin{enumerate}[(i)]
+    \item \LG{Theorem 3.7} The map $\omega\mapsto X_T(\omega):=X_{T(\omega)}(\omega)$, defined on $\{T<\infty\}$, is $\mc F_T$-measurable.
+    \item The stopped process $X^T=(X_{t\wedge T})_{t\ge0}$ is again progressive. (This is not separately numbered by Le Gall; it is an immediate consequence of unwinding \cref{chap3.1:definition-measurable_and_progressive_processes} as below, and is used silently throughout, e.g.\ to make sense of $X^T$ in \cref{chap3.4:corollary-stopped_martingale_is_martingale}.)
+\end{enumerate}
 \end{proposition}
 \begin{proofidea}
-For the first claim, fix $t\ge0$ and restrict to $\{T\le t\}$: there, $\omega\mapsto X_T(\omega)$ factors as $\omega\mapsto(\omega,T(\omega)\wedge t)\mapsto X_{T(\omega)\wedge t}(\omega)$, a composition of the $\mc F_t$-measurable map $\omega\mapsto T(\omega)\wedge t$ (\cref{chap3.2:proposition-stopping_time_of_right_cont_filtration}) with the $\mc F_t\otimes\mc B([0,t])$-measurable restriction of $X$ to $\Omega\times[0,t]$ (progressivity); the composite is $\mc F_t$-measurable, which is exactly the criterion for $\mc F_T$-measurability on $\{T\le t\}$ for every $t$. For the second claim, fix $t\ge0$; on $\Omega\times[0,t]$, $(\omega,s)\mapsto X_{s\wedge T(\omega)}(\omega)$ is the composition of $(\omega,s)\mapsto(\omega,s\wedge T(\omega)\wedge t)$ --- measurable for $\mc F_t\otimes\mc B([0,t])$, since $T\wedge t$ is $\mc F_t$-measurable --- with the restriction of $X$ to $\Omega\times[0,t]$, hence itself $\mc F_t\otimes\mc B([0,t])$-measurable; so $X^T$ is progressive.
+(i) Fix $t\ge0$ and work on $\{T\le t\}$, where $\omega\mapsto X_T(\omega)$ factors as
+$$\omega\longmapsto(\omega,T(\omega)\wedge t)\longmapsto X_{T(\omega)\wedge t}(\omega).$$
+The first arrow is $\mc F_t$-measurable because $T\wedge t$ is $\mc F_t$-measurable (\cref{chap3.2:proposition-stopping_time_of_right_cont_filtration}); the second is the restriction of $X$ to $\Omega\times[0,t]$, which is $\mc F_t\otimes\mc B([0,t])$-measurable by progressivity. The composite is therefore $\mc F_t$-measurable on $\{T\le t\}$ for every $t\ge0$, and \cref{chap3.2:properties-algebra_of_stopping_times} (last item) turns this into $\mc F_T$-measurability of $X_T$ on $\{T<\infty\}$.
+
+(ii) Fix $t\ge0$; we check progressivity of $X^T$ directly from \cref{chap3.1:definition-measurable_and_progressive_processes}, i.e.\ that $(\omega,s)\mapsto X_{s\wedge T(\omega)}(\omega)$ is $\mc F_t\otimes\mc B([0,t])$-measurable on $\Omega\times[0,t]$. This map factors as
+$$(\omega,s)\longmapsto(\omega,\,s\wedge T(\omega)\wedge t)\longmapsto X_{s\wedge T(\omega)\wedge t}(\omega),$$
+and both arrows are measurable for the same reason as in (i): $T\wedge t$ is $\mc F_t$-measurable, so the first map is $\mc F_t\otimes\mc B([0,t])$-measurable, and the second is again just the restriction of $X$ to $\Omega\times[0,t]$. Hence $X^T$ satisfies the defining progressivity criterion at every $t$.
 \end{proofidea}
 
 \begin{proposition}[Hitting times] \label{chap3.2:proposition-hitting_times} \LG{Proposition 3.9} \\
