@@ -345,47 +345,204 @@ $\{S_t\in A\}\in\mathcal F_t$. As $t$ was arbitrary, $(S_t)$ is adapted.
 \end{remark}
 
 \subsection{Stopping times and associated \texorpdfstring{$\sigma$}{sigma}-algebras}
-\begin{definition} \todo{stopping time; $\F_T$; $\F_{T+}$} \end{definition}
-\begin{proposition} \todo{right-continuous filtration: $T$ s.t.\ iff $\{T<t\}\in\F_t$} \end{proposition}
-\begin{proposition}[Properties] \todo{$S\le T\Rightarrow\F_S\subseteq\F_T$; $S\wedge T$, $S\vee T$; $\{S\le T\}\in\F_S\cap\F_T$; $T_n\downarrow T$} \end{proposition}
-\begin{proposition} \todo{$X$ progressive $\Rightarrow$ $X_T\ind_{\{T<\infty\}}$ is $\F_T$-measurable; stopped process progressive} \end{proposition}
-\begin{proposition}[Hitting times] \label{chap3.2:proposition-hitting_times} \todo{open set: s.t.\ for $\F_{t+}$; closed set + continuous paths: s.t.} \end{proposition}
-\begin{quizbox} Hitting-time results (which set type needs which hypothesis) and $X_T\in\F_T$. \end{quizbox}
+This subsection lifts the stopping-time machinery of \cref{chap2.4:definition-stopping_time} from the Brownian canonical filtration to an arbitrary filtered probability space, and settles the two loose ends that right-continuity of $(\mc F_t)$ was advertised to fix in \cref{chap3.1:remark-completing_a_non_complete_filtration}: a clean characterisation of stopping times of $(\mc F_{t+})$, and hitting times of open sets.
+
+\begin{definition}[Stopping time; $\mc F_T$ and $\mc F_{T+}$] \label{chap3.2:definition-stopping_time} \LG{Definition 3.5, p.\ 44--45} \\
+A random variable $T:\Omega\to[0,\infty]$ is a \textit{stopping time} (of $(\mc F_t)$) if $\{T\le t\}\in\mc F_t$ for every $t\ge0$; as before, this gives $\{T<t\}\in\mc F_t$ for $t>0$ and $\{T=\infty\}\in\mc F_\infty$. The \textit{$\sigma$-field of the past before $T$} is
+$$\mc F_T=\{A\in\mc F_\infty: \forall t\ge0,\; A\cap\{T\le t\}\in\mc F_t\},$$
+a $\sigma$-field containing $T$ as a measurable function. Replacing $(\mc F_t)$ by the right-continuous filtration $(\mc F_{t+})$ throughout gives the corresponding notions of a stopping time \textit{of $(\mc F_{t+})$} and of the $\sigma$-field $\mc F_{T+}$; every $(\mc F_t)$-stopping time is an $(\mc F_{t+})$-stopping time, but not conversely in general --- this gap is exactly what the next proposition controls.
+\end{definition}
+
+\begin{proposition}[Stopping times of the right-continuous filtration] \label{chap3.2:proposition-stopping_time_of_right_cont_filtration} \LG{Proposition 3.6 (i)} \\
+A random variable $T$ is a stopping time of $(\mc F_{t+})$ if and only if $\{T<t\}\in\mc F_t$ for every $t>0$, if and only if $T\wedge t$ is $\mc F_t$-measurable for every $t\ge0$.
+\end{proposition}
+\begin{proofidea}
+If $T$ is a stopping time of $(\mc G_t):=(\mc F_{t+})$, write $\{T<t\}=\bigcup_{q\in\mathbb Q_+,q<t}\{T\le q\}$: each term lies in $\mc G_q\subseteq\mc F_t$ (since $q<t$), so the countable union does too. Conversely, if $\{T<t\}\in\mc F_t$ for every $t>0$, then for $s\ge0$, $\{T\le s\}=\bigcap_{q\in\mathbb Q_+,\,s<q<s+\epsilon}\{T<q\}\in\mc F_{s+\epsilon}$ for every $\epsilon>0$, hence $\{T\le s\}\in\mc F_{s+}=\mc G_s$. This is exactly the same dyadic/rational-sandwiching trick already used in \cref{chap2.4:definition-stopping_time} to recognise $T_a$ as a stopping time, run in both directions. The equivalence with $\mc F_t$-measurability of $T\wedge t$ is immediate by writing $\{T\wedge t\le s\}$ as $\{T\le s\}$ or $\Omega$ according as $s<t$ or $s\ge t$, and using the first equivalence on a sequence $s\uparrow t$.
+\end{proofidea}
+
+\begin{properties}[Algebra of stopping times] \label{chap3.2:properties-algebra_of_stopping_times} \LG{pp.\ 45--47} \\
+Let $S,T$ (and a sequence $(T_n)$) be stopping times.
+\begin{enumerate}[(a)]
+    \item $\mc F_T\subseteq\mc F_{T+}$, with equality if $(\mc F_t)$ is right-continuous; a constant $T\equiv t$ gives back $\mc F_T=\mc F_t$.
+    \item If $S\le T$, then $\mc F_S\subseteq\mc F_T$ (and likewise for the $+$ versions): for $A\in\mc F_S$, $A\cap\{T\le t\}=(A\cap\{S\le t\})\cap\{T\le t\}\in\mc F_t$.
+    \item $S\wedge T$ and $S\vee T$ are again stopping times, since $\{S\wedge T\le t\}=\{S\le t\}\cup\{T\le t\}$ and $\{S\vee T\le t\}=\{S\le t\}\cap\{T\le t\}$ both lie in $\mc F_t$; moreover $\mc F_{S\wedge T}=\mc F_S\cap\mc F_T$, and $\{S\le T\}, \{S=T\}\in\mc F_{S\wedge T}=\mc F_S\cap\mc F_T$.
+    \item If $T_n\uparrow T$ (non-decreasing), $T$ is a stopping time, since $\{T\le t\}=\bigcap_n\{T_n\le t\}$.
+    \item If $T_n\downarrow T$ (non-increasing), $T$ is a stopping time of $(\mc F_{t+})$ --- using $\{T<t\}=\bigcup_n\{T_n<t\}\in\mc F_t$ and \cref{chap3.2:proposition-stopping_time_of_right_cont_filtration} --- and $\mc F_{T+}=\bigcap_n\mc F_{T_n+}$. If in addition $(T_n)$ is \emph{eventually stationary at $T$} (for a.e.\ $\omega$, $T_n(\omega)=T(\omega)$ for $n$ large), then $T$ is already a stopping time of $(\mc F_t)$ itself, and $\mc F_T=\bigcap_n\mc F_{T_n}$.
+\end{enumerate}
+In particular, for every stopping time $T$ the dyadic approximants
+$$T_n=\sum_{k=0}^\infty\frac{k+1}{2^n}\ind_{\{k2^{-n}<T\le(k+1)2^{-n}\}}+\infty\cdot\ind_{\{T=\infty\}}, \qquad n\ge0,$$
+form a sequence of stopping times decreasing to $T$; this is the discretisation device used repeatedly in \cref{chap2.4:theorem-strong_markov_property} and again below in the optional stopping theorems.
+\end{properties}
+\begin{usedin} The dyadic approximants $T_n\downarrow T$ are exactly how the discrete-time optional stopping theorem is bootstrapped up to continuous time in \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria,chap3.4:proposition-optional_stopping_nonnegative_supermartingales} below. \end{usedin}
+
+\begin{proposition}[Values of progressive processes at a stopping time] \label{chap3.2:proposition-progressive_at_stopping_time} \LG{Theorem 3.7, and Proposition 3.9 (discussion)} \\
+Let $(X_t)_{t\ge0}$ be progressive with values in $(E,\mc E)$ and let $T$ be a stopping time. Then $\omega\mapsto X_T(\omega):=X_{T(\omega)}(\omega)$, defined on $\{T<\infty\}$, is $\mc F_T$-measurable. Moreover, for every stopping time $T$, the stopped process $X^T=(X_{t\wedge T})_{t\ge0}$ is again progressive.
+\end{proposition}
+\begin{proofidea}
+For the first claim, fix $t\ge0$ and restrict to $\{T\le t\}$: there, $\omega\mapsto X_T(\omega)$ factors as $\omega\mapsto(\omega,T(\omega)\wedge t)\mapsto X_{T(\omega)\wedge t}(\omega)$, a composition of the $\mc F_t$-measurable map $\omega\mapsto T(\omega)\wedge t$ (\cref{chap3.2:proposition-stopping_time_of_right_cont_filtration}) with the $\mc F_t\otimes\mc B([0,t])$-measurable restriction of $X$ to $\Omega\times[0,t]$ (progressivity); the composite is $\mc F_t$-measurable, which is exactly the criterion for $\mc F_T$-measurability on $\{T\le t\}$ for every $t$. For the second claim, fix $t\ge0$; on $\Omega\times[0,t]$, $(\omega,s)\mapsto X_{s\wedge T(\omega)}(\omega)$ is the composition of $(\omega,s)\mapsto(\omega,s\wedge T(\omega)\wedge t)$ --- measurable for $\mc F_t\otimes\mc B([0,t])$, since $T\wedge t$ is $\mc F_t$-measurable --- with the restriction of $X$ to $\Omega\times[0,t]$, hence itself $\mc F_t\otimes\mc B([0,t])$-measurable; so $X^T$ is progressive.
+\end{proofidea}
+
+\begin{proposition}[Hitting times] \label{chap3.2:proposition-hitting_times} \LG{Proposition 3.9} \\
+Let $(X_t)_{t\ge0}$ be adapted with values in a metric space $(E,d)$.
+\begin{enumerate}[(i)]
+    \item If the sample paths of $X$ are right-continuous and $O\subseteq E$ is open, then $T_O=\inf\{t\ge0:X_t\in O\}$ is a stopping time of $(\mc F_{t+})$.
+    \item If the sample paths of $X$ are continuous and $F\subseteq E$ is closed, then $T_F=\inf\{t\ge0:X_t\in F\}$ is a stopping time of $(\mc F_t)$.
+\end{enumerate}
+\end{proposition}
+\begin{proofidea}
+(i) By right-continuity, $\{T_O<t\}=\bigcup_{s\in[0,t)\cap\mathbb Q}\{X_s\in O\}$ (openness of $O$ lets any path visiting $O$ on $[0,t)$ be caught at a nearby rational time), which lies in $\mc F_t$; conclude with \cref{chap3.2:proposition-stopping_time_of_right_cont_filtration}. (ii) By continuity, the distance function $s\mapsto d(X_s,F)$ is continuous, so its infimum over $[0,t]$ already equals its infimum over the countable set $[0,t]\cap\mathbb Q$, giving $\{T_F\le t\}=\{\inf_{0\le s\le t}d(X_s,F)=0\}=\{\inf_{s\in[0,t]\cap\mathbb Q}d(X_s,F)=0\}\in\mc F_t$ directly --- no detour through $\mc F_{t+}$ is needed, which is why continuity (rather than mere right-continuity) buys a genuine $(\mc F_t)$-stopping time.
+\end{proofidea}
+\begin{quizbox} Which hypothesis buys which stopping time: right-continuous paths + \emph{open} target set gives a stopping time of $(\mc F_{t+})$ only (via $\{T<t\}\in\mc F_t$, \cref{chap3.2:proposition-stopping_time_of_right_cont_filtration}); continuous paths + \emph{closed} target set upgrades this to a genuine $(\mc F_t)$-stopping time (via $\{T\le t\}\in\mc F_t$ directly). If $(\mc F_t)$ is already right-continuous the two notions coincide, which is the main structural reason the ``usual conditions'' are assumed throughout. Separately: for progressive $X$, $X_T\ind_{\{T<\infty\}}$ is always $\mc F_T$-measurable (\cref{chap3.2:proposition-progressive_at_stopping_time}) --- this is the fact that lets one freely write $X_T$, $B_{T_a}$, etc.\ and treat them as $\mc F_T$-measurable random variables without further comment. \end{quizbox}
 
 
 
 
 
 \subsection{Continuous-time martingales and supermartingales}
-\begin{definition} \todo{(sub/super)martingale} \end{definition}
-\begin{example}[Brownian martingales] \todo{$B_t$, $B_t^2-t$, $\exp(\theta B_t-\theta^2t/2)$} \end{example}
-\begin{proposition}[Maximal inequality, Doob's $L^p$ inequality] \todo{via discrete version on countable dense set + right-continuity} \end{proposition}
-\begin{proposition}[Upcrossing inequality] \todo{} \end{proposition}
-\begin{theorem}[Regularity / càdlàg modification] \todo{right-cont.\ filtration + usual cond.\ + $t\mapsto\E X_t$ right-cont.\ $\Rightarrow$ càdlàg modification} \end{theorem}
-\begin{theorem}[Convergence] \todo{a.s.\ convergence if bounded in $L^1$; closed by $X_\infty$ $\iff$ UI $\iff$ $L^1$-convergence} \end{theorem}
+From here on all processes take values in $\R$. The definitions below are the direct continuous-time transcription of the discrete-time notions (treated separately in the appendix); what is genuinely new to this section is the sample-path regularity that right-continuity of $(\mc F_t)$ buys for free.
+
+\begin{definition}[(Sub/super)martingale] \label{chap3.3:definition-sub_super_martingale} \LG{Definition 3.10} \\
+An adapted process $(X_t)_{t\ge0}$ with $X_t\in L^1$ for every $t$ is a
+\begin{itemize}
+    \item \textit{martingale} if $E[X_t\mid\mc F_s]=X_s$ for every $0\le s<t$;
+    \item \textit{supermartingale} if $E[X_t\mid\mc F_s]\le X_s$ for every $0\le s<t$;
+    \item \textit{submartingale} if $E[X_t\mid\mc F_s]\ge X_s$ for every $0\le s<t$.
+\end{itemize}
+$X$ is a submartingale iff $-X$ is a supermartingale, so every statement below for supermartingales has an immediate submartingale counterpart. Taking expectations, $t\mapsto E[X_t]$ is constant (martingale), non-increasing (supermartingale), or non-decreasing (submartingale). The basic example is a \textit{Doob martingale} $X_t=E[Z\mid\mc F_t]$ for fixed $Z\in L^1$; not every martingale arises this way (e.g.\ $X_t=B_t$ is not of the form $E[Z\mid\mc F_t]$ for any single $Z$, since $B_t\not\to$ any $L^1$ limit as $t\to\infty$ --- see \cref{chap2.1:remark-time_inversion}).
+\end{definition}
+
+\begin{definition}[$(\mc F_t)$-Brownian motion] \label{chap3.3:definition-ft_brownian_motion} \LG{Definition 3.11} \\
+A Brownian motion $B$ (\cref{chap2.2:definition-brownian_motion}) is an \textit{$(\mc F_t)$-Brownian motion} if it is adapted to $(\mc F_t)$ and has independent increments with respect to $(\mc F_t)$, i.e.\ $B_t-B_s\perp\mc F_s$ for every $s<t$ (not merely independent of $B_r$, $r\le s$). Every Brownian motion is an $(\mc F_t^B)$-Brownian motion for its own (possibly completed) canonical filtration, by \cref{chap2.1:proposition-characterisations_of_brownian_motion}.
+\end{definition}
+
+\begin{example}[Independent increments, and the Brownian case] \label{chap3.3:example-brownian_martingales} \LG{p.\ 49--51} \\
+Suppose $(Z_t)_{t\ge0}$ is adapted with \textit{independent increments}: $Z_t-Z_s\perp\mc F_s$ for every $s<t$ (e.g.\ an $(\mc F_t)$-Brownian motion above). Writing $\hat Z_t:=Z_t-E[Z_t]$, each of the following is a martingale whenever it is well defined:
+\begin{enumerate}[(i)]
+    \item $\hat Z_t$, if $Z_t\in L^1$ for every $t$;
+    \item $\hat Z_t^2-E[\hat Z_t^2]$, if $Z_t\in L^2$ for every $t$ (expand $\hat Z_t=\hat Z_s+(Z_t-Z_s)$ and use that the cross term has mean $0$ given $\mc F_s$, by independence of the increment);
+    \item $X_t=e^{\theta Z_t}/E[e^{\theta Z_t}]$, for any fixed $\theta$ with $E[e^{\theta Z_t}]<\infty$ for every $t$ (immediate from independence of $Z_t-Z_s$ and $\mc F_s$).
+\end{enumerate}
+Specialising to $Z=B$ an $(\mc F_t)$-Brownian motion from $0$ recovers the three families
+$$B_t, \qquad B_t^2-t, \qquad \exp\Big(\theta B_t-\frac{\theta^2}{2}t\Big),\qquad \theta\in\R,$$
+all with continuous sample paths; the last family is the \textit{exponential martingale} of $B$, central to the Girsanov-type arguments of Chapter 5. The same recipe applied to a Wiener integral $Z_t=\int_0^tf(s)\,dB_s$ ($f\in L^2(\R_+,dt)$) gives martingales $Z_t$, $Z_t^2-\int_0^tf^2\,ds$, $\exp(\theta Z_t-\tfrac{\theta^2}2\int_0^tf^2\,ds)$ --- these too admit continuous modifications, by the general construction of Chapter 5.
+\end{example}
+\begin{trap}
+Independence of increments alone is not enough to get a \emph{continuous} modification: a Poisson process $N$ with rate $\lambda$ also has independent increments, so $N_t-\lambda t$, $(N_t-\lambda t)^2-\lambda t$ and $\exp(\theta N_t-\lambda t(e^\theta-1))$ are martingales by exactly the same computation --- but none of them has a continuous modification, since $N$ itself jumps. Continuity of the exponential martingale above is a genuine extra feature of Brownian motion, not a free consequence of the independent-increments construction.
+\end{trap}
+
+\begin{proposition}[Doob's maximal and $L^p$ inequalities] \label{chap3.3:proposition-maximal_and_doob_Lp_inequality} \LG{Proposition 3.15} \\
+\begin{enumerate}[(i)]
+    \item If $X$ is a supermartingale with right-continuous paths, then for every $t>0$ and $\lambda>0$,
+    $$\lambda\,P\Big(\sup_{0\le s\le t}|X_s|>\lambda\Big)\le E[|X_0|]+2E[|X_t|].$$
+    \item If $X$ is a martingale with right-continuous paths, then for every $t>0$ and $p>1$,
+    $$E\Big[\sup_{0\le s\le t}|X_s|^p\Big]\le\Big(\frac{p}{p-1}\Big)^pE[|X_t|^p].$$
+\end{enumerate}
+\end{proposition}
+\begin{proofidea}
+Fix a countable dense $D\subseteq\R_+$ with $0,t\in D$, and exhaust $D\cap[0,t]$ by an increasing sequence of finite grids $D_m=\{0=t_0^m<\dots<t_m^m=t\}$. On each $D_m$, $(X_{t_i^m})_i$ is a \emph{discrete-time} (super)martingale, so the discrete maximal/Doob inequalities apply verbatim and give the stated bounds with $\sup_{D_m}$ in place of $\sup_{[0,t]}$. Let $m\to\infty$: $\sup_{D_m}|X_s|\uparrow\sup_{D\cap[0,t]}|X_s|$, so monotone convergence (resp.\ Fatou for (i)) transfers the bounds to the sup over $D\cap[0,t]$. Finally, right-continuity of sample paths together with $t\in D$ gives $\sup_{D\cap[0,t]}|X_s|=\sup_{[0,t]}|X_s|$, since every point of $[0,t]$ is a decreasing limit of points of $D$.
+\end{proofidea}
+
+\begin{proposition}[Upcrossings, and existence of one-sided limits along a dense set] \label{chap3.3:proposition-upcrossing_and_onesided_limits} \LG{Lemma 3.16, combined with the upcrossing bound used in Theorem 3.17} \\
+For $a<b$ and a real function $f$ on a set $I\subseteq\R_+$, let $M_{a,b}^f(I)\in\N\cup\{\infty\}$ be the largest $k$ such that $f$ crosses from $\le a$ to $\ge b$ at least $k$ times on $I$ (formally: there exist $s_1<t_1<\dots<s_k<t_k$ in $I$ with $f(s_i)\le a\le b\le f(t_i)$ for every $i$). If $X$ is a supermartingale and $D$ is a countable dense subset of $\R_+$, the discrete-time Doob upcrossing inequality applied along finite grids exhausting $D\cap[0,T]$ (exactly as in \cref{chap3.3:proposition-maximal_and_doob_Lp_inequality}) gives, for every rational $a<b$ and $T\in D$,
+$$E\big[M_{a,b}^X(D\cap[0,T])\big]\le\frac{1}{b-a}E[(X_T-a)^-]<\infty.$$
+Consequently, almost surely, $M_{a,b}^X(D\cap[0,T])<\infty$ simultaneously for every rational $a<b$ and every $T\in D$. A path with finitely many upcrossings of every rational level, on every bounded subinterval of $D$, cannot oscillate: it has a right-limit $X_{t+}:=\lim_{s\downarrow t,\,s\in D}X_s$ at every $t\ge0$ and a left-limit $X_{t-}:=\lim_{s\uparrow t,\,s\in D}X_s$ at every $t>0$, and $t\mapsto X_{t+}$ is càdlàg.
+\end{proposition}
+\begin{proofidea}
+The finite-upcrossing bound is the content cited above (a purely analytic fact about real sequences, not reproved here). Given it, suppose $f:D\to\R$ fails to have a right-limit at some $t$: then $\limsup_{s\downarrow t}f(s)>\liminf_{s\downarrow t}f(s)$, so $f$ crosses every level $a<b$ strictly between these two values infinitely often on $D\cap(t,t+\epsilon)$ for every $\epsilon>0$, i.e.\ $M_{a,b}^f(D\cap[0,T])=\infty$ for $T>t$ close to $t$ --- contradicting finiteness. The left-limit argument is symmetric, and càdlàg-ness of $t\mapsto X_{t+}$ is the easy bookkeeping fact that right-limits along a dense set, taken as a function of the base point, are automatically right-continuous with left-limits.
+\end{proofidea}
+
+\begin{theorem}[Regularisation: existence of a càdlàg modification] \label{chap3.3:theorem-cadlag_modification} \LG{Theorems 3.17--3.18} \\
+Let $X$ be a supermartingale. Then, almost surely, $X_{t+}$ and $X_{t-}$ (\cref{chap3.3:proposition-upcrossing_and_onesided_limits}) exist simultaneously at every $t$, $X_{t+}\in L^1$, and
+$$X_t\le E[X_{t+}\mid\mc F_t],$$
+with equality if $t\mapsto E[X_t]$ is right-continuous (in particular if $X$ is a martingale); the process $(X_{t+})_{t\ge0}$ is itself a supermartingale (a martingale, if $X$ is) with respect to $(\mc F_{t+})$.
+
+If moreover $(\mc F_t)$ satisfies the usual conditions (complete and right-continuous) and $t\mapsto E[X_t]$ is right-continuous, then $X$ has a modification with càdlàg sample paths, which is again an $(\mc F_t)$-supermartingale.
+\end{theorem}
+\begin{proofidea}
+\textit{Existence of $X_{t+}$ a.s.:} off a single null set $N$ built from \cref{chap3.3:proposition-upcrossing_and_onesided_limits} (ranging over rational $a<b$ and $T\in D$), every path has right- and left-limits along $D$.
+
+\textit{The inequality and $L^1$ membership:} fix $t$ and a sequence $t_n\downarrow t$ in $D$; running time \emph{backwards} along $(t_n)$ turns $(X_{t_n})_n$ into a \textit{backward} discrete supermartingale (indexed by $\mc F_{t_n}\supseteq\mc F_{t_{n+1}}\supseteq\dots$), which by \cref{chap3.3:proposition-maximal_and_doob_Lp_inequality}-type uniform-$L^1$-bound considerations and the backward martingale convergence theorem converges not just a.s.\ but in $L^1$ to $X_{t+}$. $L^1$-convergence (not merely a.s.) is exactly what lets us pass to the limit inside the conditional expectation in $X_t\le E[X_{t_n}\mid\mc F_t]$ to get $X_t\le E[X_{t+}\mid\mc F_t]$, and equality holds once $E[X_t]=\lim_nE[X_{t_n}]=E[X_{t+}]$ forces equality in that conditional inequality.
+
+\textit{Càdlàg modification:} set $Y_t=X_{t+}$ off the exceptional null set $N$ (and $Y_t=0$ on $N$); $Y$ is càdlàg by \cref{chap3.3:proposition-upcrossing_and_onesided_limits}. Right-continuity of $(\mc F_t)$ makes the $\mc F_{t+}$-measurable $X_{t+}$ already $\mc F_t$-measurable, and completeness absorbs the null set $N\in\mc F_\infty$ into $\mc F_0$, so $Y$ is adapted to $(\mc F_t)$. Finally $X_t=E[X_{t+}\mid\mc F_t]=X_{t+}=Y_t$ a.s.\ (using right-continuity of $t\mapsto E[X_t]$ for the first equality and $\mc F_t$-measurability of $X_{t+}$ for the second), so $Y$ is a modification of $X$ inheriting the supermartingale property.
+\end{proofidea}
+\begin{trap}
+Both hypotheses are load-bearing. Without right-continuity of $(\mc F_t)$: take $\Omega=\{\pm1\}$ with $P(\pm1)=\tfrac12$, $\xi(\omega)=\omega$, and $X_t=0$ for $t\le1$, $X_t=\xi$ for $t>1$; $X$ is a martingale for its own canonical filtration (which has $\mc F_{1+}^X\ne\mc F_1^X$, so is \emph{not} right-continuous), yet no modification of $X$ can be right-continuous at $t=1$. Without right-continuity of $t\mapsto E[X_t]$: take $X_t=f(t)$ deterministic and non-increasing but not right-continuous; again no càdlàg modification exists.
+\end{trap}
+
+\begin{theorem}[A.s.\ convergence of $L^1$-bounded supermartingales] \label{chap3.3:theorem-as_convergence_L1_bounded} \LG{Theorem 3.19} \\
+Let $X$ be a supermartingale with right-continuous sample paths such that $\sup_{t\ge0}E[|X_t|]<\infty$. Then $X_t\to X_\infty$ a.s.\ as $t\to\infty$, for some $X_\infty\in L^1$.
+\end{theorem}
+\begin{proofidea}
+Exactly the upcrossing argument of \cref{chap3.3:proposition-upcrossing_and_onesided_limits}, but now letting $T\to\infty$ along $D$ as well: $L^1$-boundedness gives $\sup_TE[(X_T-a)^-]<\infty$, so $E[M_{a,b}^X(D)]<\infty$ for every rational $a<b$, ruling out infinite oscillation of the whole path (not just locally), so $X_t$ converges a.s.\ along $D$ to some limit in $[-\infty,\infty]$; Fatou's lemma rules out $\pm\infty$ and gives $X_\infty\in L^1$; right-continuity then removes the restriction to $t\in D$.
+\end{proofidea}
+\begin{remark}
+This a.s.\ limit need not be an $L^1$ limit --- that refinement, and its equivalence with uniform integrability and with $X$ being \textit{closed}, is \cref{chap3.4:theorem-martingale_equivalence_of_L1_convergence} below, which is the martingale case ($X$ bounded in $L^1$ is then automatic from closedness).
+\end{remark}
 \begin{quizbox} Doob $L^2$: $E[\sup_{s\le t}X_s^2]\le4E[X_t^2]$. UI $\iff$ closed martingale. \end{quizbox}
 
 \subsection{Optional stopping theorems}\label{sec:ost}
+Having a candidate limit $X_\infty$ for a martingale (\cref{chap3.3:theorem-as_convergence_L1_bounded}) lets us finally make sense of $X_T$ for \emph{any} stopping time $T$, including $T=\infty$: once $X_t\to X_\infty$ a.s., set $X_T:=\ind_{\{T<\infty\}}X_T+\ind_{\{T=\infty\}}X_\infty$. This agrees with \cref{chap3.2:proposition-progressive_at_stopping_time} on $\{T<\infty\}$, and $X_T$ remains $\mc F_T$-measurable on all of $\Omega$ (the extra piece $\ind_{\{T=\infty\}}X_\infty$ is $\mc F_T$-measurable since $\{T=\infty\}\in\mc F_T$ and $X_\infty\in\mc F_\infty$, intersected appropriately). We call a martingale $X$ \textit{closed} if $X_t=E[Z\mid\mc F_t]$ for every $t$, for some fixed $Z\in L^1$ --- i.e.\ it is a Doob martingale in the sense of \cref{chap3.3:definition-sub_super_martingale}.
 
-\begin{theorem}[Equivalence of $L^1$ convergence of martingales]\label{chap3.4:theorem-martingale_equivalence_of_L1_convergence}
-\LG{Theorem 3.21} \\
-\todo{Equivalence: $X$ closed, $X$ is UI and $X_t \to X$ in $L^1$.}
+\begin{theorem}[Closed $\iff$ UI $\iff$ $L^1$-convergent] \label{chap3.4:theorem-martingale_equivalence_of_L1_convergence} \LG{Theorem 3.21} \\
+Let $X$ be a martingale with right-continuous sample paths. The following are equivalent:
+\begin{enumerate}[(i)]
+    \item $X$ is closed;
+    \item $(X_t)_{t\ge0}$ is uniformly integrable;
+    \item $X_t$ converges a.s.\ \emph{and} in $L^1$ as $t\to\infty$.
+\end{enumerate}
+When they hold, writing $X_\infty$ for the common limit, $X_t=E[X_\infty\mid\mc F_t]$ for every $t\ge0$.
 \end{theorem}
+\begin{proofidea}
+(i)$\Rightarrow$(ii): the family $\{E[Z\mid\mc G]:\mc G\text{ a sub-}\sigma\text{-field}\}$ is uniformly integrable for fixed $Z\in L^1$ --- a standard closure property of conditional expectations, not special to this setting.
+(ii)$\Rightarrow$(iii): uniform integrability gives $L^1$-boundedness, so \cref{chap3.3:theorem-as_convergence_L1_bounded} gives a.s.\ convergence to some $X_\infty$; uniform integrability upgrades a.s.\ convergence to $L^1$ convergence.
+(iii)$\Rightarrow$(i): pass to the limit $t\to\infty$ in $X_s=E[X_t\mid\mc F_s]$ (valid since conditional expectation is $L^1$-continuous) to get $X_s=E[X_\infty\mid\mc F_s]$, i.e.\ $X$ is closed by $Z=X_\infty$.
+\end{proofidea}
 
-\begin{theorem}[Optional stopping, UI case]\label{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria}
-\LG{Theorem 3.22} \\
-\todo{$S\le T$ s.t., $X$ UI càdlàg: $E[X_T\mid\F_S]=X_S$} 
+\begin{theorem}[Optional stopping, UI case] \label{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria} \LG{Theorem 3.22} \\
+Let $X$ be a uniformly integrable martingale with right-continuous sample paths, and let $S\le T$ be stopping times. Then $X_S,X_T\in L^1$ and
+$$X_S=E[X_T\mid\mc F_S].$$
+In particular $X_S=E[X_\infty\mid\mc F_S]$ for every stopping time $S$, and $E[X_S]=E[X_\infty]=E[X_0]$.
 \end{theorem}
+\begin{proofidea}
+Discretise with the dyadic approximants $S_n\downarrow S$, $T_n\downarrow T$ of \cref{chap3.2:properties-algebra_of_stopping_times} (note $S_n\le T_n$ since $S\le T$). At fixed $n$, $2^nS_n,2^nT_n$ are \emph{discrete} stopping times for the discrete filtration $(\mc F_{k2^{-n}})_k$, and $(X_{k2^{-n}})_k$ is a discrete UI martingale, so the discrete optional stopping theorem gives $X_{S_n}=E[X_{T_n}\mid\mc F_{S_n}]$ directly. Right-continuity of paths gives $X_{S_n}\to X_S$ and $X_{T_n}\to X_T$ a.s.; the discrete theorem applied again shows $X_{S_n}=E[X_\infty\mid\mc F_{S_n}]$ for every $n$, so $(X_{S_n})_n$ is itself uniformly integrable, upgrading the a.s.\ convergence to $L^1$. Passing to the $L^1$-limit in $E[\ind_AX_{S_n}]=E[\ind_AX_{T_n}]$ for $A\in\mc F_S\subseteq\mc F_{S_n}$ gives $E[\ind_AX_S]=E[\ind_AX_T]$ for every $A\in\mc F_S$, which is the claim.
+\end{proofidea}
 
-\begin{theorem}[Optional stopping, bounded stopping times]\label{chap3.4:theorem-optional_stopping_theorem_for_martingales_bounded_stopping_times}
-\LG{Theorem 3.23} \\
-\todo{$S \leq T$ with $S,T$ bounded stopping times: $E[X_T\mid\F_S]=X_S$} 
+\begin{theorem}[Optional stopping, bounded stopping times] \label{chap3.4:theorem-optional_stopping_theorem_for_martingales_bounded_stopping_times} \LG{Theorem 3.23} \\
+Let $X$ be a martingale with right-continuous sample paths (not assumed UI), and let $S\le T$ be \emph{bounded} stopping times, say $S,T\le a$. Then $X_S,X_T\in L^1$ and $X_S=E[X_T\mid\mc F_S]$.
 \end{theorem}
+\begin{proofidea}
+Boundedness is exactly what lets us discard the UI hypothesis: the process $X^a=(X_{t\wedge a})_{t\ge0}$ is closed by $X_a\in L^1$ (take $Z=X_a$), hence UI by \cref{chap3.4:theorem-martingale_equivalence_of_L1_convergence}. Since $S,T\le a$, $X_S=X^a_S$ and $X_T=X^a_T$, so \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria} applied to $X^a$ gives the result.
+\end{proofidea}
 
-\begin{corollary}\label{chap3.4:corollary-stopped_martingale_is_martingale}
-\LG{Corollary 3.24} \\
-\todo{bounded stopping times; stopped martingale $X^T$ is a martingale} \end{corollary}
-\begin{proposition}[Supermartingale version] \todo{nonnegative supermartingale} \end{proposition}
-\begin{example}[Applications] \todo{exit of $(-a,b)$: $\PP(T_{-a}<T_b)=\tfrac{b}{a+b}$, $\E T=ab$; $E[e^{-\lambda T_a}]=e^{-a\sqrt{2\lambda}}$} \end{example}
+\begin{corollary}[The stopped process is again a martingale] \label{chap3.4:corollary-stopped_martingale_is_martingale} \LG{Corollary 3.24} \\
+Let $X$ be a martingale with right-continuous sample paths and $T$ a stopping time.
+\begin{enumerate}[(i)]
+    \item $X^T=(X_{t\wedge T})_{t\ge0}$ is again a martingale.
+    \item If moreover $X$ is uniformly integrable, then $X^T$ is a uniformly integrable martingale, and $X_{t\wedge T}=E[X_T\mid\mc F_t]$ for every $t\ge0$.
+\end{enumerate}
+\end{corollary}
+\begin{proofidea}
+(ii): $t\wedge T$ is a stopping time (\cref{chap3.2:properties-algebra_of_stopping_times}), so \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria} applied to $S=t\wedge T\le T$ gives $X_{t\wedge T}=E[X_T\mid\mc F_{t\wedge T}]=E[X_T\mid\mc F_t]$ for $A\in\mc F_t$, splitting the test set as $A\cap\{T\le t\}$ (where $X_{t\wedge T}=X_T$ trivially) and $A\cap\{T>t\}\in\mc F_t\cap\mc F_T=\mc F_{t\wedge T}$ (using $\mc F_{t\wedge T}=\mc F_t\cap\mc F_T$, \cref{chap3.2:properties-algebra_of_stopping_times}) to reduce to the defining property of $\mc F_{t\wedge T}$-conditional expectation. (i) follows by applying (ii) to the UI martingale $X^a=(X_{t\wedge a})_{t\ge0}$ for each fixed $a\ge0$, exactly as in \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_bounded_stopping_times}.
+\end{proofidea}
+
+\begin{proposition}[Supermartingale version] \label{chap3.4:proposition-optional_stopping_nonnegative_supermartingales} \LG{Theorem 3.25} \\
+Let $Z$ be a nonnegative supermartingale with right-continuous sample paths (automatically bounded in $L^1$, hence a.s.\ convergent to some $Z_\infty$ by \cref{chap3.3:theorem-as_convergence_L1_bounded}). Let $U\le V$ be stopping times. Then $Z_U,Z_V\in L^1$ and
+$$Z_U\ge E[Z_V\mid\mc F_U].$$
+\end{proposition}
+\begin{proofidea}
+First for \emph{bounded} $U\le V\le p$: discretise exactly as in \cref{chap3.4:theorem-optional_stopping_theorem_for_martingales_UI_criteria} with bounded dyadic approximants $U_n\downarrow U$, $V_n\downarrow V$; the discrete optional stopping theorem for supermartingales gives $E[Z_{U_n}]\ge E[Z_{V_n}]$ and $Z_{U_n}\ge E[Z_{V_n}\mid\mc F_{U_n}]$ at each $n$, and a \emph{backward} supermartingale argument (as in \cref{chap3.3:theorem-cadlag_modification}) upgrades the a.s.\ convergence $Z_{U_n}\to Z_U$, $Z_{V_n}\to Z_V$ to $L^1$-convergence, so the inequality passes to the limit. For general (possibly unbounded or infinite) $U\le V$: apply the bounded case to $U\wedge p\le V\wedge p$ and let $p\to\infty$, using Fatou's lemma for integrability and the indicator device $U^A$ of \cref{chap3.2:properties-algebra_of_stopping_times}-style localisation (test against $A\in\mc F_U$ intersected with $\{U\le p\}$ and $\{U>p\}\subseteq\{V>p\}$ separately, then let $p\to\infty$) to recover the full inequality on $\mc F_U$.
+\end{proofidea}
+
+\begin{example}[Applications to Brownian hitting and exit times] \label{chap3.4:example-ost_applications} \LG{pp.\ 62--64} \\
+Let $B$ be a real Brownian motion from $0$ and, for $a\in\R$, $T_a=\inf\{t\ge0:B_t=a\}$ (a.s.\ finite, \cref{chap2.3:proposition-sup_inf_and_hitting_times}).
+\begin{enumerate}[(i)]
+    \item \textit{Exit of an interval.} For $a,b>0$, let $T=T_{-a}\wedge T_b$ be the exit time of $(-a,b)$. Applying \cref{chap3.4:corollary-stopped_martingale_is_martingale} to the martingale $B$ --- the stopped process $B^T$ is bounded by $a\vee b$, hence UI --- gives $0=E[B_0]=E[B_T]=bP(T_b<T_{-a})-aP(T_{-a}<T_b)$, and together with $P(T_{-a}<T_b)+P(T_b<T_{-a})=1$ this yields
+    $$P(T_{-a}<T_b)=\frac{b}{a+b}.$$
+    Applying the same corollary to $M_t=B_t^2-t$ (also a martingale, \cref{chap3.3:example-brownian_martingales}) gives $E[B_{t\wedge T}^2]=E[t\wedge T]$; letting $t\to\infty$ (monotone convergence on the right, dominated convergence on the left since $B_{t\wedge T}^2\le a^2\vee b^2$) gives
+    $$E[T]=ab.$$
+    \item \textit{Laplace transform of $T_a$, $a>0$.} For $\lambda>0$, set $\theta=\sqrt{2\lambda}>0$ and apply \cref{chap3.4:corollary-stopped_martingale_is_martingale} to the exponential martingale $N^\theta_t=\exp(\theta B_t-\tfrac{\theta^2}2t)$ stopped at $T_a$: $N^\theta_{t\wedge T_a}$ is bounded above by $e^{\theta a}$ (since $\theta>0$ and $B_{s\wedge T_a}\le a$), hence UI, and $E[N^\theta_{T_a}]=E[N^\theta_0]=1$, i.e.\ $e^{\theta a}E[e^{-\lambda T_a}]=1$, giving
+    $$E[e^{-\lambda T_a}]=e^{-a\sqrt{2\lambda}}.$$
+\end{enumerate}
+\end{example}
 \begin{quizbox} Every application in the example: be fast at choosing the right martingale and justifying the limit (dominated/bounded convergence). \end{quizbox}
 \begin{trap} $E[B_{T_a}]=a\ne0$: OST fails without UI/boundedness. \end{trap}
