@@ -8,25 +8,122 @@
 \begin{remark} \todo{fdd determine the law; Gaussian white noise from pre-BM} \end{remark}
 
 \subsection{Continuity of sample paths}
-\begin{definition}[Modification vs.\ indistinguishable] \todo{} \end{definition}
-\begin{theorem}[Kolmogorov's lemma] \todo{$\E|X_s-X_t|^q\le C|t-s|^{1+\varepsilon}$ $\Rightarrow$ $\alpha$-Hölder modification for $\alpha<\varepsilon/q$} \end{theorem}
-\begin{proofidea} \todo{dyadic chaining + Borel--Cantelli} \end{proofidea}
-\begin{corollary} \todo{BM exists; paths locally $\alpha$-Hölder for all $\alpha<1/2$} \end{corollary}
-\begin{definition}[Brownian motion, Wiener measure, canonical construction] \todo{} \end{definition}
-\begin{quizbox} Statement of Kolmogorov + why $q$ large gives any $\alpha<1/2$ for BM. \end{quizbox}
+We start with a general definition of sample paths and what they mean. Let $E$ be a metric space, with metric $d$ equipped with its Borel $\sigma$-algebra.
+\begin{definition}\label{chap2.2:definition-sample_paths_of_process}
+\LG{Definition 2.6} \\
+Let $(X_t)_{t \in T}$ be a random process indexed by $T$ with values in a metric space equipped with its Borel $\sigma$-algebra. The \textit{sample paths} of $X$ are the mappings $T \ni t \mapsto X_t(\omega)$ obtained when fixing $\omega \in \Omega$. The sample paths of $X$ thus form a collection of mappings from $T$ into $E$ indexed by $\omega \in \Omega$.    
+\end{definition}
+Let $B=(B_t)_{t \geq 0}$ be a pre-Brownian motion. At this present stage in Le Gall, we have no information about the sample paths of $B$: we cannot assert whether these are continuous or even measurable. By modifying the process $B$ we can ensure that sample paths are continuous.
+
+\begin{definition}[Modification vs.\ indistinguishable]\label{chap2.2:definition-modification_and_indistinguishable}
+\LG{Definition 2.7 and 2.8}\\
+Let $X=(X_t)_{t \in T}$ and $\tilde{X}=(\tilde{X}_t)_{t \in T}$ be two random processes indexed by the same index set $T$ and with values in the same metric space $E$. We say that $\tilde{X}$ is a \textit{modification} of $X$ if
+$$\forall t \in T: \quad P(\tilde{X}_t=X_t)=1$$
+This implies that $\tilde{X}$ has the same finite-dimensional marginals as $X$\footnote{Thus, if $X$ is a pre-Brownian motion, $\tilde{X}$ is also a pre-Brownian motion. On the other hand, sample paths of $\tilde{X}$ may have very different properties from those of $X$. For instance, considering the case where $T = \R_+$ and $E=\R$, it is easy to construct examples where all the sample paths of $X$ are continuous whereas all sample paths of $\tilde{X}$ are discontinuous - one could for example let $\tilde{X}_t=X_t\cdot 1_{\mb{Q}}(t)$, where $X_t$ is some process that is almost surely not equal to 0, making it impossible for $\tilde{X}$ to be continuous}.
+We say that the process $\tilde{X}$ is \textit{indistinguishable} from $X$ if there exists a negligible subset $N$ of $\Omega$ such that\footnote{One can also formulate this as $P(\forall t \in T: \tilde{X}_t = X_t)=1$, but the set may not be measurable in general, so this is slightly wrong.}
+$$\forall \omega \in \Omega \setminus N, \forall t \in T: \quad \tilde{X}_t(\omega)=X_t(\omega).$$
+\end{definition}
+If $\tilde{X}$ is indistinguishable from $X$ then $\tilde{X}$ is a modification of $X$. The notion of indistinguishability is much stronger: Two indistinguishable processes have almost surely the same sample paths. Being a modification is not enough in general to imply indistinguishability: the null set where $\{\tilde{X}_t \neq X_t\}$ may depend on $t$, where as indistinguishability forces the null set where the processes do not almost surely agree to not depend on $t$. An uncountable infinite union of null sets may not in general be measurable. The following remark shows that continuity can be the missing piece
+\begin{remark}\label{chap2.2:remark-continuity_makes_modifcation_equal_to_indistinguishability}
+\LG{page 23}\\
+Let $I$ be an interval of $\R$ and let $X=(X_t)_{t \in I}$ and $\tilde{X}=(\tilde{X}_t)_{t \in I}$ be random processes. Let $N$ and $\tilde{N}$ be negligible measurable sets of $\Omega$. If the sample paths of $X$ and $\tilde{X}$ are continuous on $\Omega \setminus N$ and $\Omega \setminus \tilde{N}$ respectively, then $\tilde{X}$ is a modification of $X$ if and only if $\tilde{X}$ is indistinguishable from $X$.    
+\end{remark}
+\begin{proof}
+It is clear that indistinguishability implies a modification exists by the preceding observation.
+If $\tilde{X}$ is a modification of $X$, we have almost surely that $X_t = \tilde{X}$ for every $t \in I \cap \mb{Q}$, because we can discard a countable union of negligible a countable union of negligible sets. Then, by a continuity argument, $X_t=\tilde{X}_t$ almost surely for every $t \in I$.
+\end{proof}
+
+\begin{theorem}[Kolmogorov's continuity criterion] \label{chap2.2:theorem-kolmogorovs_continuity_criterion}
+\LG{Theorem 2.9} \\
+Let $X=(X_t)_{t \in I}$ be a random process indexed by a bounded interval $I$ of $\R$, and taking values in a complete metric space $(E,d)$. Assume that there exists reals $q, \epsilon, C >0$ such that, for every $s,t \in I$,
+\begin{equation}\label{chap2.2:equation-kolmogorovs_continuity_criterion}
+E[d(X_s,X_t)^q] \leq C|t-s|^{1+\epsilon}.    
+\end{equation}
+Then, there exists a modification $\tilde{X}$ og $X$ whose sample paths are Hölder continuous with exponent $\alpha$ for every $\alpha \in (0, \frac{\epsilon}{q})$. This means that, for every $\omega \in \Omega$ and every $\alpha \in (0,\frac{\epsilon}{q})$, there exists a finite constant $C_\alpha(\omega)$ such that, for every $s,t \in I$,
+$$d(\tilde{X}_s(\omega), \tilde{X}_t(\omega)) \leq C_\alpha(\omega)|t-s|^{\alpha}$$.
+In particular, $\tilde{X}$ is a modification of $X$ with continuous sample paths, and by Remark \ref{chap2.2:remark-continuity_makes_modifcation_equal_to_indistinguishability} such a modification is unique up to indistinguishability.
+\end{theorem}
+
+
+Now we define the work-horse of the whole book: Brownian motion
+\begin{definition}\label{chap2.2:definition-brownian_motion}
+\LG{Definition 2.12} \\
+A process $(B_t)_{t \geq0}$ is a (real) Brownian motion (started from 0) if:
+\begin{enumerate}[(i)]
+    \item $(B_t)_{t \geq 0}$ is a pre-Brownian motion.
+    \item All sample paths of $B$ are continuous
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}\label{chap2.2:corollary-brownian_motion_exists}
+\LG{Corollary 2.11} \\
+Let $B = (B_t)_{t \geq 0}$ be a pre-Brownian, which exists by Proposition \ref{chap1.4:proposition-existence_of_gaussian_white_noise} using $f = 1_{[0,t]}$. Then Brownian motion exists in the following sense:
+The process B has a modification whose sample paths are continuous, and even locally Hölder continuous with exponent $\frac{1}{2}-\delta$ for every $\delta \in (0,\frac{1}{2})$.
+\end{corollary}
+\begin{proof}
+If $s<t$, then $B_t-B_s \sim \Norm{0,}{t-s}$, and thus $B_t-B_s$ has the same law as $\sqrt{t-s}U$, where $U \sim \Norm{0}{1}$. Consequently, for every $q >0$,
+$$E[|B_t-B_s|^q]=(t-s)^{1/2}E[|U|^q]=C_q(t-s)^{q/2}$$
+where $C_q=E[|U|^q]<\infty$. Taking $q > 2$ we can apply Kolmogorovs continuity criterion, Theorem \ref{chap2.2:theorem-kolmogorovs_continuity_criterion}, with $\epsilon = \frac{q}{2}-1$. It follows that $B$ has a modification (and hence is indistinguishable by Remark \ref{chap2.2:remark-continuity_makes_modifcation_equal_to_indistinguishability}, whose sample paths are locally Hölder continuous with exponent $\alpha$ for every $\alpha < \frac{1}{2}-\frac{1}{q}$. Taking $q$ arbitrarily large we can take $\alpha$ arbitrarily close to $\frac12$.
+\end{proof}
+
+
+\begin{definition}[Wiener measure, canonical construction] \todo{} \end{definition}
+\begin{quizbox} Statement of Kolmogorov + why $q$ large gives any $\alpha<1/2$ for BM. 
+\todo{Finished quizbox}
+\end{quizbox}
 
 \subsection{Properties of Brownian sample paths}
-\begin{proposition}[Invariance properties] \todo{symmetry, scaling, simple Markov $B_{t+s}-B_s$, time inversion $tB_{1/t}$} \end{proposition}
-\begin{theorem}[Blumenthal's 0--1 law] \todo{$\F_{0+}$ is trivial} \end{theorem}
-\begin{corollary} \todo{$\sup_{s\le\varepsilon}B_s>0$, $\inf<0$ a.s.; $T_a<\infty$; $\limsup B_t=+\infty$; infinitely many zeros near $0$} \end{corollary}
-\begin{proposition} \todo{not monotone on any interval; nowhere differentiable (remark)} \end{proposition}
+In this section, we investigate properties of sample paths of Brownian motion. We fix a Brownian motion $(B_t)_{t \geq 0}$. For every $t \geq 0$, we define the filtration like in Definition \ref{chap3.1:definition-filtration}
+$$\mc{F}_t=\sigma(B_s, s \leq t)$$
+We also set
+$$\mc{F}_{0+}=\bigcap_{s > 0}\mc{F}_s$$
+
+\begin{theorem}[Blumenthal's 0--1 law] \label{chap2.3:theorem-blumenthal_0_1_law}
+\LG{Theorem 2.13} \\
+The $\sigma$-algebra $\mc{F}_{0+}$ is trivial, in the sense that $P(A)\in \{0,1\}$ for every $A \in \mc{F}_{0+}$.
+\end{theorem}
+
+\begin{proposition}[Invariance properties] \todo{symmetry, scaling, simple Markov $B_{t+s}-B_s$, time inversion $tB_{1/t}$. These might be  in the Pre-brownian motion section. Move them there!} 
+\end{proposition}
+
+\begin{proposition}\todo{add label}
+\LG{Proposition 2.14} \\
+\begin{enumerate}
+\item We have, a.s. for every $\epsilon>0$,
+    $$\sup_{0 \leq s \leq \epsilon} B_s>0, \quad \inf_{0 \leq s \leq \epsilon} B_s<0$$
+\item For every $a \in \R$, let $T_a=\inf\{t \geq 0|B_t=a\}$ (with the convention $\inf\emptyset=\infty$). Then,
+$$\mathrm{a.s.}, \forall a \in \R: \quad T_a < \infty$$
+Consequently, we have a.s.
+$$\limsup_{t \to \infty}B_t=+\infty, \quad \liminf_{t \to \infty}B_t=-\infty$$
+\end{enumerate}
+\end{proposition}
+\todo{Add remark measurability of sup}
+
+\begin{corollary}\todo{add label}
+\LG{Corollary 2.15} \\
+Almost surely, the function $t \mapsto B_t$ is not monotone on any non-trivial interval.
+\end{corollary} 
+
+
+
 \begin{proposition}[Quadratic variation of BM] \label{chap2.3:proposition-quadratic_variation_of_brownian_motion} \LG{Prop 2.16} \\
-\todo{$\sum (B_{t_i}-B_{t_{i-1}})^2\to t$ in $L^2$ along mesh $\to0$} \end{proposition}
-\begin{proofidea} \todo{variance computation: independent centred terms, $\Var \le 2t\cdot\text{mesh}$} \end{proofidea}
+Let $0 = t_0^n<t_1^n<...<t_{p_n}^n=t$ be a sequence of subdivisions of $[0,t]$ whose mesh tends to $0$ (i.e. $\sup_{1 \leq i \leq p_n}(t_i^n-t_{i-1}^n) \to 0$ as $n \to \infty$). Then
+$$\lim_{n \to \infty} \sum_{i=1}^{p_n}(B_{t_i^n}-B_{t_{i-1}^n})^2=t$$
+in $L^2$.
+\end{proposition}
+
+\begin{corollary}\todo{add label}
+\LG{Corollary 2.17} \\
+Almost surely, the function $t \mapsto B_t$ has infinite variation on any non-trivial interval.
+\end{corollary}
+
+
 \begin{quizbox} Blumenthal and its corollaries; the $L^2$ QV computation. \end{quizbox}
 \begin{usedin} QV of BM $\to$ \cref{sec:qv} (general $\br{M}$), Itô's formula, realised volatility. \end{usedin}
 
 \subsection{Strong Markov property}
+\todo{Explain the reflection principle in great details and maybe in more context used later with barrier options}
+
 \begin{definition} \todo{stopping time w.r.t.\ canonical filtration (preview of Ch.\ 3)} \end{definition}
 \begin{theorem}[Strong Markov property] \todo{$B^{(T)}_t = \ind_{\{T<\infty\}}(B_{T+t}-B_T)$ is BM indep.\ of $\F_T$} \end{theorem}
 \begin{proofidea} \todo{discretise $T_n=\lceil 2^nT\rceil/2^n$, use simple Markov, pass to limit by continuity} \end{proofidea}
