@@ -197,7 +197,10 @@ Then, under $P(\cdot\mid T<\infty)$, the process $(B_t^{(T)})_{t\ge0}$ is a Brow
 \end{theorem}
 \begin{proofidea} \LG{pp.\ 34--35} \\
 Assume first $T<\infty$ a.s. For $n\ge1$ let $[T]_n$ be the smallest number of the form $k2^{-n}$ that is $\ge T$, so $[T]_n\downarrow T$. Fix $A\in\mathcal F_T$, times $0\le t_1<\dots<t_p$, and bounded continuous $F:\R^p\to\R$. Since $A\cap\{(k-1)2^{-n}<T\le k2^{-n}\}$ is $\mathcal F_{k2^{-n}}$-measurable (it equals $(A\cap\{T\le k2^{-n}\})\cap\{T\le(k-1)2^{-n}\}^c$), the simple Markov property \ref{chap2.1:proposition-invariance_properties}(iii) applied at the deterministic time $k2^{-n}$ gives
-$$E\big[\ind_{A\cap\{(k-1)2^{-n}<T\le k2^{-n}\}}F(B_{k2^{-n}+t_1}-B_{k2^{-n}},\dots,B_{k2^{-n}+t_p}-B_{k2^{-n}})\big]=P\big(A\cap\{(k-1)2^{-n}<T\le k2^{-n}\}\big)E[F(B_{t_1},\dots,B_{t_p})].$$
+\begin{align*}
+&E\big[\ind_{A\cap\{(k-1)2^{-n}<T\le k2^{-n}\}}F(B_{k2^{-n}+t_1}-B_{k2^{-n}},\dots,B_{k2^{-n}+t_p}-B_{k2^{-n}})\big] \\
+&\qquad=P\big(A\cap\{(k-1)2^{-n}<T\le k2^{-n}\}\big)\,E[F(B_{t_1},\dots,B_{t_p})].
+\end{align*}
 Summing over $k\ge0$ gives the identity with $[T]_n$ in place of $T$ on the left. As $n\to\infty$, $[T]_n\downarrow T$ and continuity of $B$ gives $B^{([T]_n)}_{t_i}\to B^{(T)}_{t_i}$ a.s.\ for each $i$, so dominated convergence (recall $F$ is bounded) transfers the identity to $T$:
 $$E\big[\ind_AF(B^{(T)}_{t_1},\dots,B^{(T)}_{t_p})\big]=P(A)\,E[F(B_{t_1},\dots,B_{t_p})].$$
 Taking $A=\Omega$ shows $B^{(T)}$ has the finite-dimensional marginals of a Brownian motion; its sample paths are continuous since $B$'s are; and the identity for general $A\in\mathcal F_T$ shows every finite-dimensional vector of $B^{(T)}$, hence $B^{(T)}$ itself, is independent of $\mathcal F_T$. The case $P(T=\infty)>0$ is identical after restricting everywhere to $\{T<\infty\}$.
@@ -210,7 +213,10 @@ In particular, $S_t\eqd|B_t|$.
 \end{theorem}
 \begin{proofidea} \LG{pp.\ 35--36} \\
 Apply the strong Markov property at $T_a=\inf\{t\ge0:B_t=a\}$, which is a.s.\ finite by \cref{chap2.3:proposition-sup_inf_and_hitting_times}. On $\{T_a\le t\}=\{S_t\ge a\}$ we have $B_t-a=B^{(T_a)}_{t-T_a}$, and $(T_a,B^{(T_a)})$ has the same law as $(T_a,-B^{(T_a)})$, since $B^{(T_a)}$ is a Brownian motion independent of $T_a$ and $-B^{(T_a)}$ is again a Brownian motion with the same law. Rewriting $\{S_t\ge a,B_t\le b\}$ in terms of $(T_a,B^{(T_a)})$ and swapping the sign of $B^{(T_a)}$ therefore gives
-$$\PP(S_t\ge a,B_t\le b)=\PP\big(T_a\le t,\, B^{(T_a)}_{t-T_a}\le b-a\big)=\PP\big(T_a\le t,\,-B^{(T_a)}_{t-T_a}\le b-a\big)=\PP\big(T_a\le t,\,B_t\ge 2a-b\big)=\PP(B_t\ge2a-b),$$
+\begin{align*}
+\PP(S_t\ge a,B_t\le b) &=\PP\big(T_a\le t,\, B^{(T_a)}_{t-T_a}\le b-a\big)=\PP\big(T_a\le t,\,-B^{(T_a)}_{t-T_a}\le b-a\big) \\
+&=\PP\big(T_a\le t,\,B_t\ge 2a-b\big)=\PP(B_t\ge2a-b),
+\end{align*}
 where the last equality holds because $b\le a$ forces $\{B_t\ge 2a-b\}\subseteq\{S_t\ge a\}=\{T_a\le t\}$ a.s. For the last claim, take $b=a$ and split
 $$\PP(S_t\ge a)=\PP(S_t\ge a,B_t\ge a)+\PP(S_t\ge a,B_t\le a)=\PP(B_t\ge a)+\PP(B_t\ge a)=\PP(|B_t|\ge a),$$
 using $\{B_t\ge a\}\subseteq\{S_t\ge a\}$ for the first term.
