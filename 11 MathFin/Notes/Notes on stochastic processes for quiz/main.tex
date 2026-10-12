@@ -20,15 +20,17 @@
             citecolor = blue,
             anchorcolor = blue]{hyperref}
 \usepackage[capitalise,nameinlink]{cleveref}
-% The installed cleveref is v0.21.4 (2018), so the LaTeX kernel applies an old
-% compatibility "first aid" patch for it. That patch's \label hook recomputes
-% the cross-reference type from the raw (shared) theorem counter name instead
-% of the environment name, so every \cref to a theorem-like environment that
-% shares the `definition' counter (theorem, proposition, lemma, corollary,
-% remark, counterexample, example) renders as "Definition" regardless of its
-% real type. Removing just that hook action restores cleveref's own (correct)
-% behaviour; everything else the patch does (plain \ref, \pageref, etc.) is
-% unaffected. Safe to delete once cleveref is updated past 2018/03/27 v0.21.4.
+% cleveref's last upstream release is v0.21.4 (2018/03/27) -- there is no
+% newer version to update to -- and the LaTeX kernel applies an old
+% compatibility "first aid" patch to every cleveref at or below that version.
+% That patch's \label hook recomputes the cross-reference type from the raw
+% (shared) theorem counter name instead of the environment name, so every
+% \cref to a theorem-like environment that shares the `definition' counter
+% (theorem, proposition, lemma, corollary, remark, counterexample, example)
+% renders as "Definition" regardless of its real type. Removing just that
+% hook action restores cleveref's own (correct) behaviour; everything else
+% the patch does (plain \ref, \pageref, etc.) is unaffected. This is a
+% permanent fix, not a stopgap -- keep it.
 \RemoveFromHook{label}[firstaid/cleveref]
 \usepackage{tikz,booktabs,array}
 \usetikzlibrary{positioning,arrows.meta}
