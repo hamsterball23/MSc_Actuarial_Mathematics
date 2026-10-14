@@ -1,0 +1,395 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[most]{tcolorbox}
+\usepackage[shortlabels]{enumitem}
+\setlist{nosep}
+\usepackage{fancyhdr,lastpage}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathcal F}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\br}[1]{\langle #1\rangle}
+
+\newtcolorbox[auto counter]{result}[2][]{%
+  colback=blue!3,colframe=blue!45!black,
+  title={Result~\thetcbcounter: #2},fonttitle=\bfseries,
+  breakable,enhanced,boxrule=0.6pt,#1}
+\newtcolorbox{sourcebox}{colback=gray!6,colframe=gray!55!black,
+  boxrule=0.4pt,boxsep=2pt,left=6pt,right=6pt,top=3pt,bottom=3pt,
+  fontupper=\small,breakable}
+\newtcolorbox{trap}{colback=orange!5,colframe=orange!60!black,
+  title=Common trap,fonttitle=\bfseries\small,fontupper=\small,breakable}
+
+\newcommand{\used}[2]{\begin{sourcebox}\textbf{First appears:} #1 \\ \textbf{Reused in:} #2\end{sourcebox}}
+
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Mathematical Finance \& Stochastic Processes}
+\fancyhead[R]{Recurring Results Toolbox --- Sheets 1--6}
+\fancyfoot[C]{\thepage\ / \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\title{Recurring Results Toolbox\\[2pt]\large Mathematical Finance and Stochastic Processes in Continuous-Time\\ Collected from Problem Sheets 1--6 and their solutions}
+\author{Kasper Svejgård Nielsen}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\noindent This sheet collects results, techniques, and computational templates that
+recur across Problem Sheets 1--6 (and their official solutions), with pointers to
+every place they resurface. The goal is to stop re-deriving the same lemma from
+scratch and instead recognise ``oh, this is \emph{Result~N} again.'' A typical
+example: Sheet 4, Problem 4.3(h) derives $\Var(\int_s^{s+t}B_r\,dr)=st^2+t^3/3$ to
+show the integrated Brownian motion does \emph{not} have stationary increments --
+the underlying technique (Fubini + $\E[B_rB_s]=r\wedge s$, then Theorem~4.8 to rule
+out the martingale property) is exactly the one needed for the covariance
+computations in Problem~6.3 and for several quiz-style questions. That technique is
+catalogued below as Result~16 (the ``not a martingale'' test) and
+Result~17 (the time-integral moment formulas).
+
+\tableofcontents
+
+%======================================================================
+\section{Stopping times: construction and recognition}
+%======================================================================
+
+\begin{result}{Hitting times of continuous adapted processes are stopping times}
+\label{res:1}
+If $X=(X_t,t\ge0)$ is continuous and adapted and $A\subseteq\R$ is closed, then
+$T=\inf\{t\ge0\mid X_t\in A\}$ is a stopping time (Proposition 3.9(ii)). In
+particular, hitting times of a fixed level, or of a moving but continuous
+deterministic boundary $b(t)$, are stopping times: just apply the result to
+$X_t - b(t)$.
+\end{result}
+\used{Problem 2.1(d) ($T\wedge t$ argument via Prop.\ 3.6); Problem 3.4(a)
+($T=\inf\{t\mid B_t=t-1\}$, via $X_t=B_t-t$).}{Quiz practice problems on
+stopping-time identification (Quizzes A/B, Q1).}
+
+\begin{result}{Last-exit / ``time of the extremum'' is \emph{not} a stopping time}
+\label{res:2}
+Random times defined as a $\sup$ of a future-dependent set --- last passage times
+$\rho=\sup\{t\ge0\mid X_t\ge a\}$, or the time $\theta$ at which a running maximum
+is attained on a fixed horizon --- are \emph{not} stopping times in general: the
+event $\{T\le t\}$ requires knowing the path strictly after time $t$.
+\end{result}
+\used{Problem 2.2(b) (last passage time above level $a$).}{Problem 3.4(b) (time of
+the maximum of $B$ on $[0,1]$); same reasoning re-used verbatim in solution 3.4(b).}
+
+\begin{result}{Building new stopping times from old ones}
+\label{res:3}
+\begin{itemize}
+\item For $A\in\F_s$, the time $T^A(\omega)=s\cdot\mathbf 1_A(\omega)+\infty\cdot
+\mathbf 1_{A^c}(\omega)$ is a stopping time.
+\item More generally, for $A\in\F_s$ and $s<t$, $T(\omega)=s$ on $A$ and $t$ on
+$A^c$ is a stopping time (special case: $T=T^A\wedge t$).
+\item Minima, maxima, and sums of stopping times are stopping times; the minimum
+of a stopping time and a deterministic constant is a stopping time.
+\end{itemize}
+\end{result}
+\used{Problem 2.2(a) ($T^A$); page-45 property list.}{Problem 5.2(a) (re-derives
+$T^A\wedge t$ is a stopping time two ways); Problem 5.3(b) (localizing sequences
+$\tilde T_n$ built from the same $T^A$-template).}
+
+%======================================================================
+\section{The exponential-martingale engine}
+%======================================================================
+
+\begin{result}{MGF-as-ODE trick}
+\label{res:4}
+If $M(\lambda)=\E[e^{\lambda X}]$ satisfies $M'(\lambda)=\lambda\sigma^2 M(\lambda)$
+with $M(0)=1$, define $H(\lambda)=e^{-\lambda^2\sigma^2/2}M(\lambda)$. Then
+$H'\equiv0$, so $H\equiv1$ and $M(\lambda)=e^{\lambda^2\sigma^2/2}$: this
+\emph{is} the defining computation behind every ``exponential process is a
+martingale'' argument in the course.
+\end{result}
+\used{Problem 1.1(d)--(e) (MGF of $N(0,1)$).}{The identical ODE argument reappears,
+dressed up as a conditional-expectation computation, in Problem 3.1(b), Problem
+4.1(i), and Problem 6.2(b)(i) -- see Result~7.}
+
+\begin{result}{Independence from a factorised joint MGF / characteristic function
+(Problem 1.2, Lemmas 1--2)}
+\label{res:5}
+If $\E[e^{\lambda X}\mid\mathcal G]=e^{\lambda^2\sigma^2/2}$ for all $\lambda$ (or
+the characteristic-function analogue), then $X\sim N(0,\sigma^2)$ \emph{and} $X$
+is independent of $\mathcal G$. Proof template: tower property $+$ pull-out
+property turns the conditional MGF into a product of marginal MGFs/characteristic
+functions, which characterises independence.
+\end{result}
+\used{Problem 1.2 (full proof, both the MGF and characteristic-function
+versions).}{Problem 6.2(c)(i): applied directly to $M_t-M_s$ conditional on
+$\F_s$ to show a local martingale with deterministic quadratic variation has
+independent Gaussian increments -- this is exactly Lévy's characterisation
+specialised to deterministic $\br{M,M}$.}
+
+\begin{result}{Monotone-class extension of independence (Problem 1.3)}
+\label{res:6}
+$(X_i,i\in I)$ is independent of $\mathcal G$ iff every \emph{finite} subcollection
+$(X_{i_1},\dots,X_{i_p})$ is independent of $\mathcal G$. This lets you check
+independence on finite-dimensional marginals and automatically lift it to an
+entire (possibly infinite) family / $\sigma$-algebra.
+\end{result}
+\used{Problem 1.3 (statement and proof via the monotone class theorem).}{Problem
+2.3(c)(ii): used twice, first to go from finite collections of increments to
+$\sigma(B_r\mid 0\le r\le s)$, then to lift to the whole process $(X_t,t\ge0)$.}
+
+\begin{result}{\textbf{The} exponential-martingale template}
+\label{res:7}
+Let $M$ be a continuous local martingale with $M_0=0$ and deterministic quadratic
+variation $\br{M,M}_t=g(t)$. Then for every $\theta\in\R$,
+\[
+Y_t=\exp\!\Big(\theta M_t-\tfrac12\theta^2 g(t)\Big)
+\]
+is a martingale. This single statement specialises to \emph{every} ``find
+$\theta$ such that $\exp(\cdots)$ is a martingale'' question in the course.
+\end{result}
+\begin{itemize}[leftmargin=*]
+  \item $M=B_t$, $g(t)=t$: Problem 3.1(b) ($Y_t=e^{\theta B_t-\theta^2t/2}$), and
+  Problem 3.1(c) shows the $\mu\ne0$ drift version is a sub-/supermartingale.
+  \item $M=\boldsymbol\lambda\cdot\boldsymbol B_t$ in $\R^d$ with
+  $\boldsymbol\lambda\cdot\boldsymbol\lambda=1$: Problem 3.2(c).
+  \item $M$ a general continuous Gaussian martingale, $g(t)=\Gamma(t,t)$: Problem
+  4.1(i), used immediately in the quiz question 4.2(b) ($\theta=\pm2$ for
+  $g(t)=2t$ against a target coefficient of $4t$).
+  \item $M$ a continuous local martingale with \emph{any} deterministic,
+  continuous, increasing quadratic variation $g(t)=\br{M,M}_t$ (not assumed
+  Gaussian or Brownian a priori): Problem 6.2(b)(i)--(ii), which then
+  \emph{bootstraps Result~7 to prove $M$ is Gaussian in the first place}
+  (Problem 6.2(c)--(d)) -- the martingale property comes first, Gaussianity is a
+  consequence, not an assumption.
+\end{itemize}
+\used{Problem 3.1(b).}{Problems 3.1(c)(d), 3.2(c), 4.1(i), 4.2(b)(quiz), 6.2(b),
+and implicitly Problem 5.5(a) (showing the \emph{compensator cannot be dropped}:
+$e^{\lambda B_t}$ alone is a martingale only for $\lambda=0$).}
+
+\begin{trap}
+Problem 5.5(a) is the ``negative'' companion to Result~7: drop the
+$-\theta^2g(t)/2$ compensator and the process is a martingale \emph{only} for
+$\theta=0$. Always check whether a given exponential process already includes
+the compensator before answering a ``for which $\theta$'' question.
+\end{trap}
+
+%======================================================================
+\section{Computing moments of Brownian / Gaussian-martingale functionals}
+%======================================================================
+
+\begin{result}{``Pull out the past, the future has mean zero'' rule}
+\label{res:8}
+For $0\le s<t$ and any $\F_s$-measurable $Z$ with $\E|Z|<\infty$,
+\[
+\E[Z\cdot(B_t-B_s)]=\E[Z]\cdot\E[B_t-B_s]=0,
+\qquad
+\E[Z\cdot g(B_t-B_s)]=\E[Z]\cdot\E[g(B_t-B_s)]
+\]
+whenever $B_t-B_s$ is independent of $\F_s$ (true for Brownian motion, and for any
+process with independent increments, e.g.\ Problem 4.1's Gaussian martingales).
+This is the single most-used computational step in the course.
+\end{result}
+\used{Problem 3.1(a) (expanding $B_t^2-t$ via $B_t=B_s+(B_t-B_s)$).}{Problem
+3.4(c)--(e) (all four moment computations); Problem 4.1(e); quiz 4.2(c); Problem
+5.5(b)(i); and essentially every ``compute $\E[\cdots]$'' quiz question on
+Sheets 3--6.}
+
+\begin{result}{Odd moments of centred (jointly) Gaussian variables vanish}
+\label{res:9}
+If $X\sim N(0,\sigma^2)$ then $\E[X^{2n+1}]=0$ for all $n\ge0$. More generally,
+any odd-order moment of a mean-zero jointly Gaussian vector
+$(X_1,\dots,X_k)$ -- e.g.\ $\E[X_1X_2X_3]$ or $\E[X_1^2X_2]$ -- is zero, by the
+symmetry $(X_1,\dots,X_k)\overset{d}=(-X_1,\dots,-X_k)$.
+\end{result}
+\used{Problem 1.1(c) (derived by induction via Stein's identity).}{Problem
+3.4(d)(f) ($\E[B_s^2B_t]=0$, $\E[B_sB_tB_u]=0$ -- solution sheet gives \emph{two}
+independent derivations, one via Result~8 and one via the tower property, as a
+cross-check); quiz questions throughout Quizzes A/B.}
+
+\begin{result}{Covariance shortcut for Brownian motion and Gaussian martingales}
+\label{res:10}
+$\Cov(B_s,B_t)=s\wedge t$. More generally, if $M$ is a continuous Gaussian
+martingale with $M_0=0$ and $\Cov(M_s,M_u-M_t)=0$ for $s\le t<u$ (Problem
+4.1(e)), then for $s\le t$,
+\[
+\Cov(M_s,M_t)=\Gamma(s,s)=\Gamma(s\wedge t,\,s\wedge t).
+\]
+\end{result}
+\used{Problem 4.1(e) (proved via tower property + martingale property).}{Problem
+3.3(b)(i) (direct analogue for the correlated 2D Brownian motion,
+$\Cov(W^{(1)}_s,B^{(2)}_t)=\rho(s\wedge t)$); quiz 4.2 / 6.3(g)
+($\Cov(B_t,Y_t)$ computed via the Itô-isometry version, Result~12).}
+
+%======================================================================
+\section{Quadratic variation, Itô integrals, and the product rule}
+%======================================================================
+
+\begin{result}{Bracket bilinearity for stochastic integrals}
+\label{res:11}
+For Itô integrals driven by the same (or independent) Brownian motions,
+\[
+\Big\langle\!\int H\,dB^{(1)},\int K\,dB^{(2)}\Big\rangle_t
+=\int_0^t H_sK_s\,d\br{B^{(1)},B^{(2)}}_s,
+\]
+and $\br{B^{(1)},B^{(2)}}_t=0$ whenever $B^{(1)}\perp B^{(2)}$ are independent
+Brownian motions (Proposition 4.16). When $B^{(1)}=B^{(2)}=B$, this collapses to
+$\br{\int H\,dB,\int K\,dB}_t=\int_0^t H_sK_s\,ds$.
+\end{result}
+\used{Problem 5.4(b)--(c) (orthogonality of integrals against independent
+Brownian motions).}{Problem 6.1 (every sub-part: computing $\br{W^{(i)},W^{(j)}}_t$
+to invoke Lévy's characterisation); Problem 6.3(a)(b) ($\br{Y,Y}_t=\int s^2ds$,
+$\br{Y,Z}_t=\int sY_s\,ds$); Problem 6.4(a); quiz questions on $\br{Y,Y}_t$.}
+
+\begin{result}{Deterministic / bounded integrand $\Rightarrow$ genuine
+martingale, via Itô isometry}
+\label{res:12}
+If $H$ is adapted and $\E\int_0^t H_s^2\,ds<\infty$, then $X_t=\int_0^t H_s\,dB_s$
+is a (true, not just local) square-integrable martingale with
+\[
+\E[X_t]=0,\qquad \Var(X_t)=\E[X_t^2]=\E\Big[\int_0^t H_s^2\,ds\Big].
+\]
+\end{result}
+\used{Problem 5.5(c)(i), 5.6(c)(d) (variance of $\int_0^tB_s\,dB_s$).}{Problem
+5.4(d) (used in $\mathbb H^2$ form to get $\E[X_tY_t]=0$); Problem 6.3(c)(d);
+Problem 6.4(a)(b); every ``is this an Itô integral a martingale'' quiz question.}
+
+\begin{trap}
+The martingale property in Result~12 needs $H$ to not depend on the \emph{upper
+limit} $t$ itself. $X_t=\int_0^te^{-(t-s)}\,dB_s=e^{-t}\int_0^te^sdB_s$ looks like
+a stochastic integral but is \emph{not} one in the sense of Result~12: writing
+$Z_t=\int_0^te^sdB_s$ (a genuine martingale) and $X_t=e^{-t}Z_t$, the product rule
+gives $dX_t=-X_t\,dt+dB_t$ -- a nonzero drift appears, so $X$ is \emph{not} a
+martingale (it is the stationary Ornstein--Uhlenbeck process). Contrast with
+Problem 5.5(c)(ii), which is exactly this trap.
+\end{trap}
+
+\begin{result}{$M^2-\br{M,M}$ is a martingale (and its converse: identifying
+$\br{M,M}$)}
+\label{res:13}
+For a continuous (local) martingale $M$ with $M_0=0$, $M_t^2-\br{M,M}_t$ is a
+martingale. Conversely, since $\br{M,M}$ is the \emph{unique} continuous
+increasing process making $M^2-\br{M,M}$ a martingale, if you can show
+$M_t^2-g(t)$ is a martingale for some deterministic, continuous, increasing
+$g$, then necessarily $\br{M,M}_t=g(t)$.
+\end{result}
+\used{Problem 3.1(a) ($B_t^2-t$, base case).}{Problem 3.2(b) (multivariate sum of
+base cases); Problem 4.1(g)--(h) (general Gaussian martingale, $g=\Gamma(t,t)$,
+used to \emph{identify} the quadratic variation rather than just verify it);
+quiz 4.2(a); Problem 6.2(a).}
+
+\begin{result}{Product-minus-bracket is a local martingale; orthogonality}
+\label{res:14}
+For continuous local martingales $M,\tilde M$, the process $M\tilde M-\br{M,\tilde
+M}$ is a local martingale. Consequently $M\perp\tilde M$ (i.e.\ $\br{M,\tilde
+M}\equiv0$) iff $M\tilde M$ is itself a local martingale.
+\end{result}
+\used{Problem 5.4(a) (statement, via Proposition 4.15(i)).}{Problem 3.3(c) (the
+\emph{same} computation carried out by hand, one week earlier, for
+$M_t=W^{(1)}_tB^{(2)}_t-\rho t$ -- a good worked example of Result~14 before the
+general machinery is available); Problem 6.3(f) ($\E[Y_tZ_t]=\E[\br{Y,Z}_t]$).}
+
+%======================================================================
+\section{Gaussian-process closure, finite variation, and time integrals}
+%======================================================================
+
+\begin{result}{Gaussianity is closed under linear maps and $L^2$/pointwise limits
+(Proposition 1.1)}
+\label{res:15}
+A finite linear combination of jointly Gaussian variables is Gaussian; and if
+$X_n\to X$ in $L^2$ (or a.s., or in distribution) with each $X_n$ Gaussian, then
+$X$ is Gaussian. This is the standard route to proving a \emph{limit} process is
+Gaussian without computing its density directly.
+\end{result}
+\used{Problem 2.6(a) (Brownian bridge is Gaussian, as a linear map of
+$(B_{t_1},\dots,B_{t_p},B_1)$).}{Problem 4.3(b)--(c) (integrated Brownian motion:
+Riemann sums are Gaussian, limit is Gaussian); Problem 6.3/6.4(c)--(e) (elementary
+functions $\to$ Gaussian processes, approximating $\int f\,dB$).}
+
+\begin{result}{A continuous martingale of finite variation is constant
+(Theorem~4.8) --- the standard ``NOT a martingale'' test}
+\label{res:16}
+If $X$ is a continuous martingale and has (a.s.) finite variation, then $X$ is
+a.s.\ constant. Contrapositive: if $X_0$ is deterministic, $X$ is continuous and
+of finite variation, and $\Var(X_t)\ne0$ for some $t$, then $X$ is \emph{not} a
+martingale.
+\end{result}
+\used{Problem 4.3(e): the integrated Brownian motion $\int_0^tB_s\,ds$ is
+continuous, has finite variation (Problem 4.3(c)), and $\Var(\int_0^tB_s\,ds)=
+t^3/3\ne0$ -- hence it cannot be a martingale, even though it is centred
+(Problem 4.3(d)).}{This is the standard argument whenever a process looks
+``martingale-like'' (centred, continuous) but is built from a time-integral
+rather than a stochastic integral. Watch for it on any question of the form
+``is $\int_0^t X_s\,ds$ a martingale?''}
+
+\begin{result}{Second moments of time-integrals of Brownian motion (Fubini +
+$\E[B_rB_s]=r\wedge s$)}
+\label{res:17}
+For $0\le s<t$, writing $I_t=\int_0^tB_r\,dr$:
+\[
+\E[I_t]=0,\qquad
+\Var(I_t)=\frac{t^3}{3},\qquad
+\Cov(I_s,I_t)=s^2\Big(\frac t2-\frac s6\Big).
+\]
+Consequently the increments are \emph{not} stationary:
+$\Var(I_{s+t}-I_s)=st^2+\dfrac{t^3}{3}\ne\dfrac{t^3}{3}=\Var(I_t)$,
+and \emph{not} independent, e.g.\ $\Cov(I_1,I_2-I_1)=\tfrac12\ne0$.
+\end{result}
+\used{Problem 4.3(d), (f)(ii), (g), (h) (full derivation).}{Problem 4.4(b)(f)(g)
+(simulation exercise checks these exact numbers numerically); the underlying
+technique (Fubini + the covariance kernel $r\wedge s$ of $B$) is the direct
+template for Problem 6.3(c)--(g)'s moment computations for $Y_t=\int_0^tsdB_s$
+and $Z_t=\int_0^tY_s\,dB_s$, and for quiz questions computing
+$\Cov(B_t,Y_t)=\int_0^ts\,ds=t^2/2$.}
+
+\begin{result}{Toolbox of Brownian-motion-preserving transformations}
+\label{res:18}
+Each of the following is again a standard Brownian motion whenever $B$ is:
+\begin{itemize}
+\item $-B_t$ \ (symmetry);
+\item $\lambda B_{t/\lambda^2}$ for $\lambda>0$ \ (Brownian scaling);
+\item $B_{s+t}-B_s$ for fixed $s\ge0$, and this new process is independent of
+$\F^B_s$ \ (time-homogeneity / strong Markov flavour);
+\item $W_t=tB_{1/t}$ for $t>0$, $W_0=0$ \ (time inversion);
+\item $\boldsymbol\lambda\cdot\boldsymbol B_t$ for $\boldsymbol\lambda\in\R^d$
+with $\boldsymbol\lambda\cdot\boldsymbol\lambda=1$ \ (unit-vector projection of
+multivariate BM).
+\end{itemize}
+\end{result}
+\used{Problem 2.3 (first four transformations, each proved from the
+definition).}{Problem 2.4(b) (time inversion, used together with Result~18's
+SLLN consequence $B_t/t\to0$ a.s.\ from Problem 2.4(a)); Problem 3.2(a) (unit
+projection); Problem 3.3(a) (built directly from the projection result with
+$\boldsymbol\lambda=(\sqrt{1-\rho^2},\rho)$); underlies every ``is this
+combination of stochastic integrals a Brownian motion'' question in Problem 6.1
+(via Lévy's characterisation instead, but motivically the same idea).}
+
+%======================================================================
+\section{Supporting inequalities and convexity facts}
+%======================================================================
+
+\begin{result}{Doob's $L^2$ maximal inequality}
+\label{res:19}
+For a continuous martingale $M$, $\E\big[\sup_{t\in[0,T]}M_t^2\big]\le4\,\E[M_T^2]$.
+\end{result}
+\used{Problem 2.4(a)(iv) (bounds $\E[S_n]<\infty$ for the sup-of-increments
+sequence, needed for the SLLN step).}{Problem 4.1(d) (dominated convergence
+argument for continuity of $t\mapsto\Gamma(t,t)$).}
+
+\begin{result}{Convex functions of a martingale are submartingales (Proposition
+3.12)}
+\label{res:21}
+If $M$ is a martingale and $h$ is convex (and, when needed, increasing in the
+relevant direction), then $h(M_t)$ is a submartingale.
+\end{result}
+\used{Problem 3.1(e): $(e^{B_t}-K)^+$ is a submartingale, since $x\mapsto
+(e^x-K)^+$ is convex (composition of convex $e^x-K$ with convex increasing
+$y\mapsto y^+$).}{Problem 4.1(d): $M_t^2$ is a submartingale since $x\mapsto x^2$
+is convex -- used to show $t\mapsto\Gamma(t,t)=\E[M_t^2]$ is increasing.}
+
+\vspace{8pt}
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[2pt]\textbf{END}\end{center}
+
+\end{document}
