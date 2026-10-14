@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}, leftmargin=*, itemsep=10pt, topsep=6pt}
+\setlist[enumerate,2]{label=(\Alph*), leftmargin=1.6cm}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Mathematical Finance \& Stochastic Processes}
+\fancyhead[R]{Practice Quiz A}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Mathematical Finance and Stochastic Processes in Continuous-Time}\\[4pt]
+{\Large Practice Quiz A --- Brownian Motion, Martingales \& Stochastic Integrals}\\[8pt]
+\textbf{Time allowed: 60 minutes} \qquad \textbf{Total: 16 questions, 100 points}
+\end{center}
+
+\vspace{4pt}
+\noindent\textbf{Instructions.}
+\begin{itemize}[nosep,leftmargin=*]
+  \item Unless stated otherwise, $B=(B_t,t\ge0)$ is a standard Brownian motion and $(\mathcal F_t,t\ge0)$ is its (completed, right-continuous) canonical filtration.
+  \item Each question is worth the number of points shown. Questions marked \textbf{(Select ONE)} have exactly one correct option; questions marked \textbf{(Select ALL that apply)} may have more than one correct option, and you must select all of them for full marks.
+  \item No partial credit is given for multi-select questions unless stated otherwise by your instructor.
+  \item You may use any result proved on the problem sheets or in the lecture notes without re-proving it.
+\end{itemize}
+
+\vspace{10pt}
+\hrule
+\vspace{10pt}
+
+\begin{enumerate}
+
+\item[\textbf{Q1.}] \textbf{(6 pts, Select ALL that apply)} Which of the following random times are stopping times with respect to $(\mathcal F_t)$?
+\begin{enumerate}
+  \item $T_1=\inf\{t\ge 0 \mid B_t=2\}$
+  \item $T_2=\inf\{t\ge 0 \mid B_t=2-3t\}$
+  \item $T_3=\sup\{t\in[0,1]\mid B_t=0\}$
+  \item $T_4=\inf\{t\ge 0 \mid B_t\ge 1\}\wedge 5$
+\end{enumerate}
+
+\item[\textbf{Q2.}] \textbf{(5 pts, Select ONE)} Let $\theta=\sup\{t\in[0,1]\mid B_t=\max_{s\in[0,1]}B_s\}$ be the (a.s.\ unique) time at which $B$ attains its maximum on $[0,1]$. Which statement is correct?
+\begin{enumerate}
+  \item $\theta$ is a stopping time, because it is a supremum over a compact time set.
+  \item $\theta$ is \emph{not} a stopping time, because the event $\{\theta\le t\}$ depends on whether $B$ exceeds its time-$t$ running maximum at some \emph{later} time in $(t,1]$, i.e.\ it requires information not available at time $t$.
+  \item $\theta$ is a stopping time, because $B$ has continuous paths.
+  \item $\theta$ is a stopping time only when $t\le 1/2$.
+\end{enumerate}
+
+\item[\textbf{Q3.}] \textbf{(6 pts, Select ONE)} For which values of $\theta\in\R$ is the process $S_t=\exp(\theta B_t-3t)$ a martingale?
+\begin{enumerate}
+  \item $\theta=3$ only
+  \item $\theta=\sqrt3$ only
+  \item $\theta=\sqrt6$ or $\theta=-\sqrt6$
+  \item No value of $\theta$ makes $S$ a martingale
+\end{enumerate}
+
+\item[\textbf{Q4.}] \textbf{(6 pts, Select ONE)} Let $M=(M_t,t\ge0)$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=4t$. For which values of $\theta$ is $Y_t=\exp(\theta M_t-8t)$ a martingale?
+\begin{enumerate}
+  \item $\theta=\pm2$
+  \item $\theta=\pm4$
+  \item $\theta=\pm\sqrt2$
+  \item $\theta=\pm8$
+\end{enumerate}
+
+\item[\textbf{Q5.}] \textbf{(5 pts, Select ONE)} With $M$ as in Q4 (i.e.\ $\E[M_t^2]=4t$), what is the quadratic variation $\langle M,M\rangle_t$?
+\begin{enumerate}
+  \item $t$
+  \item $2t$
+  \item $4t$
+  \item $4t^2$
+\end{enumerate}
+
+\item[\textbf{Q6.}] \textbf{(6 pts, Select ONE)} Let $Y_t=\int_0^t s^2\,dB_s$. Compute $\langle Y,Y\rangle_t$.
+\begin{enumerate}
+  \item $t^3/3$
+  \item $t^4/4$
+  \item $t^5/5$
+  \item $t^2$
+\end{enumerate}
+
+\item[\textbf{Q7.}] \textbf{(8 pts, Select ALL that apply)} For fixed $0\le s<t$, which of the following quantities equal $0$?
+\begin{enumerate}
+  \item $\E[B_s(B_t-B_s)^2]$
+  \item $\E[B_s^2B_t]$
+  \item $\E[B_sB_t]$
+  \item $\E[B_s^3]$
+\end{enumerate}
+
+\item[\textbf{Q8.}] \textbf{(6 pts, Select ONE)} For $0\le s<t<u$, compute $\E[(B_t-B_s)B_u]$.
+\begin{enumerate}
+  \item $0$
+  \item $t-s$
+  \item $u-s$
+  \item $t$
+\end{enumerate}
+
+\item[\textbf{Q9.}] \textbf{(5 pts, Select ONE)} For $0\le s<t<u$, compute $\E[B_sB_tB_u]$.
+\begin{enumerate}
+  \item $st$
+  \item $s$
+  \item $0$
+  \item $stu$
+\end{enumerate}
+
+\item[\textbf{Q10.}] \textbf{(6 pts, Select ONE)} For $0\le s<t<u<v$, compute $\E[(B_t-B_s)(B_v-B_u)]$.
+\begin{enumerate}
+  \item $0$
+  \item $t-s$
+  \item $v-u$
+  \item $\min(t,v)-\max(s,u)$
+\end{enumerate}
+
+\item[\textbf{Q11.}] \textbf{(6 pts, Select ONE)} Let $Y_t=\int_0^t 2s\,dB_s$. Compute $\Cov(B_t,Y_t)$.
+\begin{enumerate}
+  \item $t^2$
+  \item $t^2/2$
+  \item $2t^2$
+  \item $t$
+\end{enumerate}
+
+\item[\textbf{Q12.}] \textbf{(6 pts, Select ONE)} Let $M$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=4t$. Compute $\Cov(M_2,M_7)$.
+\begin{enumerate}
+  \item $8$
+  \item $28$
+  \item $14$
+  \item $4$
+\end{enumerate}
+
+\item[\textbf{Q13.}] \textbf{(5 pts, Select ONE)} Is $X_t=\int_0^t e^{-2s}\,dB_s$ a martingale?
+\begin{enumerate}
+  \item Yes, because $e^{-2s}$ is a deterministic, square-integrable integrand, so the Itô integral is always a (true) martingale.
+  \item No, because $e^{-2s}\to 0$ as $s\to\infty$.
+  \item Yes, but only because $B$ is a martingale.
+  \item No, because the integrand is not adapted.
+\end{enumerate}
+
+\item[\textbf{Q14.}] \textbf{(7 pts, Select ONE)} Define $X_t=\int_0^t e^{-2(t-s)}\,dB_s$ (note the integrand depends on the upper limit $t$ itself). Is $(X_t,t\ge0)$ a martingale?
+\begin{enumerate}
+  \item Yes, it is a stochastic integral with respect to $B$, hence automatically a martingale.
+  \item No: Itô's formula gives $dX_t=-2X_t\,dt+dB_t$, which has a nonzero drift term, so $X$ is not a martingale.
+  \item Yes, because $X_t$ is Gaussian with mean $0$.
+  \item No, because $X_t$ is not square-integrable.
+\end{enumerate}
+
+\item[\textbf{Q15.}] \textbf{(7 pts, Select ONE)} Let $X_t=\int_0^t(3s+1)\,dB_s$. Compute $\Var(X_t)$.
+\begin{enumerate}
+  \item $3t^3+3t^2+t$
+  \item $9t^3/3 + 3t^2$
+  \item $(3t+1)^2 t$
+  \item $3t^2+t$
+\end{enumerate}
+
+\item[\textbf{Q16.}] \textbf{(10 pts, Select ONE)} Let $Y_t=\int_0^t s\,dB_s$ and $Z_t=\int_0^t Y_s\,dB_s$. Compute $\E[Z_t^2]$.
+\begin{enumerate}
+  \item $t^4/12$
+  \item $t^3/3$
+  \item $t^4/4$
+  \item $t^5/20$
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{10pt}
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[2pt]\textbf{END OF QUIZ A}\end{center}
+
+\end{document}
