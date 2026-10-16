@@ -33,46 +33,60 @@
 \item[\textbf{Q1.}] \ans{A, B, D.}
 \begin{itemize}[nosep]
 \item[A] Hitting time of a continuous adapted process at a fixed level: a stopping time.
-\item[B] $B_t-(5+2t)=B_t-2t-5$ is continuous and adapted, so $T_2$ is a hitting time of level $0$: a stopping time.
-\item[C] $T_3$ is the hitting time of level $1$ \emph{shifted backward} by $0.5$. Knowing $\{T_3\le t\}$ at time $t$ would require knowing, before it happens, that $B$ will hit level $1$ within the next $0.5$ units of time -- information not available at time $t$. Not a stopping time.
-\item[D] $|B_t|$ is continuous and adapted, so $T_4$ is a hitting time of level $2$ by the adapted process $|B_t|$: a stopping time.
+\item[B] $B_t-(3-2t)=B_t+2t-3$ is continuous and adapted, so $T_2$ is a hitting time of level $0$: a stopping time.
+\item[C] $T_3$ is the hitting time of level $2$ \emph{shifted backward} by $1$. Knowing $\{T_3\le t\}$ at time $t$ would require knowing, before it happens, that $B$ will hit level $2$ within the next $1$ unit of time -- information not available at time $t$. Not a stopping time.
+\item[D] $|B_t|$ is continuous and adapted, so $T_4$ is a hitting time of level $3$ by the adapted process $|B_t|$: a stopping time.
 \end{itemize}
 
-\item[\textbf{Q2.}] \ans{B.} $\rho$ is a last-exit time (a supremum of a time set), analogous to Problem 3.4(b)/2.2(b); deciding $\{\rho\le t\}$ requires knowledge of the future path on $(t,10]$, so $\rho$ is not a stopping time.
+\item[\textbf{Q2.}] \ans{C.} By Problem 5.2, if $A\in\mathcal F_s$ and $T=a$ on $A$, $T=b$ on $A^c$, then $T$ is a stopping time precisely when $a\wedge b\ge s$: for $t<a\wedge b$, $\{T\le t\}=\varnothing\in\mathcal F_t$ trivially; for $a\wedge b\le t<a\vee b$, $\{T\le t\}$ equals $A$ or $A^c$, which lies in $\mathcal F_s\subseteq\mathcal F_t$ since $t\ge s$; for $t\ge a\vee b$, $\{T\le t\}=\Omega$. Here $A=\{B_3>0\}\in\mathcal F_3$, so we need $a\wedge b\ge3$. Only option C, $(a,b)=(3,5)$, satisfies this ($3\wedge5=3$); all other pairs have $a\wedge b<3$.
 
-\item[\textbf{Q3.}] \ans{B.} $\exp(\theta B_t-\theta^2t/2)$ is a martingale for every $\theta$. Matching $-5t=-\theta^2t/2$ gives $\theta^2=10$, i.e.\ $\theta=\pm\sqrt{10}$.
+\item[\textbf{Q3.}] \ans{B.} $\rho$ is a last-exit time (a supremum of a time set), analogous to Problem 3.4(b)/2.2(b); deciding $\{\rho\le t\}$ requires knowledge of the future path on $(t,8]$, so $\rho$ is not a stopping time.
 
-\item[\textbf{Q4.}] \ans{A.} With $\Gamma(t,t)=9t$, the compensator is $\theta^2\Gamma(t,t)/2=\theta^2\cdot9t/2=4.5\theta^2 t$. Setting $4.5\theta^2t=18t$ gives $\theta^2=4$, so $\theta=\pm2$.
+\item[\textbf{Q4.}] \ans{B.} For fixed $c=\sqrt3$, $B_t\sim N(0,t)$, so $\E[\mathbf1_{\{B_t\le c\}}]=P(B_t\le c)=\Phi(c/\sqrt t)$. As $t\to\infty$, $c/\sqrt t\to0$, so $\Phi(c/\sqrt t)\to\Phi(0)=1/2$. (The limit does not depend on the fixed level $c$.)
 
-\item[\textbf{Q5.}] \ans{B.} $\langle M,M\rangle_t=\Gamma(t,t)=\E[M_t^2]=9t$.
+\item[\textbf{Q5.}] \ans{D.} $X_t=e^{-2t}B_{e^{4t}}$ is a deterministic linear transform of a centered Gaussian process, hence centered Gaussian: $\E[X_t]=e^{-2t}\E[B_{e^{4t}}]=0$. For $0\le s<t$ (so $e^{4s}<e^{4t}$),
+\[
+\Cov(X_s,X_t)=e^{-2s-2t}\Cov(B_{e^{4s}},B_{e^{4t}})=e^{-2s-2t}\min(e^{4s},e^{4t})=e^{-2s-2t}e^{4s}=e^{2s-2t}=e^{-2(t-s)}.
+\]
+(This is the Lamperti/time-change representation of the stationary Ornstein--Uhlenbeck process, cf.\ Problem 5.5(c)(ii)/Q14.)
 
-\item[\textbf{Q6.}] \ans{C.} $\langle Y,Y\rangle_t=\int_0^t(s^3)^2\,ds=\int_0^ts^6\,ds=t^7/7$.
+\item[\textbf{Q6.}] \ans{A.} For jointly Gaussian mean-zero $(B_s,B_t)$ with $\Var(B_s)=s$, $\Var(B_t)=t$, $\Cov(B_s,B_t)=s$, Wick/Isserlis' theorem gives $\E[B_s^2B_t^2]=\E[B_s^2]\E[B_t^2]+2\Cov(B_s,B_t)^2=st+2s^2$. Hence
+\[
+\Cov(B_s^2,B_t^2)=\E[B_s^2B_t^2]-\E[B_s^2]\E[B_t^2]=(st+2s^2)-st=2s^2.
+\]
 
-\item[\textbf{Q7.}] \ans{B, C, D.}
+\item[\textbf{Q7.}] \ans{B.} $e^{\lambda X_t}=e^{\lambda B_t+2\lambda t}=e^{\lambda B_t-\lambda^2t/2}\cdot e^{(2\lambda+\lambda^2/2)t}$. Since $e^{\lambda B_t-\lambda^2t/2}$ is always a martingale, the product is a martingale iff the remaining deterministic exponential factor is constant, i.e.\ $2\lambda+\lambda^2/2=0$, giving $\lambda=0$ or $\lambda=-4$. So $e^{-4X_t}$ is a martingale.
+
+\item[\textbf{Q8.}] \ans{A.} By the Itô isometry, $\E\big[(\int_0^4\mathbf1_{\{B_t<0\}}\,dB_t)^2\big]=\int_0^4\E[\mathbf1_{\{B_t<0\}}^2]\,dt=\int_0^4P(B_t<0)\,dt=\int_0^4\tfrac12\,dt=2$, using $\mathbf1_A^2=\mathbf1_A$ and $P(B_t<0)=1/2$ for every $t>0$ by symmetry of $B_t\sim N(0,t)$.
+
+\item[\textbf{Q9.}] \ans{A.} By the Itô isometry, $\E[X_s^2]=\int_0^se^{4u}\,du=\tfrac14(e^{4s}-1)$. Applying the isometry again,
+\[
+\E\left[\left(\int_0^tX_s\,dB_s\right)^2\right]=\int_0^t\E[X_s^2]\,ds=\int_0^t\tfrac14(e^{4s}-1)\,ds=\tfrac1{16}(e^{4t}-1)-\tfrac t4.
+\]
+
+\item[\textbf{Q10.}] \ans{A.} With $T=2$, $X_t=B_t-\tfrac tT B_T$. For $s\le t$,
+\[
+\Cov(X_s,X_t)=\Cov(B_s,B_t)-\tfrac tT\Cov(B_s,B_T)-\tfrac sT\Cov(B_T,B_t)+\tfrac{st}{T^2}\Var(B_T)=s-\tfrac{st}T-\tfrac{st}T+\tfrac{st}T=s-\tfrac{st}T=\tfrac{s(T-t)}T.
+\]
+With $T=2$ this is $\tfrac{s(2-t)}2$.
+
+\item[\textbf{Q11.}] \ans{A.} The quadratic variation of an Itô integral $\int_0^tH_s\,dB_s$ is $\int_0^tH_s^2\,ds$; here $H_s=B_s^2$, so $\langle X,X\rangle_t=\int_0^t(B_s^2)^2\,ds=\int_0^tB_s^4\,ds$.
+
+\item[\textbf{Q12.}] \ans{B, C, D.}
 \begin{itemize}[nosep]
 \item[A] $\E[B_t(B_t-B_s)]=\E[B_t^2]-\E[B_tB_s]=t-s\ne0$ in general. \textbf{Not} zero.
-\item[B] $B_s\sim N(0,s)$: all odd moments vanish, $\E[B_s^3]=0$.
-\item[C] $B_s^2$ is $\mathcal F_s$-measurable and $B_t-B_s$ is independent of $\mathcal F_s$ with mean $0$: $\E[B_s^2(B_t-B_s)]=\E[B_s^2]\cdot0=0$.
-\item[D] $B_t\sim N(0,t)$: all odd moments vanish, $\E[B_t^3]=0$.
+\item[B] $B_s$ is $\mathcal F_t$-measurable (since $s<t$) and $B_u-B_t$ is independent of $\mathcal F_t$ with mean $0$, so $\E[B_s(B_u-B_t)]=\E[B_s]\cdot0=0$.
+\item[C] $B_s,B_t,B_u$ are jointly Gaussian and mean zero; the third (odd) moment of their product vanishes: $\E[B_sB_tB_u]=0$.
+\item[D] $B_s^2$ is $\mathcal F_s$-measurable and $B_t-B_s$ is independent of $\mathcal F_s$ with mean $0$: $\E[B_s^2(B_t-B_s)]=\E[B_s^2]\cdot0=0$.
 \end{itemize}
 
-\item[\textbf{Q8.}] \ans{A.} $B_s$ is $\mathcal F_t$-measurable (since $s<t$) and $B_u-B_t$ is independent of $\mathcal F_t$ with mean $0$, so $\E[B_s(B_u-B_t)]=\E[B_s]\cdot0=0$.
+\item[\textbf{Q13.}] \ans{B.} For $s\le t$, $\Cov(M_s,M_t)=\Gamma(s,s)$. Here $\Cov(M_3,M_{10})=\Gamma(3,3)=4\cdot3=12$.
 
-\item[\textbf{Q9.}] \ans{A.} $B_s,B_t,B_u$ are jointly Gaussian and mean zero; the third (odd) moment of their product vanishes: $\E[B_sB_tB_u]=0$.
+\item[\textbf{Q14.}] \ans{B.} Write $X_t=e^{-2t}Z_t$ with $Z_t=\int_0^te^{2s}\,dB_s$, $dZ_t=e^{2t}dB_t$. By the product rule, $dX_t=-2e^{-2t}Z_t\,dt+e^{-2t}dZ_t=-2X_t\,dt+dB_t$. The nonzero drift term shows $X$ is not a martingale (it is a stationary Ornstein--Uhlenbeck process, cf.\ Problem 5.5(c)(ii)).
 
-\item[\textbf{Q10.}] \ans{C.} The increments $B_t-B_s$ (over $(s,t]$) and $B_u-B_t$ (over $(t,u]$) are adjacent, non-overlapping increments of a Brownian motion, hence independent with mean $0$; their product has expectation $0$.
+\item[\textbf{Q15.}] \ans{A.} By the Itô isometry, $\Var(X_t)=\int_0^t(3s-1)^2\,ds=\int_0^t(9s^2-6s+1)\,ds=3t^3-3t^2+t$.
 
-\item[\textbf{Q11.}] \ans{A.} $\Cov(B_t,Y_t)=\E[B_tY_t]=\int_0^t1\cdot(s+1)\,ds=\big[\tfrac{s^2}{2}+s\big]_0^t=\tfrac{t^2}{2}+t$.
-
-\item[\textbf{Q12.}] \ans{B.} For $s\le t$, $\Cov(M_s,M_t)=\Gamma(s,s)$. Here $\Cov(M_3,M_{10})=\Gamma(3,3)=9\cdot3=27$.
-
-\item[\textbf{Q13.}] \ans{A.} A deterministic, square-integrable integrand (on any finite horizon, $\int_0^ts^4\,ds<\infty$) always produces a genuine martingale.
-
-\item[\textbf{Q14.}] \ans{B.} Write $X_t=e^{-t}Z_t$ with $Z_t=\int_0^te^s\,dB_s$, $dZ_t=e^tdB_t$. By the product rule, $dX_t=-e^{-t}Z_t\,dt+e^{-t}dZ_t=-X_t\,dt+dB_t$. The nonzero drift term shows $X$ is not a martingale (it is the stationary Ornstein--Uhlenbeck process, cf.\ Problem 5.5(c)(ii)).
-
-\item[\textbf{Q15.}] \ans{A.} By the Itô isometry, $\Var(X_t)=\int_0^t(2s-1)^2\,ds=\int_0^t(4s^2-4s+1)\,ds=\tfrac{4t^3}{3}-2t^2+t$.
-
-\item[\textbf{Q16.}] \ans{A.} Using the covariance formula for Itô integrals driven by the same $B$ (integrands $H_s=s$ for $Y$, $K_s=Y_s$ for $Z$): $\E[Y_tZ_t]=\E\Big[\int_0^tsY_s\,ds\Big]=\int_0^ts\,\E[Y_s]\,ds$. Since $Y$ is a continuous local martingale with $Y_0=0$ and is square-integrable (by Itô isometry $\E[Y_s^2]=s^3/3<\infty$), it is a true martingale, so $\E[Y_s]=\E[Y_0]=0$ for all $s$. Hence $\E[Y_tZ_t]=0$.
+\item[\textbf{Q16.}] \ans{A.} Using the covariance formula for Itô integrals driven by the same $B$ (integrands $H_s=2s$ for $Y$, $K_s=Y_s$ for $Z$): $\E[Y_tZ_t]=\E\Big[\int_0^t2sY_s\,ds\Big]=\int_0^t2s\,\E[Y_s]\,ds$. Since $Y$ is a continuous local martingale with $Y_0=0$ and is square-integrable (by Itô isometry $\E[Y_s^2]=\int_0^s4u^2\,du=4s^3/3<\infty$), it is a true martingale, so $\E[Y_s]=\E[Y_0]=0$ for all $s$. Hence $\E[Y_tZ_t]=0$.
 
 \end{enumerate}
 
