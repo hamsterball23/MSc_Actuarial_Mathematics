@@ -30,55 +30,90 @@
 
 \begin{enumerate}
 
-\item[\textbf{Q1.}] \ans{A, B, C.}
+\item[\textbf{Q1.}] \ans{A, B, D.} By the Toolbox rule for building new stopping times (Result 3): minima, maxima, and sums of stopping times are stopping times, and the minimum of a stopping time and a deterministic constant is a stopping time.
 \begin{itemize}[nosep]
-\item[A] Hitting time of a continuous adapted process at a fixed level: a stopping time.
-\item[B] $B_t-(t-1)$ is continuous and adapted, so $T_2$ is the hitting time of level $0$ by this process (Problem 3.4(a)): a stopping time.
-\item[C] Let $\tau=\inf\{t\ge0\mid B_t\ge3\}$, a stopping time. For a stopping time $\tau$ and constant $c>0$, $\tau+c$ is again a stopping time: for $t<c$, $\{\tau+c\le t\}=\varnothing\in\mathcal F_t$ (since $\tau\ge0$); for $t\ge c$, $\{\tau+c\le t\}=\{\tau\le t-c\}\in\mathcal F_{t-c}\subseteq\mathcal F_t$. (Contrast this with \emph{backward} shifts, as in Quiz B Q1(C) / the practice quiz, which are \emph{not} stopping times.)
-\item[D] $T_4$ is a last-exit time (supremum of a time set within $[0,5]$): deciding $\{T_4\le t\}$ for $t<5$ requires knowing that $B$ has \emph{no} further visit to level $2$ in $(t,5]$ -- information not available at time $t$. Not a stopping time.
+\item[A] $T_1\wedge T_2$: minimum of two stopping times. A stopping time.
+\item[B] $T_1\vee T_2$: maximum of two stopping times. A stopping time.
+\item[C] $T_2-T_1$: a \emph{difference} of stopping times is \textbf{not} covered by the rule, and is not a stopping time in general -- deciding $\{T_2-T_1\le t\}$ can require comparing two not-yet-fully-revealed random times, which is not $\mathcal F_t$-measurable information.
+\item[D] $(T_1\wedge4)+(T_2\wedge4)$: each summand is the minimum of a stopping time and a constant, hence a stopping time; their sum is again a stopping time.
 \end{itemize}
 
-\item[\textbf{Q2.}] \ans{C.} By Problem 5.2, if $A\in\mathcal F_s$ and $T=a$ on $A$, $T=b$ on $A^c$, then $T$ is a stopping time precisely when $a\wedge b\ge s$. Here $A=\{B_4>0\}\in\mathcal F_4$, so we need $a\wedge b\ge4$. Only option C, $(a,b)=(4,6)$, satisfies this.
+\item[\textbf{Q2.}] \ans{A.} By It\^o's formula, with $f(x,t)=x^2+at$, $f_x=2x$, $f_{xx}=2$, $f_t=a$:
+\[
+dY_t=f_x(B_t,t)\,dB_t+\Big(f_t(B_t,t)+\tfrac12f_{xx}(B_t,t)\Big)dt=2B_t\,dB_t+(a+1)\,dt.
+\]
+$Y$ is a martingale iff the drift vanishes, i.e.\ $a+1=0$, so $a=-1$. (This recovers the familiar fact that $B_t^2-t$ is a martingale.)
 
-\item[\textbf{Q3.}] \ans{A.} This is the process of Problem 3.1(c) with $\theta=3$ (so $\theta^2/2=4.5$): $S$ is a submartingale if $\mu>0$ and a supermartingale if $\mu<0$ (and a genuine martingale if $\mu=0$). Hence $S$ is a supermartingale iff $\mu<0$.
+\item[\textbf{Q3.}] \ans{A.} Since the components $B_t^{(1)},B_t^{(2)}$ are independent,
+\[
+\Cov(\lambda\cdot\boldsymbol B_t,\mu\cdot\boldsymbol B_s)=\sum_{i,j}\lambda_i\mu_j\Cov(B_t^{(i)},B_s^{(j)})=\sum_i\lambda_i\mu_i\Cov(B_t^{(i)},B_s^{(i)})=(\lambda\cdot\mu)(s\wedge t),
+\]
+using that $\Cov(B_t^{(i)},B_s^{(j)})=0$ for $i\ne j$ (independent coordinates) and $=s\wedge t$ for $i=j$. With $s\le t$ and $\lambda\cdot\mu=\rho$, this is $\rho s$.
 
-\item[\textbf{Q4.}] \ans{A.} By Result 20 (Toolbox) / Problem 3.1(e): $x\mapsto(x-4)^+$ is convex (and non-decreasing where it matters), so $(B_t-4)^+$ is a submartingale since $B$ is a martingale. The other options fail: $x\mapsto x^3$ and $x\mapsto\sin x$ are not convex (indeed, by It\^o, $d(B_t^3)=3B_t^2\,dB_t+3B_t\,dt$ and $d(\sin B_t)=\cos(B_t)\,dB_t-\tfrac12\sin(B_t)\,dt$ both have sign-indefinite drift, so neither is a submartingale); $x\mapsto-x^2$ is concave, giving a supermartingale, not a submartingale; $x\mapsto e^{-x^2}$ is not convex.
+\item[\textbf{Q4.}] \ans{A.} Since $M_t=W_tB_t-\rho t$ is a martingale, the product rule $d(W_tB_t)=W_t\,dB_t+B_t\,dW_t+d\langle W,B\rangle_t$ forces the finite-variation part of $d(W_tB_t)$ to cancel against $\rho\,dt$, i.e.\ $\langle W,B\rangle_t=\rho t$. Hence $dM_t=W_t\,dB_t+B_t\,dW_t$, and by bracket bilinearity,
+\[
+\langle M,M\rangle_t=\int_0^tW_s^2\,ds+\int_0^tB_s^2\,ds+2\rho\int_0^tW_sB_s\,ds.
+\]
+Taking expectations, using $\E[W_s^2]=\E[B_s^2]=s$ and $\E[W_sB_s]=\Cov(W_s,B_s)=\rho s$:
+\[
+\E[\langle M,M\rangle_t]=\int_0^t\big(s+s+2\rho\cdot\rho s\big)\,ds=2(1+\rho^2)\int_0^ts\,ds=(1+\rho^2)t^2.
+\]
+With $\rho=0.5$: $(1+0.25)t^2=1.25\,t^2$.
 
-\item[\textbf{Q5.}] \ans{A.} The components $B_t^{(1)},B_t^{(2)},B_t^{(3)}$ are independent, each with variance $t$, so $\Var(\lambda\cdot\boldsymbol B_t)=\sum_i\lambda_i^2\Var(B_t^{(i)})=t(\lambda\cdot\lambda)$. Here $\lambda\cdot\lambda=1^2+2^2+2^2=9$, so $\Var(X_t)=9t$.
+\item[\textbf{Q5.}] \ans{A.} By Result 17 (Toolbox), $\Var(I_t)=t^3/3$, so $I_3\sim N(0,9)$, i.e.\ $I_3=3Z$ for $Z\sim N(0,1)$. Hence $P(I_3>3)=P(Z>1)=1-\Phi(1)$.
 
-\item[\textbf{Q6.}] \ans{A.} By Problem 3.3(b)(i), $\Cov(W_s^{(1)},B_t^{(2)})=\rho(s\wedge t)$. For $s\le t$, $s\wedge t=s$, so $\Cov(W_s^{(1)},B_t^{(2)})=0.6s$.
+\item[\textbf{Q6.}] \ans{A.} With $f(x)=x^4$, $f'(x)=4x^3$, $f''(x)=12x^2$, It\^o's formula gives
+\[
+d(B_t^4)=4B_t^3\,dB_t+\tfrac12\cdot12B_t^2\,dt=4B_t^3\,dB_t+6B_t^2\,dt.
+\]
+Hence $dX_t=d(B_t^4)-6B_t^2\,dt=4B_t^3\,dB_t$: the drift term cancels exactly, leaving a pure stochastic integral. So $X$ is a martingale. (This generalises the familiar fact that $B_t^2-t$ is a martingale.)
 
-\item[\textbf{Q7.}] \ans{A.} By Result 17 (Toolbox) / Problem 4.3, for integrated Brownian motion $I_t=\int_0^tB_s\,ds$, $\Var(I_t)=t^3/3$.
+\item[\textbf{Q7.}] \ans{A.} By the It\^o isometry, $\E[M_3^2]=\int_0^3s^2\,ds=9$. By Doob's $L^2$ maximal inequality (Result 19), $\E\big[\sup_{t\in[0,3]}M_t^2\big]\le4\,\E[M_3^2]=4\cdot9=36$.
 
-\item[\textbf{Q8.}] \ans{A.} Using $\Cov(I_s,I_t)=\tfrac{s^2t}2-\tfrac{s^3}6$ for $s\le t$ (Result 17): $\Cov(I_1,I_2)=\tfrac{1\cdot2}2-\tfrac16=1-\tfrac16=\tfrac56$. Then $\Cov(I_1,I_2-I_1)=\Cov(I_1,I_2)-\Var(I_1)=\tfrac56-\tfrac13=\tfrac12$. (In particular this is nonzero, so -- unlike Brownian motion itself -- integrated Brownian motion does \emph{not} have independent increments.)
+\item[\textbf{Q8.}] \ans{A.} Expand $(x+2)^4=x^4+8x^3+24x^2+32x+16$ and substitute $x=B_t$, using $\E[B_t]=0$, $\E[B_t^2]=t$, $\E[B_t^3]=0$, $\E[B_t^4]=3t^2$:
+\[
+\E[(B_t+2)^4]=3t^2+8\cdot0+24t+32\cdot0+16=3t^2+24t+16.
+\]
 
-\item[\textbf{Q9.}] \ans{A.} $W$ is a standard Brownian motion (Result 18, time inversion), so $\Var(W_t)=t$ directly. (Check: $\Var(W_t)=t^2\Var(B_{1/t})=t^2\cdot\tfrac1t=t$.)
+\item[\textbf{Q9.}] \ans{A.} By bracket bilinearity and the orthogonality of $B^{(1)}$ and $B^{(2)}$ (Problem 5.4), the cross term vanishes:
+\[
+\langle X,X\rangle_t=\int_0^t\cos^2(s)\,ds+\int_0^t\sin^2(s)\,ds=\int_0^t\big(\cos^2(s)+\sin^2(s)\big)\,ds=\int_0^t1\,ds=t.
+\]
+Since $\langle X,X\rangle_t=t$ is deterministic, continuous and increasing, L\'evy's characterisation identifies $X$ as a standard Brownian motion.
 
-\item[\textbf{Q10.}] \ans{A.} Doob's $L^2$ maximal inequality (Result 19) gives $\E\big[\sup_{t\in[0,T]}M_t^2\big]\le4\,\E[M_T^2]$. With $T=4$, $\E[M_4^2]=5\cdot4=20$, so the bound is $4\cdot20=80$.
+\item[\textbf{Q10.}] \ans{A.} $W_2=2B_{1/2}$, so $\Cov(B_1,W_2)=2\Cov(B_1,B_{1/2})=2\min(1,0.5)=2\cdot0.5=1$.
 
-\item[\textbf{Q11.}] \ans{A.} $B_t\sim N(0,t)$, so by the even-moment formula $\E[X^{2n}]=(2n-1)!!\,\sigma^{2n}$ for $X\sim N(0,\sigma^2)$ (Problem 1.1(c)) with $\sigma^2=t$, $n=3$: $\E[B_t^6]=5!!\cdot t^3=15t^3$.
-
-\item[\textbf{Q12.}] \ans{A, B, D.}
+\item[\textbf{Q11.}] \ans{A, C.}
 \begin{itemize}[nosep]
-\item[A] $B_s$ is $\mathcal F_s$-measurable and $(B_t-B_s)^2$ is a function of the increment $B_t-B_s$, which is independent of $\mathcal F_s$. Hence $\E[B_s(B_t-B_s)^2]=\E[B_s]\cdot\E[(B_t-B_s)^2]=0\cdot(t-s)=0$ (Problem 3.4(c)).
-\item[B] Writing $B_t=B_s+(B_t-B_s)$: $\E[B_s^2B_t]=\E[B_s^3]+\E[B_s^2(B_t-B_s)]=0+\E[B_s^2]\cdot0=0$ (Problem 3.4(d)).
-\item[C] Writing $B_u=B_t+(B_u-B_t)$: $\E[(B_t-B_s)B_u]=\E[(B_t-B_s)B_t]+\E[(B_t-B_s)(B_u-B_t)]=\big(\E[(B_t-B_s)B_s]+\E[(B_t-B_s)^2]\big)+0=(0+(t-s))+0=t-s\ne0$ in general (Problem 3.4(e)). \textbf{Not} zero.
-\item[D] $B_s,B_t,B_u$ are jointly Gaussian and mean zero; the third (odd) moment of their product vanishes: $\E[B_sB_tB_u]=0$ (Problem 3.4(f)).
+\item[A] $B_s^3$ is $\mathcal F_s$-measurable and $B_t-B_s$ is independent of $\mathcal F_s$, so $\E[B_s^3(B_t-B_s)]=\E[B_s^3]\cdot\E[B_t-B_s]=0\cdot0=0$.
+\item[B] Write $B_t=B_s+(B_t-B_s)$ and expand $B_t^3(B_t-B_s)=B_t^4-B_t^3B_s$. Now $\E[B_t^4]=3t^2$, and by Wick's theorem (for jointly Gaussian mean-zero $(B_t,B_s)$), $\E[B_t^3B_s]=3\Var(B_t)\Cov(B_t,B_s)=3ts$. Hence $\E[B_t^3(B_t-B_s)]=3t^2-3ts=3t(t-s)\ne0$ in general. \textbf{Not} zero -- despite superficially resembling A, the factor $B_t^3$ is \emph{not} independent of $B_t-B_s$ (both involve $B_t$), so the naive ``independent factor times mean-zero increment'' shortcut does not apply here.
+\item[C] $(B_t-B_s)^3$ is (up to sign) the cube of a centered Gaussian random variable $B_t-B_s\sim N(0,t-s)$: all odd central moments vanish, so $\E[(B_t-B_s)^3]=0$.
+\item[D] $B_s^2$ is $\mathcal F_s$-measurable and $(B_t-B_s)^2$ is a function of the increment, independent of $\mathcal F_s$: $\E[B_s^2(B_t-B_s)^2]=\E[B_s^2]\cdot\E[(B_t-B_s)^2]=s(t-s)\ne0$ in general. \textbf{Not} zero.
 \end{itemize}
 
-\item[\textbf{Q13.}] \ans{A.} $X$ is a standard Brownian motion by Brownian scaling (Result 18), so $\Var(X_t)=t$ for every $t$; in particular $\Var(X_5)=5$. (Check directly: $\Var(X_5)=\lambda^2\Var(B_{5/\lambda^2})=9\cdot\tfrac59=5$.)
-
-\item[\textbf{Q14.}] \ans{A.} By the It\^o isometry, $\E[X_s^2]=\int_0^se^{6u}\,du=\tfrac16(e^{6s}-1)$. Applying the isometry again to the outer integral,
+\item[\textbf{Q12.}] \ans{A.} This is the general conditional-MGF identity for a continuous local martingale with deterministic quadratic variation $g$ (Problem 6.2(b)(ii)):
 \[
-\E\left[\left(\int_0^tX_s\,dB_s\right)^2\right]=\int_0^t\E[X_s^2]\,ds=\int_0^t\tfrac16(e^{6s}-1)\,ds=\tfrac1{36}(e^{6t}-1)-\tfrac t6.
+\E\big[\exp(\lambda(M_t-M_s))\mid\mathcal F_s\big]=\exp\Big(\tfrac{\lambda^2}2\big(g(t)-g(s)\big)\Big).
+\]
+With $g(t)=t^2$: $g(t)-g(s)=t^2-s^2$, giving $\exp\big(\tfrac{\lambda^2}2(t^2-s^2)\big)$.
+
+\item[\textbf{Q13.}] \ans{A.} $C_t=Z_t^2=\exp\big(2\lambda\cdot\boldsymbol B_t-|\lambda|^2t\big)$. Since the coordinates of $\boldsymbol B_t$ are independent $N(0,t)$, for any $v\in\R^d$, $\E[\exp(v\cdot\boldsymbol B_t)]=\exp\big(\tfrac12|v|^2t\big)$. With $v=2\lambda$: $\E[\exp(2\lambda\cdot\boldsymbol B_t)]=\exp(2|\lambda|^2t)$. Hence
+\[
+\E[C_t]=\exp(2|\lambda|^2t)\cdot e^{-|\lambda|^2t}=e^{|\lambda|^2t}.
+\]
+(Consistent with $C=Z^2$ being a submartingale, since $x\mapsto x^2$ is convex and $Z$ is a martingale: $\E[C_t]=e^{|\lambda|^2t}\ge1=\E[C_0]$ and is strictly increasing.)
+
+\item[\textbf{Q14.}] \ans{A.} By the It\^o isometry, $\E[X_s^2]=\int_0^se^{8u}\,du=\tfrac18(e^{8s}-1)$. Applying the isometry again to the outer integral,
+\[
+\E\left[\left(\int_0^tX_s\,dB_s\right)^2\right]=\int_0^t\E[X_s^2]\,ds=\int_0^t\tfrac18(e^{8s}-1)\,ds=\tfrac1{64}(e^{8t}-1)-\tfrac t8.
 \]
 
-\item[\textbf{Q15.}] \ans{D.} $X_t=e^{-3t}B_{e^{6t}}$ is a deterministic rescaling of Brownian motion at a deterministic time, hence centered Gaussian: $\E[X_t]=e^{-3t}\E[B_{e^{6t}}]=0$. For $0\le s<t$ (so $e^{6s}<e^{6t}$),
+\item[\textbf{Q15.}] \ans{D.} $X_t=e^{-4t}B_{e^{8t}}$ is a deterministic rescaling of Brownian motion at a deterministic time, hence centered Gaussian: $\E[X_t]=e^{-4t}\E[B_{e^{8t}}]=0$. For $0\le s<t$ (so $e^{8s}<e^{8t}$),
 \[
-\Cov(X_s,X_t)=e^{-3s-3t}\Cov(B_{e^{6s}},B_{e^{6t}})=e^{-3s-3t}\min(e^{6s},e^{6t})=e^{-3s-3t}e^{6s}=e^{3s-3t}=e^{-3(t-s)}.
+\Cov(X_s,X_t)=e^{-4s-4t}\Cov(B_{e^{8s}},B_{e^{8t}})=e^{-4s-4t}\min(e^{8s},e^{8t})=e^{-4s-4t}e^{8s}=e^{4s-4t}=e^{-4(t-s)}.
 \]
 
-\item[\textbf{Q16.}] \ans{B.} $e^{\lambda X_t}=e^{\lambda B_t+3\lambda t}=e^{\lambda B_t-\lambda^2t/2}\cdot e^{(3\lambda+\lambda^2/2)t}$. Since $e^{\lambda B_t-\lambda^2t/2}$ is always a martingale, the product is a martingale iff the remaining deterministic exponential factor is constant, i.e.\ $3\lambda+\lambda^2/2=0$, giving $\lambda=0$ or $\lambda=-6$. So $e^{-6X_t}$ is a martingale.
+\item[\textbf{Q16.}] \ans{B.} $e^{\lambda X_t}=e^{\lambda B_t+4\lambda t}=e^{\lambda B_t-\lambda^2t/2}\cdot e^{(4\lambda+\lambda^2/2)t}$. Since $e^{\lambda B_t-\lambda^2t/2}$ is always a martingale, the product is a martingale iff the remaining deterministic exponential factor is constant, i.e.\ $4\lambda+\lambda^2/2=0$, giving $\lambda=0$ or $\lambda=-8$. So $e^{-8X_t}$ is a martingale.
 
 \end{enumerate}
 
