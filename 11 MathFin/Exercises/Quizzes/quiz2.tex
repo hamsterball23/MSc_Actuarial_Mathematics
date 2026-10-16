@@ -44,130 +44,146 @@
 
 \item[\textbf{Q1.}] \textbf{(6 pts, Select ALL that apply)} Which of the following random times are stopping times with respect to $(\mathcal F_t)$?
 \begin{enumerate}
-  \item $T_1=\inf\{t\ge 0 \mid B_t=-3\}$
-  \item $T_2=\inf\{t\ge 0 \mid B_t=5+2t\}$
-  \item $T_3=\inf\{t\ge 0 \mid B_t\ge 1\}-0.5$
-  \item $T_4=\inf\{t\ge 0 \mid |B_t|\ge 2\}$
+  \item $T_1=\inf\{t\ge 0 \mid B_t=4\}$
+  \item $T_2=\inf\{t\ge 0 \mid B_t=3-2t\}$
+  \item $T_3=\inf\{t\ge 0 \mid B_t\ge 2\}-1$
+  \item $T_4=\inf\{t\ge 0 \mid |B_t|\ge 3\}$
 \end{enumerate}
 
-\item[\textbf{Q2.}] \textbf{(5 pts, Select ONE)} Let $\rho=\sup\{t\in[0,10]\mid B_t=0\}$ be the last time before time $10$ at which $B$ visits $0$. Which statement is correct?
+\item[\textbf{Q2.}] \textbf{(6 pts, Select ONE)} Let $A\in\mathcal F_3$ and define the random time
+\[
+T=\begin{cases}a & \text{on } A\\ b & \text{on } A^c,\end{cases}
+\]
+where $A=\{B_3>0\}$. For which pair $(a,b)$ is $T$ a stopping time?
+\begin{enumerate}
+  \item $(a,b)=(3,1)$
+  \item $(a,b)=(1,5)$
+  \item $(a,b)=(3,5)$
+  \item $(a,b)=(2,3)$
+  \item $(a,b)=(3,2)$
+\end{enumerate}
+
+\item[\textbf{Q3.}] \textbf{(5 pts, Select ONE)} Let $\rho=\sup\{t\in[0,8]\mid B_t=0\}$ be the last time before time $8$ at which $B$ visits $0$. Which statement is correct?
 \begin{enumerate}
   \item $\rho$ is a stopping time, since $\{B_t=0\}\in\mathcal F_t$ for every $t$.
-  \item $\rho$ is \emph{not} a stopping time: for $t<10$, deciding $\{\rho\le t\}$ requires knowing that $B$ has \emph{no} zero in $(t,10]$, which is information not available at time $t$.
+  \item $\rho$ is \emph{not} a stopping time: for $t<8$, deciding $\{\rho\le t\}$ requires knowing that $B$ has \emph{no} zero in $(t,8]$, which is information not available at time $t$.
   \item $\rho$ is a stopping time because $0$ is a deterministic level.
-  \item $\rho$ is a stopping time only if $t\ge 5$.
+  \item $\rho$ is a stopping time only if $t\ge 4$.
 \end{enumerate}
 
-\item[\textbf{Q3.}] \textbf{(6 pts, Select ONE)} For which values of $\theta\in\R$ is the process $S_t=\exp(\theta B_t-5t)$ a martingale?
+\item[\textbf{Q4.}] \textbf{(5 pts, Select ONE)} Determine $\displaystyle\lim_{t\to\infty}\E\big[\mathbf 1_{\{B_t\le\sqrt3\}}\big]$.
 \begin{enumerate}
-  \item $\theta=5$ only
-  \item $\theta=\sqrt{10}$ or $\theta=-\sqrt{10}$
-  \item $\theta=\sqrt5$ only
-  \item No value of $\theta$ makes $S$ a martingale
+  \item $1$
+  \item $1/2$
+  \item $1/4$
+  \item $0$
+  \item $1/\sqrt2$
 \end{enumerate}
 
-\item[\textbf{Q4.}] \textbf{(6 pts, Select ONE)} Let $M=(M_t,t\ge0)$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=9t$. For which values of $\theta$ is $Y_t=\exp(\theta M_t-18t)$ a martingale?
+\item[\textbf{Q5.}] \textbf{(7 pts, Select ONE)} Determine which type of process $X_t=e^{-2t}B_{e^{4t}}$ is.
 \begin{enumerate}
-  \item $\theta=\pm2$
-  \item $\theta=\pm3$
-  \item $\theta=\pm4$
-  \item $\theta=\pm9$
+  \item Centered Gaussian process with $\Cov(X_s,X_t)=e^{2(t-s)}$ for $0\le s<t$.
+  \item Gaussian process with $\E[X_t]=e^{-2t}$ and $\Cov(X_s,X_t)=e^{2(t-s)}$ for $0\le s<t$.
+  \item Gaussian process with $\E[X_t]=e^{-2t}$ and $\Cov(X_s,X_t)=e^{-2(t-s)}$ for $0\le s<t$.
+  \item Centered Gaussian process with $\Cov(X_s,X_t)=e^{-2(t-s)}$ for $0\le s<t$.
+  \item Gaussian process with $\E[X_t]=e^{-2t}$ and $\Cov(X_s,X_t)=e^{4(t-s)}$ for $0\le s<t$.
 \end{enumerate}
 
-\item[\textbf{Q5.}] \textbf{(5 pts, Select ONE)} With $M$ as in Q4 (i.e.\ $\E[M_t^2]=9t$), what is the quadratic variation $\langle M,M\rangle_t$?
+\item[\textbf{Q6.}] \textbf{(7 pts, Select ONE)} For $0\le s<t$, determine $\Cov(B_s^2,B_t^2)$.
 \begin{enumerate}
-  \item $3t$
-  \item $9t$
-  \item $9t^2$
-  \item $t$
+  \item $2s^2$
+  \item $s^2$
+  \item $s(t-s)$
+  \item $2st$
+  \item $t^2-s^2$
 \end{enumerate}
 
-\item[\textbf{Q6.}] \textbf{(6 pts, Select ONE)} Let $Y_t=\int_0^t s^3\,dB_s$. Compute $\langle Y,Y\rangle_t$.
+\item[\textbf{Q7.}] \textbf{(6 pts, Select ONE)} Let $X_t=B_t+2t$. Determine which process is a martingale.
 \begin{enumerate}
-  \item $t^4/4$
-  \item $t^6/6$
-  \item $t^7/7$
-  \item $t^8/8$
+  \item $e^{-2X_t}$
+  \item $e^{-4X_t}$
+  \item $e^{2X_t}$
+  \item $e^{4X_t}$
+  \item $e^{-X_t}$
 \end{enumerate}
 
-\item[\textbf{Q7.}] \textbf{(8 pts, Select ALL that apply)} For fixed $0\le s<t$, which of the following quantities equal $0$?
+\item[\textbf{Q8.}] \textbf{(6 pts, Select ONE)} Determine the value of $\displaystyle\E\left[\left(\int_0^4\mathbf 1_{\{B_t<0\}}\,dB_t\right)^2\right]$.
+\begin{enumerate}
+  \item $2$
+  \item $4$
+  \item $1$
+  \item $1/2$
+  \item $0$
+\end{enumerate}
+
+\item[\textbf{Q9.}] \textbf{(8 pts, Select ONE)} Let $X_t=\int_0^t e^{2s}\,dB_s$. Determine the value of $\displaystyle\E\left[\left(\int_0^t X_s\,dB_s\right)^2\right]$.
+\begin{enumerate}
+  \item $\dfrac1{16}(e^{4t}-1)-\dfrac t4$
+  \item $\dfrac1{16}(e^{2t}-1)-\dfrac t4$
+  \item $\dfrac1{16}(e^{4t}-1)-\dfrac t2$
+  \item $\dfrac14(e^{4t}-1)-\dfrac t4$
+  \item $\dfrac1{16}(e^{4t}-1)$
+\end{enumerate}
+
+\item[\textbf{Q10.}] \textbf{(6 pts, Select ONE)} Let $X_t=B_t-\dfrac t2 B_2$ for $0\le t\le 2$. Determine the value of $\Cov(X_s,X_t)$ for $0\le s\le t\le 2$.
+\begin{enumerate}
+  \item $\dfrac{s(2-t)}2$
+  \item $s(1-t)$
+  \item $\dfrac{t(2-s)}2$
+  \item $\dfrac{s(2-s)}2$
+  \item $s-t$
+\end{enumerate}
+
+\item[\textbf{Q11.}] \textbf{(5 pts, Select ONE)} Determine the quadratic variation of $X_t=\displaystyle\int_0^t B_s^2\,dB_s$, that is, determine $\langle X,X\rangle_t$.
+\begin{enumerate}
+  \item $\displaystyle\int_0^t B_s^4\,ds$
+  \item $\displaystyle\int_0^t s^4\,dB_s$
+  \item $t^5/5$
+  \item $\displaystyle\int_0^t B_s^2\,ds$
+  \item $t^3/3$
+\end{enumerate}
+
+\item[\textbf{Q12.}] \textbf{(6 pts, Select ALL that apply)} For fixed $0\le s<t<u$, which of the following quantities equal $0$?
 \begin{enumerate}
   \item $\E[B_t(B_t-B_s)]$
-  \item $\E[B_s^3]$
+  \item $\E[B_s(B_u-B_t)]$
+  \item $\E[B_sB_tB_u]$
   \item $\E[B_s^2(B_t-B_s)]$
-  \item $\E[B_t^3]$
 \end{enumerate}
 
-\item[\textbf{Q8.}] \textbf{(6 pts, Select ONE)} For $0\le s<t<u$, compute $\E[B_s(B_u-B_t)]$.
+\item[\textbf{Q13.}] \textbf{(6 pts, Select ONE)} Let $M$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=4t$. Compute $\Cov(M_3,M_{10})$.
 \begin{enumerate}
-  \item $0$
-  \item $u-t$
-  \item $t-s$
-  \item $s$
+  \item $40$
+  \item $12$
+  \item $28$
+  \item $4$
+  \item $120$
 \end{enumerate}
 
-\item[\textbf{Q9.}] \textbf{(5 pts, Select ONE)} For $0\le s<t<u$, compute $\E[B_sB_tB_u]$.
-\begin{enumerate}
-  \item $0$
-  \item $st$
-  \item $s$
-  \item $stu$
-\end{enumerate}
-
-\item[\textbf{Q10.}] \textbf{(6 pts, Select ONE)} For $0\le s<t<u<v$, compute $\E[(B_t-B_s)(B_u-B_t)]$.
-\begin{enumerate}
-  \item $t-s$
-  \item $u-t$
-  \item $0$
-  \item $(t-s)(u-t)$
-\end{enumerate}
-
-\item[\textbf{Q11.}] \textbf{(6 pts, Select ONE)} Let $Y_t=\int_0^t (s+1)\,dB_s$. Compute $\Cov(B_t,Y_t)$.
-\begin{enumerate}
-  \item $t^2/2+t$
-  \item $t^2/2$
-  \item $t^2+t$
-  \item $t$
-\end{enumerate}
-
-\item[\textbf{Q12.}] \textbf{(6 pts, Select ONE)} Let $M$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=9t$. Compute $\Cov(M_3,M_{10})$.
-\begin{enumerate}
-  \item $90$
-  \item $27$
-  \item $63$
-  \item $9$
-\end{enumerate}
-
-\item[\textbf{Q13.}] \textbf{(5 pts, Select ONE)} Is $X_t=\int_0^t s^2\,dB_s$ a martingale?
-\begin{enumerate}
-  \item Yes, because $s^2$ is a deterministic, square-integrable integrand, so the Itô integral is always a (true) martingale.
-  \item No, because $s^2\to\infty$ as $s\to\infty$.
-  \item Yes, but only on bounded time intervals.
-  \item No, because the integrand is not adapted.
-\end{enumerate}
-
-\item[\textbf{Q14.}] \textbf{(7 pts, Select ONE)} Define $X_t=\int_0^t e^{s-t}\,dB_s$ (note the integrand depends on the upper limit $t$ itself). Is $(X_t,t\ge0)$ a martingale?
+\item[\textbf{Q14.}] \textbf{(7 pts, Select ONE)} Define $X_t=\int_0^t e^{2(s-t)}\,dB_s$ (note the integrand depends on the upper limit $t$ itself). Is $(X_t,t\ge0)$ a martingale?
 \begin{enumerate}
   \item Yes, it is a stochastic integral with respect to $B$, hence automatically a martingale.
-  \item No: Itô's formula gives $dX_t=-X_t\,dt+dB_t$, which has a nonzero drift term, so $X$ is not a martingale.
+  \item No: Itô's formula gives $dX_t=-2X_t\,dt+dB_t$, which has a nonzero drift term, so $X$ is not a martingale.
   \item Yes, because $X_t$ is Gaussian with mean $0$.
   \item No, because $X_t$ is not square-integrable.
 \end{enumerate}
 
-\item[\textbf{Q15.}] \textbf{(7 pts, Select ONE)} Let $X_t=\int_0^t(2s-1)\,dB_s$. Compute $\Var(X_t)$.
+\item[\textbf{Q15.}] \textbf{(7 pts, Select ONE)} Let $X_t=\int_0^t(3s-1)\,dB_s$. Compute $\Var(X_t)$.
 \begin{enumerate}
-  \item $4t^3/3-2t^2+t$
-  \item $4t^3/3+t$
-  \item $(2t-1)^2t$
-  \item $4t^3/3-2t^2$
+  \item $3t^3-3t^2+t$
+  \item $3t^3+t$
+  \item $(3t-1)^2t$
+  \item $3t^3-3t^2$
+  \item $3t^3-6t^2+t$
 \end{enumerate}
 
-\item[\textbf{Q16.}] \textbf{(10 pts, Select ONE)} Let $Y_t=\int_0^t s\,dB_s$ and $Z_t=\int_0^t Y_s\,dB_s$. Compute $\E[Y_tZ_t]$.
+\item[\textbf{Q16.}] \textbf{(7 pts, Select ONE)} Let $Y_t=\int_0^t 2s\,dB_s$ and $Z_t=\int_0^t Y_s\,dB_s$. Compute $\E[Y_tZ_t]$.
 \begin{enumerate}
   \item $0$
-  \item $t^4/12$
+  \item $t^4/3$
+  \item $t^4/6$
   \item $t^3/3$
-  \item $t^4/8$
+  \item $t^5/10$
 \end{enumerate}
 
 \end{enumerate}
