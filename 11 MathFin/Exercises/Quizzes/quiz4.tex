@@ -1,0 +1,192 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}, leftmargin=*, itemsep=10pt, topsep=6pt}
+\setlist[enumerate,2]{label=(\Alph*), leftmargin=1.6cm}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Mathematical Finance \& Stochastic Processes}
+\fancyhead[R]{Practice Quiz D}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Mathematical Finance and Stochastic Processes in Continuous-Time}\\[4pt]
+{\Large Practice Quiz D --- Brownian Motion, Martingales \& Stochastic Integrals}\\[8pt]
+\textbf{Time allowed: 60 minutes} \qquad \textbf{Total: 16 questions, 100 points}
+\end{center}
+
+\vspace{4pt}
+\noindent\textbf{Instructions.}
+\begin{itemize}[nosep,leftmargin=*]
+  \item Unless stated otherwise, $B=(B_t,t\ge0)$ is a standard Brownian motion and $(\mathcal F_t,t\ge0)$ is its (completed, right-continuous) canonical filtration, and $\Phi$ denotes the standard normal c.d.f.
+  \item Each question is worth the number of points shown. Questions marked \textbf{(Select ONE)} have exactly one correct option; questions marked \textbf{(Select ALL that apply)} may have more than one correct option, and you must select all of them for full marks.
+  \item No partial credit is given for multi-select questions unless stated otherwise by your instructor.
+  \item You may use any result proved on the problem sheets or in the lecture notes without re-proving it. This quiz is harder than Quizzes A--C: several questions require the reflection principle, the optional stopping theorem, the multivariate It\^o formula, or the stochastic product rule, none of which appeared on the earlier practice quizzes.
+\end{itemize}
+
+\vspace{10pt}
+\hrule
+\vspace{10pt}
+
+\begin{enumerate}
+
+\item[\textbf{Q1.}] \textbf{(6 pts, Select ALL that apply)} Let $T_1,T_2$ be stopping times with respect to $(\mathcal F_t)$. Which of the following are also stopping times?
+\begin{enumerate}
+  \item $2T_1$
+  \item $T_1+2$
+  \item $(T_1-2)^+$ (i.e.\ $\max\{T_1-2,0\}$)
+  \item $T_1\wedge T_2\wedge 5$
+\end{enumerate}
+
+\item[\textbf{Q2.}] \textbf{(7 pts, Select ONE)} Let $B^{(1)},B^{(2)}$ be independent Brownian motions and let $X_t=\big(B^{(1)}_t\big)^2+\big(B^{(2)}_t\big)^2$. Using It\^o's formula for a function of two independent Brownian motions, determine the constant $c$ for which $X_t-ct$ is a martingale.
+\begin{enumerate}
+  \item $c=2$
+  \item $c=1$
+  \item $c=0$
+  \item $c=4$
+  \item $c=1/2$
+\end{enumerate}
+
+\item[\textbf{Q3.}] \textbf{(7 pts, Select ONE)} Using the reflection principle, determine $P\big(\max_{s\in[0,4]}B_s\ge2\big)$.
+\begin{enumerate}
+  \item $1-\Phi(1)$
+  \item $2(1-\Phi(1))$
+  \item $2\Phi(1)-1$
+  \item $\Phi(0.5)$
+  \item $2(1-\Phi(2))$
+\end{enumerate}
+
+\item[\textbf{Q4.}] \textbf{(7 pts, Select ONE)} Let $T=\inf\{t\ge0\mid B_t\in\{3,-2\}\}$, the first exit time of $B$ from $(-2,3)$ (you may assume $T<\infty$ a.s.\ and that the optional stopping theorem applies to $B$ at $T$). Determine $p=P(B_T=3)$.
+\begin{enumerate}
+  \item $1/2$
+  \item $3/5$
+  \item $2/5$
+  \item $2/3$
+  \item $1/5$
+\end{enumerate}
+
+\item[\textbf{Q5.}] \textbf{(7 pts, Select ONE)} With $T$ as in Q4 (you may also assume the optional stopping theorem applies to $B_t^2-t$ at $T$), determine $\E[T]$.
+\begin{enumerate}
+  \item $5$
+  \item $36/5$
+  \item $11$
+  \item $6$
+  \item $3$
+\end{enumerate}
+
+\item[\textbf{Q6.}] \textbf{(6 pts, Select ONE)} Let $X_t=\int_0^ts\,dB_s$ and $Z_t=B_tX_t$. Using It\^o's product rule, $dZ_t=B_t\,dX_t+X_t\,dB_t+d\langle B,X\rangle_t$. Determine the drift coefficient (the coefficient of $dt$) in $dZ_t$.
+\begin{enumerate}
+  \item $t$
+  \item $t/2$
+  \item $2t$
+  \item $0$
+  \item $B_t$
+\end{enumerate}
+
+\item[\textbf{Q7.}] \textbf{(6 pts, Select ONE)} Let $M$ be a continuous Gaussian martingale with $M_0=0$ and $\E[M_t^2]=3t^2$. Find all $\theta\in\R$ for which $Y_t=\exp(\theta M_t-18t^2)$ is a martingale.
+\begin{enumerate}
+  \item $\theta=\pm6$
+  \item $\theta=\pm3\sqrt2$
+  \item $\theta=\pm4$
+  \item $\theta=\pm\sqrt{18}$
+  \item $\theta=\pm2\sqrt3$
+\end{enumerate}
+
+\item[\textbf{Q8.}] \textbf{(6 pts, Select ONE)} Is $X_t=tB_t$ a martingale?
+\begin{enumerate}
+  \item Yes, since $B$ is a martingale and $t$ is a deterministic factor, and any deterministic multiple of a martingale is again a martingale.
+  \item No: $\E[X_t\mid\mathcal F_s]=tB_s$, which differs from $X_s=sB_s$ in general, so $X$ is not a martingale.
+  \item Yes, because $X_t$ is Gaussian with mean $0$.
+  \item No, because $X_t$ has finite variation.
+  \item Yes, because It\^o's formula gives $d(tB_t)=t\,dB_t+B_t\,dt$, which has zero drift.
+\end{enumerate}
+
+\item[\textbf{Q9.}] \textbf{(7 pts, Select ALL that apply)} For fixed $0\le s<t$, which of the following quantities equal $0$?
+\begin{enumerate}
+  \item $\E[B_t^3(B_t-B_s)]$
+  \item $\E[B_s^3]$
+  \item $\E[(B_t-B_s)^3]$
+  \item $\E[B_s^2(B_t-B_s)]$
+\end{enumerate}
+
+\item[\textbf{Q10.}] \textbf{(6 pts, Select ONE)} For fixed $0\le s<t$, determine $P(B_t>B_s\mid\mathcal F_s)$.
+\begin{enumerate}
+  \item $\Phi\!\left(\dfrac{B_s}{\sqrt{t-s}}\right)$
+  \item $1-\Phi(B_s)$
+  \item $\Phi\!\left(\dfrac{-B_s}{\sqrt{t-s}}\right)$
+  \item $1/2$
+  \item $\dfrac{t-s}{2t}$
+\end{enumerate}
+
+\item[\textbf{Q11.}] \textbf{(6 pts, Select ONE)} Let $\boldsymbol B=(B^{(1)},B^{(2)},B^{(3)})$ be a $3$-dimensional Brownian motion (independent components) and let $\lambda=\big(\tfrac1{\sqrt3},\tfrac1{\sqrt3},\tfrac1{\sqrt3}\big)$, $\mu=\big(\tfrac1{\sqrt2},-\tfrac1{\sqrt2},0\big)$, so $\lambda\cdot\lambda=\mu\cdot\mu=1$ and $\rho=\lambda\cdot\mu=0$. For $0\le s\le t$, determine $\Cov(\lambda\cdot\boldsymbol B_t,\ \mu\cdot\boldsymbol B_s)$.
+\begin{enumerate}
+  \item $s$
+  \item $st$
+  \item $\sqrt s$
+  \item $1$
+  \item $0$
+\end{enumerate}
+
+\item[\textbf{Q12.}] \textbf{(6 pts, Select ONE)} Let $M_t=\int_0^ts^2\,dB_s$. Using the It\^o isometry together with Doob's $L^2$ maximal inequality, determine the resulting upper bound for $\E\big[\sup_{t\in[0,2]}M_t^2\big]$.
+\begin{enumerate}
+  \item $32/5$
+  \item $64/5$
+  \item $128/5$
+  \item $16$
+  \item $256/5$
+\end{enumerate}
+
+\item[\textbf{Q13.}] \textbf{(6 pts, Select ONE)} Let $I_t=\int_0^tB_r\,dr$ be integrated Brownian motion. Using $\Var(I_t)=t^3/3$ and $\Cov(I_s,I_t)=s^2\big(\tfrac t2-\tfrac s6\big)$ for $s\le t$, determine $\Var(I_5-I_2)$.
+\begin{enumerate}
+  \item $19$
+  \item $27$
+  \item $9$
+  \item $33$
+  \item $21$
+\end{enumerate}
+
+\item[\textbf{Q14.}] \textbf{(6 pts, Select ONE)} Let $X_t=\int_0^t2s\,dB_s$ and $Y_t=\int_0^t3s^2\,dB_s$ (same driving Brownian motion $B$). Using bracket bilinearity, determine $\langle X+Y,\,X+Y\rangle_t$.
+\begin{enumerate}
+  \item $\dfrac{4t^3}3+\dfrac{9t^5}5$
+  \item $\dfrac{4t^3}3+3t^4+\dfrac{9t^5}5$
+  \item $\dfrac{2t^3}3+3t^4+\dfrac{9t^5}{10}$
+  \item $\dfrac{4t^3}3+6t^4+\dfrac{9t^5}5$
+  \item $\dfrac{4t^3}3+3t^4+\dfrac{9t^5}{10}$
+\end{enumerate}
+
+\item[\textbf{Q15.}] \textbf{(5 pts, Select ALL that apply)} Let $M=(M_t,t\ge0)$ be a (square-integrable, continuous) martingale. Which of the following are submartingales?
+\begin{enumerate}
+  \item $M_t^2$
+  \item $|M_t|$
+  \item $-M_t^2$
+  \item $e^{M_t}$
+\end{enumerate}
+
+\item[\textbf{Q16.}] \textbf{(6 pts, Select ONE)} Let $X_t=\int_0^te^{3s}\,dB_s$. Determine the value of $\displaystyle\E\left[\left(\int_0^tX_s\,dB_s\right)^2\right]$.
+\begin{enumerate}
+  \item $\dfrac1{36}(e^{3t}-1)-\dfrac t6$
+  \item $\dfrac1{18}(e^{6t}-1)-\dfrac t6$
+  \item $\dfrac1{36}(e^{6t}-1)-\dfrac t6$
+  \item $\dfrac1{36}(e^{6t}-1)$
+  \item $\dfrac1{36}(e^{6t}-1)-\dfrac t3$
+\end{enumerate}
+
+\end{enumerate}
+
+\vspace{10pt}
+\begin{center}\rule{0.5\textwidth}{0.4pt}\\[2pt]\textbf{END OF QUIZ D}\end{center}
+
+\end{document}

@@ -1,0 +1,116 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.}, leftmargin=*, itemsep=10pt, topsep=6pt}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\newcommand{\ans}[1]{\par\noindent\textbf{\color{blue!50!black}Answer: #1}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Mathematical Finance \& Stochastic Processes}
+\fancyhead[R]{Practice Quiz D --- Solutions}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Practice Quiz D --- Solutions}
+\end{center}
+\vspace{6pt}
+\hrule
+\vspace{10pt}
+
+\begin{enumerate}
+
+\item[\textbf{Q1.}] \ans{A, B, D.}
+\begin{itemize}[nosep]
+\item[A] $2T_1$: for $c\ge1$, $\{cT_1\le t\}=\{T_1\le t/c\}$, and $t/c\le t$, so this event is $\mathcal F_{t/c}$-measurable, hence $\mathcal F_t$-measurable. A stopping time.
+\item[B] $T_1+2$: $\{T_1+2\le t\}=\{T_1\le t-2\}\in\mathcal F_{t-2}\subseteq\mathcal F_t$. A stopping time.
+\item[C] $(T_1-2)^+$: $\{(T_1-2)^+\le t\}=\{T_1\le t+2\}\in\mathcal F_{t+2}$, which is \textbf{not} contained in $\mathcal F_t$ (information up to $t+2$ is needed to decide the event by time $t$). \textbf{Not} a stopping time in general -- shifting a stopping time \emph{earlier} looks into the future, in contrast to B which shifts it later.
+\item[D] $T_1\wedge T_2\wedge5$: minimum of two stopping times and a constant (Toolbox Result 3). A stopping time.
+\end{itemize}
+
+\item[\textbf{Q2.}] \ans{A.} By It\^o's formula for a function of two independent Brownian motions, with $f(x,y)=x^2+y^2$: $f_x=2x$, $f_y=2y$, $f_{xx}=f_{yy}=2$, $f_{xy}=0$. Since $\langle B^{(1)},B^{(2)}\rangle_t=0$ (independent Brownian motions, Toolbox Result 11),
+\[
+dX_t=2B^{(1)}_t\,dB^{(1)}_t+2B^{(2)}_t\,dB^{(2)}_t+\tfrac12\big(2+2\big)\,dt=2B^{(1)}_t\,dB^{(1)}_t+2B^{(2)}_t\,dB^{(2)}_t+2\,dt.
+\]
+The compensator is $2\,dt$, so $c=2$.
+
+\item[\textbf{Q3.}] \ans{B.} By the reflection principle, $P\big(\max_{s\in[0,t]}B_s\ge a\big)=2P(B_t\ge a)=2\big(1-\Phi(a/\sqrt t)\big)$ for $a\ge0$. With $a=2$, $t=4$: $a/\sqrt t=1$, giving $2(1-\Phi(1))$.
+
+\item[\textbf{Q4.}] \ans{C.} $B$ is a martingale, and (by assumption) the optional stopping theorem applies at $T$, so $\E[B_T]=\E[B_0]=0$. Writing $p=P(B_T=3)$ (so $P(B_T=-2)=1-p$):
+\[
+3p-2(1-p)=0\ \Longrightarrow\ 5p=2\ \Longrightarrow\ p=2/5.
+\]
+
+\item[\textbf{Q5.}] \ans{D.} $B_t^2-t$ is a martingale (Toolbox Result 13), so (by assumption) the optional stopping theorem gives $\E[B_T^2-T]=\E[B_0^2-0]=0$, i.e.\ $\E[T]=\E[B_T^2]$. Using $p=2/5$ from Q4:
+\[
+\E[B_T^2]=9p+4(1-p)=9\cdot\tfrac25+4\cdot\tfrac35=\tfrac{18}5+\tfrac{12}5=\tfrac{30}5=6.
+\]
+
+\item[\textbf{Q6.}] \ans{A.} First, $\langle B,X\rangle_t=\int_0^t1\cdot s\,ds=t^2/2$ (bracket bilinearity, Toolbox Result 11), so $d\langle B,X\rangle_t=t\,dt$. Then
+\[
+dZ_t=B_t\,dX_t+X_t\,dB_t+d\langle B,X\rangle_t=B_t\cdot t\,dB_t+X_t\,dB_t+t\,dt=(tB_t+X_t)\,dB_t+t\,dt.
+\]
+The drift coefficient is $t$.
+
+\item[\textbf{Q7.}] \ans{E.} By the exponential-martingale template (Toolbox Result 7), with $g(t)=3t^2$, $Y_t=\exp(\theta M_t-\tfrac12\theta^2g(t))$ is a martingale for every $\theta$. Matching $\tfrac12\theta^2\cdot3t^2=18t^2$ gives $\theta^2\cdot\tfrac32=18$, so $\theta^2=12$, i.e.\ $\theta=\pm2\sqrt3$.
+
+\item[\textbf{Q8.}] \ans{B.} Since $B_t-B_s$ is independent of $\mathcal F_s$ with mean $0$,
+\[
+\E[X_t\mid\mathcal F_s]=\E[tB_t\mid\mathcal F_s]=t\,\E[B_t\mid\mathcal F_s]=tB_s.
+\]
+This equals $X_s=sB_s$ only when $t=s$ (or $B_s=0$), not for all $\omega$ and $t>s$, so $X$ is not a martingale. (Option E's computation of $dX_t$ is correct but its drift, $B_t\,dt$, is not identically zero, so the conclusion in E is wrong; option D is also wrong since $X_t=tB_t$ is \emph{not} finite variation -- it still has a nonzero stochastic part $t\,dB_t$.)
+
+\item[\textbf{Q9.}] \ans{B, C, D.}
+\begin{itemize}[nosep]
+\item[A] As in Quiz C, Q11(B): $\E[B_t^3(B_t-B_s)]=\E[B_t^4]-\E[B_t^3B_s]=3t^2-3ts=3t(t-s)\ne0$ in general. \textbf{Not} zero.
+\item[B] $\E[B_s^3]=0$: odd central moment of $B_s\sim N(0,s)$ (Toolbox Result 9).
+\item[C] $\E[(B_t-B_s)^3]=0$: odd central moment of $B_t-B_s\sim N(0,t-s)$.
+\item[D] $B_s^2$ is $\mathcal F_s$-measurable and $B_t-B_s$ is independent of $\mathcal F_s$ with mean $0$ (Toolbox Result 8): $\E[B_s^2(B_t-B_s)]=\E[B_s^2]\E[B_t-B_s]=s\cdot0=0$.
+\end{itemize}
+
+\item[\textbf{Q10.}] \ans{D.} $B_t-B_s$ is independent of $\mathcal F_s$ and symmetric about $0$ (it is $N(0,t-s)$-distributed), so
+\[
+P(B_t>B_s\mid\mathcal F_s)=P(B_t-B_s>0\mid\mathcal F_s)=P(B_t-B_s>0)=\tfrac12,
+\]
+regardless of $B_s$, $s$, or $t$ (note $B_s$ itself has a continuous distribution, so the boundary case has probability $0$).
+
+\item[\textbf{Q11.}] \ans{E.} Since the components of $\boldsymbol B$ are independent, $\Cov(B^{(i)}_t,B^{(j)}_s)=0$ for $i\ne j$ and $=s\wedge t$ for $i=j$ (as in Quiz C, Q3), so
+\[
+\Cov(\lambda\cdot\boldsymbol B_t,\mu\cdot\boldsymbol B_s)=\sum_i\lambda_i\mu_i\,(s\wedge t)=(\lambda\cdot\mu)\,(s\wedge t)=\rho\,s=0\cdot s=0.
+\]
+
+\item[\textbf{Q12.}] \ans{C.} By the It\^o isometry (Toolbox Result 12), $\E[M_2^2]=\int_0^2s^4\,ds=32/5$. By Doob's $L^2$ maximal inequality (Toolbox Result 19), $\E\big[\sup_{t\in[0,2]}M_t^2\big]\le4\,\E[M_2^2]=4\cdot32/5=128/5$.
+
+\item[\textbf{Q13.}] \ans{B.} Using $\Var(I_t)=t^3/3$ and $\Cov(I_2,I_5)=2^2\big(\tfrac52-\tfrac26\big)=4\big(\tfrac52-\tfrac13\big)=4\cdot\tfrac{13}6=\tfrac{26}3$ (Toolbox Result 17):
+\[
+\Var(I_5-I_2)=\Var(I_5)+\Var(I_2)-2\Cov(I_2,I_5)=\tfrac{125}3+\tfrac83-2\cdot\tfrac{26}3=\tfrac{125+8-52}3=\tfrac{81}3=27.
+\]
+
+\item[\textbf{Q14.}] \ans{B.} By bracket bilinearity (Toolbox Result 11), with $H_s=2s$, $K_s=3s^2$ (same driving $B$):
+\[
+\langle X,X\rangle_t=\int_0^t4s^2\,ds=\tfrac{4t^3}3,\qquad
+\langle Y,Y\rangle_t=\int_0^t9s^4\,ds=\tfrac{9t^5}5,\qquad
+\langle X,Y\rangle_t=\int_0^t6s^3\,ds=\tfrac{3t^4}2.
+\]
+Hence $\langle X+Y,X+Y\rangle_t=\langle X,X\rangle_t+2\langle X,Y\rangle_t+\langle Y,Y\rangle_t=\tfrac{4t^3}3+3t^4+\tfrac{9t^5}5$.
+
+\item[\textbf{Q15.}] \ans{A, B, D.} By Toolbox Result 21 (convex functions of a martingale are submartingales, given integrability): $x\mapsto x^2$ is convex, so A is a submartingale; $x\mapsto|x|$ is convex, so B is a submartingale; $x\mapsto e^x$ is convex, so D is a submartingale. The map $x\mapsto-x^2$ is \emph{concave}, so $-M_t^2$ is in general a \textbf{supermartingale}, not a submartingale (indeed $-M_t^2=-(\langle M,M\rangle_t+\text{martingale})$ is non-increasing in expectation whenever $\langle M,M\rangle_t$ is increasing) -- \textbf{not} selected.
+
+\item[\textbf{Q16.}] \ans{C.} By the It\^o isometry, $\E[X_s^2]=\int_0^se^{6u}\,du=\tfrac16(e^{6s}-1)$. Applying the isometry again to the outer integral,
+\[
+\E\left[\left(\int_0^tX_s\,dB_s\right)^2\right]=\int_0^t\E[X_s^2]\,ds=\int_0^t\tfrac16(e^{6s}-1)\,ds=\tfrac1{36}(e^{6t}-1)-\tfrac t6.
+\]
+
+\end{enumerate}
+
+\end{document}

@@ -389,6 +389,105 @@ relevant direction), then $h(M_t)$ is a submartingale.
 $y\mapsto y^+$).}{Problem 4.1(d): $M_t^2$ is a submartingale since $x\mapsto x^2$
 is convex -- used to show $t\mapsto\Gamma(t,t)=\E[M_t^2]$ is increasing.}
 
+%======================================================================
+\section{Multivariate It\^o, the product rule, the optional stopping theorem,
+and the reflection principle}
+%======================================================================
+
+\noindent The results below are not stated explicitly on Problem Sheets 1--6,
+but they are standard consequences of machinery that \emph{is} developed there
+(It\^o's formula, the martingale property, L\'evy's characterisation). Quiz D
+is the first practice quiz to require them directly, so they are collected here
+rather than being re-derived from scratch each time.
+
+\begin{result}{It\^o's formula for a function of several independent Brownian
+motions}
+\label{res:22}
+Let $B^{(1)},\dots,B^{(d)}$ be independent Brownian motions and let
+$f(x_1,\dots,x_d,t)$ be $C^2$ in $x$ and $C^1$ in $t$. Then
+\[
+df\big(B^{(1)}_t,\dots,B^{(d)}_t,t\big)=\sum_{i=1}^d f_{x_i}\,dB^{(i)}_t
++\Big(f_t+\tfrac12\sum_{i=1}^d f_{x_ix_i}\Big)dt,
+\]
+i.e.\ exactly the single-variable It\^o formula applied coordinate-by-coordinate,
+with \emph{no} cross terms $f_{x_ix_j}$ ($i\ne j$) because
+$\langle B^{(i)},B^{(j)}\rangle_t=0$ for independent Brownian motions (Toolbox
+Result 11). Contrast with Problem 3.3(c) / Toolbox Result 14, where the two
+driving Brownian motions are \emph{correlated} and a cross term
+$\rho\,\partial^2_{xy}f\,dt$ survives.
+\end{result}
+\used{Problem 3.1(a) (single-variable case, $f(x,t)=x^2-t$).}{Quiz D, Q2
+($f(x,y)=x^2+y^2$, identifying the compensator $c=2$).}
+
+\begin{result}{It\^o's product rule, in stochastic-differential form}
+\label{res:23}
+For continuous (local) martingales (or more general It\^o processes) $X,Y$,
+\[
+d(X_tY_t)=X_t\,dY_t+Y_t\,dX_t+d\langle X,Y\rangle_t.
+\]
+This is the differential form of ``product minus bracket is a (local)
+martingale'' (Toolbox Result 14): integrating $d(XY)$ term by term reproduces
+$X_tY_t-\langle X,Y\rangle_t$ as the martingale part. It is the fastest way to
+find the SDE satisfied by a product of two known It\^o processes, without
+re-deriving the bracket from first principles each time.
+\end{result}
+\used{Problem 3.3(c) ($d(W^{(1)}_tB^{(2)}_t)$, derived by hand before the general
+rule is available).}{Problem 5.4(a) (general statement, via Proposition 4.15(i));
+Quiz D, Q6 (drift of $Z_t=B_tX_t$ for $X_t=\int_0^ts\,dB_s$, using
+$\langle B,X\rangle_t=t^2/2$ from bracket bilinearity, Toolbox Result 11).}
+
+\begin{result}{Optional stopping theorem (bounded / uniformly integrable case)}
+\label{res:24}
+If $M$ is a continuous martingale and $T$ is a stopping time such that the
+stopped process $(M_{t\wedge T})$ is uniformly integrable (e.g.\ $T$ is bounded,
+or $T$ is a.s.\ finite with $\sup_t\E[M_{t\wedge T}^2]<\infty$), then
+$\E[M_T]=\E[M_0]$. Applying this to \emph{both} $M_t=B_t$ and $M_t=B_t^2-t$
+(Toolbox Result 13) at the same exit time $T$ is the standard ``gambler's ruin
+for Brownian motion'' template: the first identity pins down the exit
+probabilities, the second then gives $\E[T]$.
+\end{result}
+\used{Problem 2.1(d) (bounded stopping time $T\wedge n$, used to control a
+different quantity).}{Quiz D, Q4--Q5: $T=\inf\{t\mid B_t\in\{3,-2\}\}$;
+$\E[B_T]=0$ gives $P(B_T=3)=2/5$ (Q4), then $\E[B_T^2-T]=0$ gives $\E[T]=6$
+(Q5).}
+
+\begin{trap}
+Optional stopping requires \emph{some} integrability or boundedness condition on
+$T$ -- it is not automatic just because $T<\infty$ a.s. (The classical
+counterexample: for $T=\inf\{t\mid B_t=1\}$, $\E[B_T]=1\ne0=\E[B_0]$, because
+$T$ fails the uniform-integrability condition.) Quiz D's Q4--Q5 sidestep this by
+stating explicitly that the theorem may be assumed to apply; always check this
+hypothesis before invoking the theorem elsewhere.
+\end{trap}
+
+\begin{result}{Reflection principle}
+\label{res:25}
+For $a\ge0$ and $t>0$,
+\[
+P\Big(\max_{s\in[0,t]}B_s\ge a\Big)=2\,P(B_t\ge a)=2\big(1-\Phi(a/\sqrt t)\big),
+\]
+equivalently $\max_{s\in[0,t]}B_s\overset d=|B_t|$. This converts a question
+about the running maximum of $B$ into a single Gaussian tail probability, and
+underlies the hitting-time distribution of $T_a=\inf\{t\mid B_t\ge a\}$ via
+$\{T_a\le t\}=\{\max_{s\in[0,t]}B_s\ge a\}$.
+\end{result}
+\used{Problem 3.5(c) (simulation: histogram of $\max_{[0,1]}B_s$ compared to the
+density of $|B_1|$ -- the simulation-based version of this identity).}{Quiz D,
+Q3 ($P(\max_{[0,4]}B_s\ge2)=2(1-\Phi(1))$).}
+
+\begin{result}{Conditional distribution of Brownian increments (Markov
+property)}
+\label{res:26}
+For $0\le s<t$, $B_t\mid\mathcal F_s\sim N(B_s,t-s)$, because
+$B_t-B_s\sim N(0,t-s)$ is independent of $\mathcal F_s$. Consequently, for any
+Borel set $A$, $P(B_t\in A\mid\mathcal F_s)=P(B_s+Z\in A)$ with $Z\sim
+N(0,t-s)$ -- in particular, since $B_t-B_s$ is symmetric about $0$,
+$P(B_t>B_s\mid\mathcal F_s)=1/2$ regardless of $B_s$.
+\end{result}
+\used{Problem 2.1 (filtration/Markov background).}{Quiz D, Q10 (the symmetry
+shortcut $P(B_t>B_s\mid\mathcal F_s)=1/2$, a common trap for students who
+instead reach for $\Phi(B_s/\sqrt{t-s})$).}
+
 \vspace{8pt}
 \begin{center}\rule{0.5\textwidth}{0.4pt}\\[2pt]\textbf{END}\end{center}
 
