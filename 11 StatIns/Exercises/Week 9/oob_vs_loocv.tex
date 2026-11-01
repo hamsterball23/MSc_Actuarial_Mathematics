@@ -1,0 +1,205 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\newcommand{\cT}{\mathcal T}
+\newcommand{\cS}{\mathcal S}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\Err}{\widehat{\mathrm{Err}}}
+\newcommand{\CV}{\widehat{\mathrm{CV}}}
+\newcommand{\fOOB}{\bar f_{\mathrm{OOB}}}
+\newcommand{\fCV}{\bar f_{\mathrm{CV}}}
+\newcommand{\Tmi}[1]{\cT^{(-i)*}_{#1}}
+
+\title{Exercise 6.8: OOB error versus $n$-fold cross-validation\\ for a random forest}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\paragraph{Claim and order of limits.}
+We fix $n$, let $B\to\infty$ (removing the Monte Carlo noise from using finitely many trees), and then let $n$ be large. The claim is
+\[
+\lim_{B\to\infty}\Err^{B}_{\mathrm{OOB}}\;-\;\lim_{B\to\infty}\CV^{B}\;\longrightarrow\;0\qquad(n\to\infty).
+\]
+
+\paragraph{The argument in one sentence.}
+For a fixed observation $i$, the trees whose bootstrap sample happened to miss $i$ form, once $B=\infty$, a random forest trained on the other $n-1$ points. Evaluating that forest at $X_i$ is exactly what leave-one-out CV does, and $n$-fold CV \emph{is} leave-one-out. The only discrepancy is that those trees were grown from $n$ bootstrap draws instead of $n-1$, and one extra draw out of $n$ is asymptotically invisible.
+
+%---------------------------------------------------------------
+\section*{0. Setup}
+
+\paragraph{Data and loss.}
+Let $\cT=\{Z_1,\dots,Z_n\}$ with $Z_i=(X_i,Y_i)$ iid, and write $\cT^{(-i)}$ for the data with $Z_i$ removed. We use squared loss $L(y,a)=(y-a)^2$; Steps~1--2 only require $L$ to be continuous in $a$.
+
+\paragraph{Trees.}
+Let $T(x;\cS,\Theta)$ denote the prediction at $x$ of a tree grown on the sample $\cS$ with auxiliary randomness $\Theta$ (the random choice of candidate variables at each split, etc.), where $\Theta$ is independent of everything else. A leaf prediction is an average of response values in that leaf, so for any $\cS$ resampled from $\cT$,
+\begin{equation}\label{eq:bound}
+|T(x;\cS,\Theta)|\le \max_{j}|Y_j|.
+\end{equation}
+This boundedness removes every integrability issue below.
+
+\paragraph{Bootstrap.}
+As in Section~6.1.4, let $\tau_1,\dots,\tau_n$ be iid uniform on $\{1,\dots,n\}$ and set $\cT^*=(Z_{\tau_1},\dots,Z_{\tau_n})$. The forest is
+\[
+\hat f^B_{\mathrm{rf}}(x)=\frac1B\sum_{b=1}^B T(x;\cT^{*b},\Theta_b),
+\]
+where the pairs $(\cT^{*b},\Theta_b)$ are iid given the data. We write $P^*$ and $E^*$ for probability and expectation over the resampling (the $\tau$'s and $\Theta$) with the data held fixed, as in Lemma~6.1.
+
+\paragraph{OOB estimate (Section 6.3.5).}
+Let $C^{-i}=\{b:\ i\notin\cT^{*b}\}$. Then
+\[
+\hat f^B_{\mathrm{OOB}}(X_i)=\frac{1}{|C^{-i}|}\sum_{b\in C^{-i}}T(X_i;\cT^{*b},\Theta_b),
+\qquad
+\Err^B_{\mathrm{OOB}}=\frac1n\sum_{i=1}^n L\big(Y_i,\hat f^B_{\mathrm{OOB}}(X_i)\big).
+\]
+
+\paragraph{$n$-fold CV (Section 6.1.2 with $K=n$).}
+Each fold is a single observation. For each $i$, run the whole random forest algorithm on $\cT^{(-i)}$; since this set has $n-1$ points, each tree is grown on $n-1$ bootstrap draws from it. Call the result $\hat f^{-i,B}_{\mathrm{rf}}$. Then
+\[
+\CV^B=\frac1n\sum_{i=1}^n L\big(Y_i,\hat f^{-i,B}_{\mathrm{rf}}(X_i)\big).
+\]
+Both estimators have the same shape: the average loss when predicting $Y_i$ with an ensemble that never saw $Z_i$. Everything therefore reduces to comparing the two ensembles.
+
+%---------------------------------------------------------------
+\section*{Step 1: Let $B\to\infty$}
+
+Hold the data fixed. The resampled pairs are then iid and, by \eqref{eq:bound}, everything is bounded, so the strong law of large numbers applies directly.
+
+\paragraph{OOB.} Applying the SLLN to numerator and denominator separately,
+\begin{align*}
+\frac{|C^{-i}|}{B}=\frac1B\sum_{b}\1\{i\notin\cT^{*b}\}
+&\xrightarrow{\text{a.s.}} P^*(i\notin\cT^*)=\Big(1-\frac1n\Big)^n=:p_n,\\
+\frac1B\sum_{b}\1\{i\notin\cT^{*b}\}\,T(X_i;\cT^{*b},\Theta_b)
+&\xrightarrow{\text{a.s.}} E^*\big[\1\{i\notin\cT^*\}\,T(X_i;\cT^*,\Theta)\big].
+\end{align*}
+Since $p_n>0$ (about $e^{-1}\approx0.368$), $C^{-i}$ is non-empty for all large $B$, so the empty-set nuisance from Section~6.1.3 disappears, and the ratio converges:
+\[
+\hat f^B_{\mathrm{OOB}}(X_i)\xrightarrow{\text{a.s.}}\fOOB(X_i):=E^*\big[T(X_i;\cT^*,\Theta)\,\big|\,i\notin\cT^*\big].
+\]
+
+\paragraph{CV.} The same argument applies without the conditioning. This is the bagging limit $\hat f_{\mathrm{bag}}\to E_{P^{(n)}}[\hat f^*]$ from Section~6.2.1, applied to $\cT^{(-i)}$:
+\[
+\hat f^{-i,B}_{\mathrm{rf}}(X_i)\xrightarrow{\text{a.s.}}\fCV(X_i):=E^*\big[T(X_i;\Tmi{n-1},\Theta)\big],
+\]
+where $\Tmi{m}$ denotes $m$ iid uniform draws from $\cT^{(-i)}$.
+
+Since $L$ is continuous and each estimator is a finite sum over $i$, both error estimates converge a.s.\ to the same formulas with $\fOOB$ and $\fCV$ plugged in. The question is now purely how $\fOOB$ and $\fCV$ compare.
+
+%---------------------------------------------------------------
+\section*{Step 2: The key lemma}
+
+\begin{lemma}
+Conditionally on $\{i\notin\cT^*\}$, the indices $\tau_1,\dots,\tau_n$ are iid uniform on $\{1,\dots,n\}\setminus\{i\}$, and $\Theta$ keeps its law. Equivalently,
+\[
+\cT^*\,\big|\,\{i\notin\cT^*\}\;\overset{d}{=}\;\Tmi{n}.
+\]
+\end{lemma}
+
+\begin{proof}
+For any $j_1,\dots,j_n\neq i$,
+\[
+P\big(\tau_1=j_1,\dots,\tau_n=j_n\,\big|\,\tau_k\neq i\ \forall k\big)
+=\frac{(1/n)^n}{\big((n-1)/n\big)^n}=\Big(\frac{1}{n-1}\Big)^n,
+\]
+which is the law of $n$ iid uniform draws from the $n-1$ remaining indices. Since $\Theta$ is independent of the $\tau$'s, conditioning on an event involving only the $\tau$'s leaves the law of $\Theta$ unchanged.
+\end{proof}
+
+\begin{remark}
+In the multinomial language of the notes this is Proposition~6.2(2) with $A=\{k\neq i\}$ and $B=\{i\}$: given $M_{ni}=0$, the remaining counts are $\mathrm{Multinomial}\big(n;\tfrac1{n-1},\dots,\tfrac1{n-1}\big)$.
+\end{remark}
+
+Plugging the lemma into $\fOOB$ gives
+\[
+\fOOB(X_i)=E^*\big[T(X_i;\Tmi{n},\Theta)\big]
+\qquad\text{versus}\qquad
+\fCV(X_i)=E^*\big[T(X_i;\Tmi{n-1},\Theta)\big].
+\]
+This holds \emph{exactly, for every $n$}. At $B=\infty$, the OOB error \emph{is} the leave-one-out CV error of a random forest; the only modification is that this forest grows its trees on $n$ bootstrap draws instead of $n-1$:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+($B=\infty$) & Data available for predicting $i$ & Bootstrap draws per tree\\
+\midrule
+OOB & $\cT^{(-i)}$ & $n$\\
+$n$-fold CV & $\cT^{(-i)}$ & $n-1$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+%---------------------------------------------------------------
+\section*{Step 3: Large $n$ --- one extra draw is invisible}
+
+\paragraph{Coupling.}
+Draw $\tau_1,\dots,\tau_{n-1}$ iid uniform on $\{k\neq i\}$ and set $\cS_{n-1}=(Z_{\tau_1},\dots,Z_{\tau_{n-1}})$, which has the CV law. Adding one more draw $\tau_n$ gives $\cS_n=\cS_{n-1}\cup\{Z_{\tau_n}\}$, which has the OOB law. Using the same $\Theta$ for both,
+\[
+\fOOB(X_i)-\fCV(X_i)=E^*\big[T(X_i;\cS_n,\Theta)-T(X_i;\cS_{n-1},\Theta)\big].
+\]
+So the entire difference is the expected effect of adding one observation to a training sample of size $n-1$.
+
+\paragraph{Empirical-measure view.}
+In the plug-in terms of Section~6.1.4,
+\[
+P_{\cS_n}=\frac{n-1}{n}P_{\cS_{n-1}}+\frac1n\delta_{Z_{\tau_n}},
+\qquad
+\|P_{\cS_n}-P_{\cS_{n-1}}\|_{TV}\le\frac1n.
+\]
+The training distribution moves by at most $1/n$, and a procedure that depends stably on the empirical measure of its training data cannot notice this.
+
+\paragraph{Why a random forest is stable enough.}
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Leaf averages.} If the extra point does not change the partition, it affects $T(x)$ only if it lands in the leaf $L$ containing $x$. This happens with probability $\approx N_L/n$, and it then shifts the leaf mean by $(Y_{\mathrm{new}}-\bar Y_L)/(N_L+1)$, which is at most $2\max_j|Y_j|/(N_L+1)$ by \eqref{eq:bound}. The expected change is therefore
+\[
+\approx\frac{N_L}{n}\cdot\frac{O(1)}{N_L}=O\Big(\frac1n\Big).
+\]
+\item \emph{Split changes.} A single point \emph{can} flip a split in an individual tree; trees are unstable (Section~6.3.3). But $\bar f$ averages over the whole resampling law, so only the \emph{probability} (over bootstrap draws and $\Theta$) that one extra point among $n$ flips a split near $x$ enters. Smoothing away exactly this instability is the purpose of bagging (Section~6.2.1).
+\end{enumerate}
+Hence $\fOOB(X_i)-\fCV(X_i)\to0$, and since
+\[
+|L(y,a)-L(y,b)|=|a-b|\,|a+b-2y|,
+\]
+the two error estimates merge as $n\to\infty$.
+
+\paragraph{Making Step 3 airtight with the course's theory.}
+Assume the setting of Section~6.3.6: honesty, conditions (I)--(II), Theorem~6.2 with $p=2$, and the double-bootstrap extension sketched at the end of that section.
+\begin{itemize}
+\item Each bootstrap tree satisfies $T(x)\to m(x)=E[Y\mid X=x]$ in $L^2$. By conditional Jensen, $E|\bar f(x)-m(x)|^2\le E|T(x)-m(x)|^2$, so the infinite forests $\fOOB$ and $\fCV$ inherit this.
+\item Both forests use only $\cT^{(-i)}$, which is independent of $X_i$. Hence we may evaluate at $x=X_i$: condition on $X_i$ and use dominated convergence with the uniform moment bound from Exercise~7.
+\item By exchangeability across $i$ and Cauchy--Schwarz,
+\[
+E\big|\mathrm{Err}^\infty_{\mathrm{OOB}}-\mathrm{CV}^\infty\big|
+\le\big\|\fOOB(X_1)-\fCV(X_1)\big\|_2\,
+\big\|\fOOB(X_1)+\fCV(X_1)-2Y_1\big\|_2\longrightarrow0.
+\]
+The first factor tends to zero because both forests converge to $m(X_1)$ in $L^2$; the second stays bounded.
+\end{itemize}
+
+\paragraph{What this does and does not prove.}
+\begin{itemize}
+\item The rigorous version only shows that both estimators converge to the same limit $E[(Y-m(X))^2]$. That is weaker than the coupling statement, which says they are the same estimator up to an $O(1/n)$ perturbation even before either has converged.
+\item The honest-tree assumptions are not what \texttt{randomForest} actually does.
+\item Quantifying the $O(1/n)$ stability for a standard, non-honest forest is where the exercise becomes long and technical. For the exercise, Steps~1--2 (exact) together with the coupling argument of Step~3 constitute the expected answer.
+\end{itemize}
+
+%---------------------------------------------------------------
+\section*{Why this matters, and a common confusion}
+
+\begin{itemize}
+\item \textbf{LOOCV for free.} OOB delivers leave-one-out CV without refitting $n$ forests. Each prediction is backed by about $0.368B$ trees, the rule of thumb from Section~6.1.3. Since each ``fit'' uses $n-1$ points, OOB also avoids almost all of the pessimism of $K$-fold CV discussed in Section~6.1.2.
+\item \textbf{Not the same as $\Err^{(1)}$.} The random-forest OOB error averages \emph{predictions} over $C^{-i}$ and then applies the loss, whereas the leave-one-out bootstrap $\Err^{(1)}$ of Section~6.1.3 averages \emph{losses}. By the same lemma,
+\[
+\Err^{(1)}\longrightarrow\frac1n\sum_{i=1}^n E^*\big[L\big(Y_i,T(X_i;\Tmi{n},\Theta)\big)\big],
+\]
+the CV error of a \emph{single} bootstrap tree rather than of the forest. For convex $L$, Jensen gives $L(Y_i,E^*T)\le E^*L(Y_i,T)$, so $\Err^{(1)}$ is larger. The gap between the two estimators is precisely the gain from aggregation.
+\end{itemize}
+
+\end{document}
