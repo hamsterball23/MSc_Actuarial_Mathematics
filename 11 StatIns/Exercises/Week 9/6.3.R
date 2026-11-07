@@ -4,15 +4,23 @@
 library(tidyverse)
 library(rpart)
 library(randomForest)
+#library(randomForestSRC)    # more state of the art
 library(gbm)
 
+# We change Y a little bit because it would otherwise be a total mess
 simulate_data <- function(n, seed = 2026)
 {
   set.seed(seed)
   X <- runif(n)
-  S <- runif(n)
   eta <- function(x){0.3 + 2*dnorm(x, mean = 0.2, sd = 0.05)}
+
+  # Original
+  S <- runif(n)
   Y <- S**(-eta(X)) + 20 * (X > 3/4)
+
+  # Rasmus' way (really weird too)
+  # S <- rank(X)/(n+1)
+  # Y <- (1-S)^{-eta(X)} + 20*(X> 0.75)
   return(
     data.frame(
       X = X,
@@ -69,6 +77,16 @@ pivot_data_sim(
 #   ~55 (d = 4) and ~9.6 (d = 6), but neither tree splits at X = 3/4.
 #   The +20 jump is invisible next to the tail in terms of squared error.
 # So a deeper tree helps, but none of the trees recovers the regression structure.
+
+plot(tree_d2, margin = 0.1)
+text(tree_d2, use.n = TRUE, cex = 0.8)
+
+plot(tree_d4, margin = 0.1)
+text(tree_d4, use.n = TRUE, cex = 0.8)
+
+plot(tree_d6, margin = 0.1)
+text(tree_d6, use.n = TRUE, cex = 0.8)
+
 
 
 #########

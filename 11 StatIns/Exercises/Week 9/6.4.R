@@ -50,8 +50,8 @@ Y_bsfits <- vector("list", length(M))
 Z_bsfits <- vector("list", length(M))
 
 for (m in M){
-  Y_bsfits[[m]] <- lm(Y ~ bs(X, knots = knots, degree = m), data = simY)
-  Z_bsfits[[m]] <- lm(Z ~ bs(X, knots = knots, degree = m), data = simZ)
+  Y_bsfits[[m]] <- lm(Y ~ bs(X, knots = knots, degree = m, Boundary.knots = c(-2.5, 2.5)), data = simY)
+  Z_bsfits[[m]] <- lm(Z ~ bs(X, knots = knots, degree = m, Boundary.knots = c(-2.5, 2.5)), data = simZ)
 }
 
 # Predict each fit on a grid and stack into one long data frame
